@@ -10,23 +10,91 @@ import InputDataNascita from '../../../utils/InputDataNascita';
 import InputLuogoNascita from '../../../utils/InputLuogoNascita';
 import Button from '../../../utils/Button';
 
+const CodiceFiscale = require("codice-fiscale-js");
+
 // Form Registrazione dati anagrafici
 export default function RegistrazioneClienteForm() {
     const history = useHistory();
-    
+    const [checkValidate, setCheckValidate] = useState({
+        nome: false,
+        cognome: false,
+        sesso: false,
+        possessoPatente: false,
+        CF: {
+            check: false,
+            valid: false
+        }
+    })
     
     useEffect(() => {
-    
+        let inputNome = document.querySelector("#nome");
+        let inputCognome = document.querySelector("#cognome");
+        let inputSesso = document.querySelector("#sesso");
+        let inputPatente = document.querySelector("#possessoPatente");
+        // Controllo campo Nome
+        if (checkValidate.nome) {
+            inputNome.classList.remove("border-danger", "border-success");
+            inputNome.value === "" ? inputNome.classList.add("border-danger") : inputNome.classList.add("border-success");
+            setCheckValidate({ ...checkValidate, nome: false });
+        }
+        // Controllo campo Cognome
+        if (checkValidate.cognome) {
+            inputCognome.classList.remove("border-danger", "border-success")
+            inputCognome.value === "" ? inputCognome.classList.add("border-danger") : inputCognome.classList.add("border-success");
+            setCheckValidate({ ...checkValidate, cognome: false });
+        }
+        // Controllo campo Sesso
+        if (checkValidate.sesso) {
+            inputSesso.classList.remove("border-danger", "border-success")
+            inputSesso.value === "" ? inputSesso.classList.add("border-danger") : inputSesso.classList.add("border-success");
+            setCheckValidate({ ...checkValidate, sesso: false });
+        }
+        // Controllo campo PossessoPatente
+        if (checkValidate.possessoPatente) {
+            inputPatente.classList.remove("border-danger", "border-success")
+            inputPatente.value === "" ? inputPatente.classList.add("border-danger") : inputPatente.classList.add("border-success");
+            setCheckValidate({ ...checkValidate, possessoPatente: false });
+        }
+        // Controllo CF
+        if (checkValidate.CF.check) {
+            let cf;
+            let dataNascita = new Date(document.querySelector("#dataNascita").value);
+            let nazionalita = document.querySelector("#nazionalita").value;
+            let inputCF = document.querySelector("#CF");
+            const data = {
+                name: document.querySelector('#nome').value,
+                surname: document.querySelector('#cognome').value,
+                gender: document.querySelector('#sesso').value,
+                day: parseInt(dataNascita.getDate()),
+                month: parseInt(dataNascita.getMonth() + 1),
+                year: parseInt(dataNascita.getFullYear()),
+                birthplace: nazionalita === "ITALIA" ? document.querySelector("#comune").value : nazionalita,
+                birthplaceProvincia: nazionalita === "ITALIA" ? document.querySelector("#provincia").value : "EE"
+            }
+            if ((data.gender === "M" || data.gender === "F") && (!isNaN(dataNascita.getTime())) && (data.birthplace !== "") && (data.birthplaceProvincia !== "")) {
+                cf = CodiceFiscale.compute(data);
+            }
+            if (cf !== inputCF.value.toUpperCase()) {
+                inputCF.classList.add("border-danger");
+                inputCF.classList.remove("border-success");
+                setCheckValidate({ ...checkValidate, CF: { check: false, valid: false } });
+            } else {
+                inputCF.classList.add("border-success");
+                inputCF.classList.remove("border-danger");
+                setCheckValidate({ ...checkValidate, CF: { check: false, valid: true } });
+            }
 
-        })
+        }
+    }, [checkValidate])
     
-
     function onSubmit(e) {
             e.preventDefault();
-            
+            if (!checkValidate.CF.valid) {
+                return
+            }
                 const userData = {
-                    cognome: document.querySelector("#cognome").value,
                     nome: document.querySelector("#nome").value,
+                    cognome: document.querySelector("#cognome").value,
                     dataNascita: document.querySelector("#dataNascita").value,
                     sesso: document.querySelector("#sesso").value,
                     luogoNascita: {
@@ -36,10 +104,7 @@ export default function RegistrazioneClienteForm() {
                     },
                     codiceFiscale: document.querySelector("#CF").value
                 }
-                
-                
-                    // richiesta al server per registrare l'utente passando i dati inseriti
-                    axios.post("/", userData)
+        
                         .then((res) => {   
                             history.push("/credenziali", {payload: userData});
                         })
