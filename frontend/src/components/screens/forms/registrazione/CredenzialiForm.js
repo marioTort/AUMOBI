@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import axios from 'axios';
 
 // Bootstrap Components
 import { ProgressBar, Form, Container, Row, Col } from 'react-bootstrap';
@@ -51,8 +52,23 @@ export default function CredenzialiForm() {
                 }
             }
             setState({ ...state, submit: true });
-              
-            history.push("/datipatente", {payload: userData});
+            try {
+                axios.post("api/registrazione/registrazionecliente", userData)
+                    .then((res) => {
+                        history.push("/datipatente", {payload: userData.credenziali.email});
+                    })
+                    .catch(err => {
+                        setState({
+                            error: {
+                                show: true,
+                                message: err.response.data
+                            },
+                            submit: false
+                        })
+                    })
+            } catch (err) {
+                console.log(err.response.data.msg);
+            }         
  
         }
     }
@@ -94,7 +110,7 @@ export default function CredenzialiForm() {
                             </Col>
 
                             <div className="d-flex justify-content-end">
-                                <Button to="/registrazionecliente" variant="outline-secondary" submit>Indietro</Button>
+                                <Button to="/registrazionecliente" variant="outline-secondary">Indietro</Button>
                                 <Button spinner={state.submit} variant="outline-secondary" submit>Prosegui</Button>
                             </div>
                         </Row>

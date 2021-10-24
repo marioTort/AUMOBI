@@ -50,8 +50,8 @@ export default function SchermataAdmin() {
                                         to={"/"}
                                         buttonLabel={"Prosegui"}/>
                                     <LinkCard
-                                        title={"Gestione Utenti"}
-                                        text={"Modifica tutti i dati che vuoi degli utenti registrati su Aumobi."}
+                                        title={"Gestione Impiegati"}
+                                        text={"Modifica tutti i dati che vuoi degli impiegati registrati su Aumobi."}
                                         to={"/"}
                                         buttonLabel={"Prosegui"}/>
                                     <LinkCard

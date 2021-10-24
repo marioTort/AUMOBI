@@ -15,24 +15,24 @@ export default function RicercaImpiegato() {
         <Form onSubmit={onSubmit}>
             <Row className="gy-3 align-items-end">
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
-                    <Form.Group controlId="idUtente">
+                    <Form.Group controlId="emailImpiegato">
                         <Form.Label>Email impiegato</Form.Label>
-                        <Form.Control type="text" placeholder="Inserisci id utente" />
+                        <Form.Control type="text" placeholder="Inserisci email impiegato" />
                     </Form.Group>
                 </Col>
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
-                    <Form.Group controlId="cognomeUtente">
+                    <Form.Group controlId="cognomeImpiegato">
                         <Form.Label>Cognome</Form.Label>
-                        <Form.Control type="text" placeholder="Inserisci cognome utente" />
+                        <Form.Control type="text" placeholder="Inserisci cognome impiegato" />
                     </Form.Group>
                 </Col>
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
-                    <InsertEmail controlId={"emailUtente"} placeholder={"Inserisci email utente"}>
+                    <InsertEmail controlId={"cfImpiegato"} placeholder={"Inserisci codice fiscale impiegato"}>
                         Codice fiscale
                     </InsertEmail>
                 </Col>
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
-                    <Form.Group controlId="tipoUtente">
+                    <Form.Group controlId="tipoImpiegato">
                         <Form.Label>Tipo impiegato</Form.Label>
                         <Form.Control className="form-select" as="select">
                             <option value="" disabled selected>Seleziona...</option>

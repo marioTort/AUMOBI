@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 // Bootstrap Components
 import { ProgressBar, Container, Row, Col, Form } from 'react-bootstrap';
@@ -9,9 +10,56 @@ import Button from '../../../utils/Button';
 
 // Form dati patente
 export default function DatiPatenteForm() {
+    const history = useHistory();
+    const [state, setState] = useState({
+        error: {
+            show: false,
+        },
+        submit: false
+    });
+    const [checkValidate, setCheckValidate] = useState({
+        numeroPatente: false
+    })
+
+    useEffect(() => {
+        let inputNumeroPatente = document.querySelector("#numeroPatente");
+        if (checkValidate.numeroPatente) {
+            inputNumeroPatente.classList.remove("border-danger", "border-success");
+            inputNumeroPatente.value === "" ? inputNumeroPatente.classList.add("border-danger") : inputNumeroPatente.classList.add("border-success");
+            setCheckValidate({ ...checkValidate, numeroPatente: false });
+        }
+    }, [checkValidate])
 
     function onSubmit(e) {
-        
+        e.preventDefault();
+         
+            const userData = {
+                ...history.location.state.payload,
+                datiPatente: {
+                    numeroPatente: document.querySelector("#numeroPatente").value,
+                    dataScadenzaPatente: document.querySelector("#dataScadenzaPatente").value,
+                    tipoPatente: document.querySelector("#tipoPatente").value
+                }
+            }
+            setState({ ...state, submit: true });
+            try {
+                axios.post("/patente/aggiungipatente", userData)
+                    .then((res) => {
+                        history.push("/datibancari" , {payload: userData});
+                    })
+                    .catch(err => {
+                        setState({
+                            error: {
+                                show: true,
+                                message: err.response.data
+                            },
+                            submit: false
+                        })
+                    })
+            } catch (err) {
+                console.log(err.response.data.msg);
+            }
+            
         }
     
 
@@ -31,12 +79,12 @@ export default function DatiPatenteForm() {
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                 <Form.Group controlId="numeroPatente">
                                     <Form.Label>Numero patente</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il numero di patente" pattern="^([A-Z]{2}\d{7}[A-Z])|(^[U]1[BCDEFGHLMNPRSTUWYXZ]\w{6}[A-Z])$" />
+                                    <Form.Control type="text" placeholder="Inserisci il numero di patente" pattern="^([A-Z]{2}\d{7}[A-Z])|(^[U]1[BCDEFGHLMNPRSTUWYXZ]\w{6}[A-Z])$" onBlur={() => setCheckValidate({ ...checkValidate, numeroPatente: true })} />
                                 </Form.Group>
                             </Col>
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <Form.Group controlId="dataScadenza">
+                                <Form.Group controlId="dataScadenzaPatente">
                                     <Form.Label>Data di scadenza (mm/aaaa)</Form.Label>
                                     <Form.Control type="text" placeholder="Inserisci data di scadenza (mm/aaaa)" pattern="^(0?[1-9]|1[012])[\/\-]\d{4}$" />
                                 </Form.Group>                             
@@ -44,8 +92,8 @@ export default function DatiPatenteForm() {
                             
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <Form.Group controlId="tipologiaPatente">
-                                    <Form.Label>Tipologia patente</Form.Label>
+                                <Form.Group controlId="tipoPatente">
+                                    <Form.Label>Tipo patente</Form.Label>
                                     <Form.Control  className="form-select" as="select">
                                         <option value="" disabled selected>Seleziona...</option>
                                         <option value="AM">AM</option>
@@ -56,8 +104,8 @@ export default function DatiPatenteForm() {
                             </Col>
                             
                             <div className="d-flex justify-content-end">
-                                <Button to="/credenziali" variant="outline-secondary" submit>Indietro</Button>
-                                <Button to="/datibancari" variant="outline-secondary" submit>Prosegui</Button>
+                                <Button to="/credenziali" variant="outline-secondary">Indietro</Button>
+                                <Button variant="outline-secondary" submit>Prosegui</Button>
                             </div>
                         </Row>
                         <br></br>

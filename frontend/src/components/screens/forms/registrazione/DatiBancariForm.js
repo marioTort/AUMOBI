@@ -1,29 +1,88 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 // Bootstrap Components
 import { ProgressBar, Container, Row, Col, Form, Alert } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../../../utils/Button';
-import Footer from '../../../utils/Footer';
 
 //Credit Card Components
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
-import useForm from '../../../utils/useForm';
+import validateInfo from '../../../utils/validateInfo';
 
 
 export default function DatiBancariForm() {
+    const history = useHistory();
+    const [state, setState] = useState({
+        error: {
+            show: false,
+        },
+        submit: false
+    });
+
+    const [values, setValues] = useState({
+        cardName: '',
+        cardNumber: '',
+        cardExpiration: '',
+        cardSecurityCode: '',
+        focus: ''
+    })
+
+    const [errors, setErrors] = useState({})
+
+    const handleFocus = (e) => {
+        setValues({ 
+            ...values,
+            focus: (e.target.name === 'cardSecurityCode') ? 'cvc' : e.target.name
+        });
+    }
+
+    const handleChange = e => {
+        const { name, value } = e.target
+        setValues({
+            ...values,
+            [name]: value
+        })
+    }
 
     function onSubmit(e) {
-        
-        }
-    
-        const {handleChange, handleFocus, handleSubmit, values, errors} = useForm()        
+        e.preventDefault();
+        setErrors(validateInfo(values))
+            
+            const userData = {
+                ...history.location.state.payload.email,
+                datiCarta: {
+                    numeroCarta: document.querySelector("#numeroCarta").value,
+                    nomeCarta: document.querySelector("#nomeCarta").value,
+                    dataScadenzaCarta: document.querySelector("#dataScadenzaCarta").value,
+                    cvv: document.querySelector("#cvv").value
+                }
+            }
+              
+            setState({ ...state, submit: true });
+            try {
+                axios.post("/wallet/aggiungicarta", userData)
+                    .then((res) => {
+                        history.push("/registrazionecompletata");
+                    })
+                    .catch(err => {
+                        setState({
+                            error: {
+                                show: true,
+                                message: err.response.data
+                            },
+                            submit: false
+                        })
+                    })
+            } catch (err) {
+                console.log(err.response.data.msg);
+            }
+        }        
 
-    return (
-        
+    return (       
             <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5 pb-5">
                 <Row>
                 <Col className="form" xs={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }}>
@@ -43,12 +102,12 @@ export default function DatiBancariForm() {
                         />
                         <br></br>
                     </div>
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={onSubmit} onClick={() => setState({ ...state, error: { show: false } })}>
                         <Row className="gy-4" >
                         <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                 <Form.Group controlId="numeroCarta">
                                     <Form.Label>Numero carta</Form.Label>
-                                    <Form.Control type="number" id="cardNumber" data-testid="cardNumber" name="cardNumber" placeholder="Numero carta" value={values.cardNumber} onChange={handleChange} onFocus={handleFocus} isValid={errors.cnumber} required />
+                                    <Form.Control type="number" id="cardNumber" data-testid="cardNumber" name="cardNumber" placeholder="Numero carta" pattern="/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$" value={values.cardNumber} onChange={handleChange} onFocus={handleFocus} isValid={errors.cnumber} required />
                                 </Form.Group>
                             </Col>
 
@@ -75,7 +134,7 @@ export default function DatiBancariForm() {
                             
                             <div className="d-flex justify-content-end">
                                 <Button to="/datipatente" variant="outline-secondary">Indietro</Button>
-                                <Button to="/registrazionecompletata" variant="outline-secondary" submit>Prosegui</Button>
+                                <Button spinner={state.submit} variant="outline-secondary" submit>Prosegui</Button>
                             </div>
                         </Row>
                     </Form>

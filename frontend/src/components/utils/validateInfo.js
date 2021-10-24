@@ -10,7 +10,7 @@ export default function validateInfo(values) {
 
   errors.show = true;
   errors.variant = "danger";
-  errors.message = "An unknown error occured. Please try again later"
+  errors.message = "Errore sconosciuto."
   errors.cname = false;
   errors.cnumber = false;
   errors.ctype = false;
@@ -21,38 +21,38 @@ export default function validateInfo(values) {
 
   //Card CVV expiration
   if (values.cardSecurityCode === null || !values.cardSecurityCode.trim()) {
-    errors.message = "Credit card CVC is not complete";
+    errors.message = " CVV incompleto";
   } else if (creditCard.cvv.isValid) {
     errors.ccvv = true;
   } else {
-    errors.message = "Credit card CVC is invalid";
+    errors.message = " CVV non valido";
   }
 
   //Card Expiration Verification
   if (values.cardExpiration === null || !values.cardExpiration.trim()) {
-    errors.message = "Credit card expiration date is not complete";
+    errors.message = "Data di scadenza incompleta";
   } else if (creditCard.expirationDate.isValid) {
     errors.cexp = true;
   } else {
-    errors.message = "Credit card expiration date is invalid";
+    errors.message = "Data di scadenza non valida";
   }
 
   //Card Number Verification
   if (values.cardNumber === null || !values.cardNumber.trim()) {
-    errors.message = "Credit card number is not complete";
+    errors.message = "Numero carta incompleto";
   } else if (creditCard.isValid) {
     errors.cnumber = true;
   } else {
-    errors.message = "Credit card number is invalid";
+    errors.message = "Numero carta non valido";
   }
 
   //Cardholder Name Verification
   if (values.cardName === null || !values.cardName.trim()) {
-    errors.message = "Cardholder name is not complete";
+    errors.message = "Intestatario incompleto";
   } else if (creditCard.cardholderName.isValid) {
     errors.cname = true;
   } else {
-    errors.message = "Cardholder name is invalid";
+    errors.message = "Intestatario non valido";
   }
 
   if (
@@ -64,7 +64,7 @@ export default function validateInfo(values) {
     errors.ccvv
   ) {
     errors.variant = "success";
-    errors.message = "Credit Card is valid";
+    errors.message = "Carta di credito valida";
   }
 
   return errors;
