@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 // Bootstrap Components
 import { ProgressBar, Container, Row, Col, Form } from 'react-bootstrap';
@@ -154,7 +153,7 @@ export default function RegistrazioneClienteForm() {
                             </Col>
                             
                             <div className="d-flex justify-content-end">
-                                <Button variant="outline-secondary" submit={onSubmit} >Prosegui</Button>
+                                <Button variant="outline-secondary" submit >Prosegui</Button>
                             </div>
                             
                         </Row>

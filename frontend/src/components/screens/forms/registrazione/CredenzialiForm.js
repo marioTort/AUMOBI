@@ -1,22 +1,49 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 
 // Bootstrap Components
 import { ProgressBar, Form, Container, Row, Col } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../../../utils/Button';
-import Footer from '../../../utils/Footer';
 import InsertEmail from '../../../utils/InsertEmail';
 import InsertPassword from '../../../utils/InsertPassword';
 //import AlertMessage from '../../Utility/AlertMessage';
 
+const CryptoJS = require("crypto-js");
 
-// Form credenziali di accesso
 export default function CredenzialiForm() {
+    const history = useHistory();
+    //const { session, setSession } = useSession()
+    const [state, setState] = useState({
+        error: {
+            show: false,
+        },
+        submit: false
+    });
 
-    function registrazioneCliente(e) {
+    function onSubmit(e) {
+        e.preventDefault();
+        if (document.querySelector("#password").value !== document.querySelector("#confermaPassword").value) {
+            document.querySelector("#confermaPasswordError").classList.remove("d-none");
+            return
+        } else {
+            const cPassword = CryptoJS.AES.encrypt(document.querySelector("#signupPassword").value, "pick-me-up").toString();
+            const userData = {
+                ...history.location.state.payload,
+                credenziali: {
+                    cellulare: document.querySelector("#cellulare").value,
+                    email: document.querySelector("#email").value,
+                    password: cPassword,
+                }
+            }
+            .then((res) => {   
+                history.push("/credenziali", {payload: userData});
+            })
+            setState({ ...state, submit: true });
+            
         }
+    }
 
     return (
         <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5">
@@ -25,23 +52,17 @@ export default function CredenzialiForm() {
                 <br></br>
                     <h1 className="h1 text-center t-bold mb-4">Registrazione</h1>
                     <ProgressBar variant="secondary" now={40} className="mb-4" />
-                    <Form onSubmit={registrazioneCliente}>
+                    <Form onSubmit={onSubmit} onClick={() => setState({ ...state, error: { show: false } })}>
                         <Row className="gy-4" >
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <InsertEmail controlId={"signupEmail"} placeholder={"Inserisci la tua email"} required>
+                                <InsertEmail controlId={"mail"} placeholder={"Inserisci la tua email"} required>
                                     Email
                                 </InsertEmail>
                             </Col>
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <InsertEmail controlId={"confermaEmail"} placeholder={"Conferma la tua email"} required>
-                                    Conferma email
-                                </InsertEmail>
-                                <Form.Text id="confermaEmailError" className="d-none text-danger">Le email non coincidono!</Form.Text>
-                            </Col>
                             
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <InsertPassword tooltip controlId={"signupPassword"} placeholder={"Inserisci la password"}>
+                                <InsertPassword tooltip controlId={"password"} placeholder={"Inserisci la password"}>
                                     Password
                                 </InsertPassword>
                             </Col>
@@ -62,7 +83,7 @@ export default function CredenzialiForm() {
 
                             <div className="d-flex justify-content-end">
                                 <Button to="/registrazionecliente" variant="outline-secondary" submit>Indietro</Button>
-                                <Button to="/datipatente" variant="outline-secondary" submit>Prosegui</Button>
+                                <Button spinner={state.submit} variant="outline-secondary" submit>Prosegui</Button>
                             </div>
                         </Row>
                         <br></br>
