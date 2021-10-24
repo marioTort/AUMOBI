@@ -57,8 +57,11 @@ const UtentiSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "Per favore, inserisci una password di almeno 8 caratteri"],
-        minlength: 8,
+        required: true,
+        match: [
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+            "Per favore, inserisci una password di almeno 8 caratteri, di cui almeno 1 maiuscolo e almeno 1 numero"
+        ],
         select: false       //We don't want the password to be sent back as well unless we explicitly tell ask the query for it
     },
     tipoUtente: {

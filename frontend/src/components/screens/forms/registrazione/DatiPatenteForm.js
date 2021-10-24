@@ -6,7 +6,6 @@ import { ProgressBar, Container, Row, Col, Form } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../../../utils/Button';
-import Footer from '../../../utils/Footer';
 
 // Form dati patente
 export default function DatiPatenteForm() {
@@ -32,14 +31,14 @@ export default function DatiPatenteForm() {
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                 <Form.Group controlId="numeroPatente">
                                     <Form.Label>Numero patente</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il numero di patente" pattern="[a-zA-Z]{2}\d{7}[a-zA-Z]{1}" />
+                                    <Form.Control type="text" placeholder="Inserisci il numero di patente" pattern="^([A-Z]{2}\d{7}[A-Z])|(^[U]1[BCDEFGHLMNPRSTUWYXZ]\w{6}[A-Z])$" />
                                 </Form.Group>
                             </Col>
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                 <Form.Group controlId="dataScadenza">
-                                    <Form.Label>Data di scadenza</Form.Label>
-                                    <Form.Control type="month" placeholder="Inserisci data di scadenza" />
+                                    <Form.Label>Data di scadenza (mm/aaaa)</Form.Label>
+                                    <Form.Control type="text" placeholder="Inserisci data di scadenza (mm/aaaa)" pattern="^(0?[1-9]|1[012])[\/\-]\d{4}$" />
                                 </Form.Group>                             
                             </Col>
                             

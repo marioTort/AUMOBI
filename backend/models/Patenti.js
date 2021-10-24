@@ -19,7 +19,7 @@ const PatentiSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    categoria: {                            // AM, A, B
+    categoria: {                            // AM, A1, B
         type: String,
         required: true,
     }

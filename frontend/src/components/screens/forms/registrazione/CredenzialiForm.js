@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
 // Bootstrap Components
@@ -10,11 +10,13 @@ import InsertEmail from '../../../utils/InsertEmail';
 import InsertPassword from '../../../utils/InsertPassword';
 //import AlertMessage from '../../Utility/AlertMessage';
 
-const CryptoJS = require("crypto-js");
+
 
 export default function CredenzialiForm() {
     const history = useHistory();
-    //const { session, setSession } = useSession()
+    const [checkValidate, setCheckValidate] = useState({
+        cellulare: false
+    })
     const [state, setState] = useState({
         error: {
             show: false,
@@ -22,26 +24,36 @@ export default function CredenzialiForm() {
         submit: false
     });
 
+    useEffect(() => {
+        let inputCellulare = document.querySelector("#cellulare");
+        
+        // Controllo campo Cellulare
+        if (checkValidate.cellulare) {
+            inputCellulare.classList.remove("border-danger", "border-success");
+            inputCellulare.value === "" ? inputCellulare.classList.add("border-danger") : inputCellulare.classList.add("border-success");
+            setCheckValidate({ ...checkValidate, cellulare: false });
+        }
+    }, [checkValidate])
+
     function onSubmit(e) {
         e.preventDefault();
         if (document.querySelector("#password").value !== document.querySelector("#confermaPassword").value) {
             document.querySelector("#confermaPasswordError").classList.remove("d-none");
             return
         } else {
-            const cPassword = CryptoJS.AES.encrypt(document.querySelector("#signupPassword").value, "pick-me-up").toString();
+            
             const userData = {
                 ...history.location.state.payload,
                 credenziali: {
                     cellulare: document.querySelector("#cellulare").value,
                     email: document.querySelector("#email").value,
-                    password: cPassword,
+                    password: document.querySelector("#password").value,
                 }
             }
-            .then((res) => {   
-                history.push("/credenziali", {payload: userData});
-            })
             setState({ ...state, submit: true });
-            
+              
+            history.push("/datipatente", {payload: userData});
+ 
         }
     }
 
@@ -56,9 +68,16 @@ export default function CredenzialiForm() {
                         <Row className="gy-4" >
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <InsertEmail controlId={"mail"} placeholder={"Inserisci la tua email"} required>
+                                <InsertEmail controlId={"email"} placeholder={"Inserisci la tua email"} required>
                                     Email
                                 </InsertEmail>
+                            </Col>
+
+                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                <Form.Group controlId="cellulare">
+                                    <Form.Label>Cellulare</Form.Label>
+                                    <Form.Control type="tel" placeholder="Inserisci il numero di cellulare" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" onBlur={() => setCheckValidate({ ...checkValidate, cellulare: true })} required />
+                                </Form.Group>
                             </Col>
                             
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
@@ -72,13 +91,6 @@ export default function CredenzialiForm() {
                                     Conferma password
                                 </InsertPassword>
                                 <Form.Text id="confermaPasswordError" className="d-none text-danger">Le password non coincidono!</Form.Text>
-                            </Col>
-
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <Form.Group controlId="cellulare">
-                                    <Form.Label>Cellulare</Form.Label>
-                                    <Form.Control type="tel" placeholder="Inserisci il numero di cellulare" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" required />
-                                </Form.Group>
                             </Col>
 
                             <div className="d-flex justify-content-end">

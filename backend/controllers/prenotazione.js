@@ -160,7 +160,7 @@ exports.programmaPrenotazione = async (req, res, next) => {
     
                                             var autoPrenotabile = (patentePresente.categoria === "B" && mezzoPresente.tipoMezzo === "Auto");
     
-                                            var motoPrenotabile = (patentePresente.categoria === "A" && mezzoPresente.tipoMezzo === "Moto"); 
+                                            var motoPrenotabile = (patentePresente.categoria === "A1" && mezzoPresente.tipoMezzo === "Moto"); 
     
                                             var scooterPrenotabile = (patentePresente.categoria === "AM" && mezzoPresente.categoriaMezzo < 50); 
                                             //console.log(scooterPrenotabile, motoPrenotabile, autoPrenotabile);
