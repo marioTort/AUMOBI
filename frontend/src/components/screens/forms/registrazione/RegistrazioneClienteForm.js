@@ -18,7 +18,6 @@ export default function RegistrazioneClienteForm() {
         nome: false,
         cognome: false,
         sesso: false,
-        possessoPatente: false,
         CF: {
             check: false,
             valid: false
@@ -29,7 +28,6 @@ export default function RegistrazioneClienteForm() {
         let inputNome = document.querySelector("#nome");
         let inputCognome = document.querySelector("#cognome");
         let inputSesso = document.querySelector("#sesso");
-        let inputPatente = document.querySelector("#possessoPatente");
         // Controllo campo Nome
         if (checkValidate.nome) {
             inputNome.classList.remove("border-danger", "border-success");
@@ -47,12 +45,6 @@ export default function RegistrazioneClienteForm() {
             inputSesso.classList.remove("border-danger", "border-success")
             inputSesso.value === "" ? inputSesso.classList.add("border-danger") : inputSesso.classList.add("border-success");
             setCheckValidate({ ...checkValidate, sesso: false });
-        }
-        // Controllo campo PossessoPatente
-        if (checkValidate.possessoPatente) {
-            inputPatente.classList.remove("border-danger", "border-success")
-            inputPatente.value === "" ? inputPatente.classList.add("border-danger") : inputPatente.classList.add("border-success");
-            setCheckValidate({ ...checkValidate, possessoPatente: false });
         }
         // Controllo CF
         if (checkValidate.CF.check) {
@@ -103,10 +95,7 @@ export default function RegistrazioneClienteForm() {
                     },
                     codiceFiscale: document.querySelector("#CF").value
                 }
-        
-                        .then((res) => {   
-                            history.push("/credenziali", {payload: userData});
-                        })
+                history.push("/credenziali", {payload: userData});
         }
     
 
@@ -122,13 +111,13 @@ export default function RegistrazioneClienteForm() {
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                 <Form.Group controlId="nome">
                                     <Form.Label>Nome</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il tuo nome" checked pattern="[A-z]+\ [A-z]+"  required />
+                                    <Form.Control type="text" placeholder="Inserisci il tuo nome" checked pattern="^[A-Za-zèùàòé][a-zA-Z'èùàòé ]*$" onBlur={() => setCheckValidate({ ...checkValidate, nome: true })} required />
                                 </Form.Group>
                             </Col>
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                 <Form.Group controlId="cognome">
                                     <Form.Label>Cognome</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il tuo cognome" pattern="[A-z]+\ [A-z]+"  required />
+                                    <Form.Control type="text" placeholder="Inserisci il tuo cognome" pattern="^[A-Za-zèùàòé][a-zA-Z'èùàòé ]*$" onBlur={() => setCheckValidate({ ...checkValidate, cognome: true })} required />
                                 </Form.Group>
                             </Col>
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
@@ -137,7 +126,7 @@ export default function RegistrazioneClienteForm() {
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                 <Form.Group controlId="sesso">
                                     <Form.Label>Sesso </Form.Label>
-                                    <Form.Control className="form-select" as="select"  required>
+                                    <Form.Control className="form-select" as="select" onBlur={() => setCheckValidate({ ...checkValidate, sesso: true })} required>
                                         <option value="" disabled selected>Seleziona...</option>
                                         <option value="M">M</option>
                                         <option value="F">F</option>
@@ -148,7 +137,7 @@ export default function RegistrazioneClienteForm() {
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                 <Form.Group controlId="CF">
                                     <Form.Label className="me-2">Codice fiscale</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il tuo codice fiscale"  required />
+                                    <Form.Control type="text" placeholder="Inserisci il tuo codice fiscale" onBlur={() => setCheckValidate({ ...checkValidate, CF: { ...checkValidate.CF, check: true } })} required />
                                 </Form.Group>
                             </Col>
                             
