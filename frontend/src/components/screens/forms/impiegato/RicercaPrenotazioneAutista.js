@@ -3,7 +3,7 @@ import React from 'react'
 import { Row, Col, Form } from 'react-bootstrap'
 
 import Button from '../../../utils/Button'
-import InsertEmail from '../../../utils/InsertEmail';
+import CampoEmail from '../../../utils/CampoEmail';
 
 export default function RicercaPrenotazioneAutista() {
 
@@ -30,9 +30,9 @@ export default function RicercaPrenotazioneAutista() {
                     </Form.Group>
                 </Col>
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
-                    <InsertEmail controlId={"loginEmail"} placeholder={"Inserisci la tua email"} required>
+                    <CampoEmail controlId={"loginEmail"} placeholder={"Inserisci la tua email"} required>
                         Email Autista
-                    </InsertEmail>
+                    </CampoEmail>
                 </Col>
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
                     <Form.Group controlId="idCliente">

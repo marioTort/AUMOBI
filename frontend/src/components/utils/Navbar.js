@@ -159,15 +159,15 @@ export default function Navbar() {
                         <Button className="button-menu" to={"/"} variant="outline-light">Prenota</Button>
                         <Button className="button-menu" to={"/"} variant="outline-light">Account</Button>
                         <Button className="button-menu" to={"/"} variant="outline-light">Prenotazioni</Button>
-                        <Button className="button-menu" to={"/"} variant="outline-light">Logout</Button>
+                        <Button className="button-menu" to={"/"} variant="outline-warning">Logout</Button>
                     </div>
                 </Col>
             </Row>
             <Sidebar>
-                <Button to={"/"} variant="outline-light">Prenota</Button>
-                <Button to={"/"} variant="outline-light">Account</Button>
-                <Button to={"/"} variant="outline-light">Prenotazioni</Button>
-                <Button to={"/"} variant="outline-light">Logout</Button>
+                <Button className="button-menu" to={"/"} variant="outline-light">Prenota</Button>
+                <Button className="button-menu" to={"/"} variant="outline-light">Account</Button>
+                <Button className="button-menu" to={"/"} variant="outline-light">Prenotazioni</Button>
+                <Button className="button-menu" to={"/"} variant="outline-warning">Logout</Button>
             </Sidebar>
         </nav>
     );

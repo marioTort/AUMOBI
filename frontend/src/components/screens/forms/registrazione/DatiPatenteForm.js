@@ -22,10 +22,10 @@ export default function DatiPatenteForm() {
     })
 
     useEffect(() => {
-        let inputNumeroPatente = document.querySelector("#numeroPatente");
+        let campoNumeroPatente = document.querySelector("#numeroPatente");
         if (checkValidate.numeroPatente) {
-            inputNumeroPatente.classList.remove("border-danger", "border-success");
-            inputNumeroPatente.value === "" ? inputNumeroPatente.classList.add("border-danger") : inputNumeroPatente.classList.add("border-success");
+            campoNumeroPatente.classList.remove("border-danger", "border-success");
+            campoNumeroPatente.value === "" ? campoNumeroPatente.classList.add("border-danger") : campoNumeroPatente.classList.add("border-success");
             setCheckValidate({ ...checkValidate, numeroPatente: false });
         }
     }, [checkValidate])

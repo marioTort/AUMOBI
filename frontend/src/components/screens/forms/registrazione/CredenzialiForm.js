@@ -3,21 +3,28 @@ import { useHistory } from 'react-router';
 import axios from 'axios';
 
 // Bootstrap Components
-import { ProgressBar, Form, Container, Row, Col } from 'react-bootstrap';
+import { ProgressBar, Form, Container, Row, Col, InputGroup } from 'react-bootstrap';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 // Custom Components
 import Button from '../../../utils/Button';
-import InsertEmail from '../../../utils/InsertEmail';
-import InsertPassword from '../../../utils/InsertPassword';
-//import AlertMessage from '../../Utility/AlertMessage';
-
-
+import CampoEmail from '../../../utils/CampoEmail';
+import CampoPassword from '../../../utils/CampoPassword';
 
 export default function CredenzialiForm() {
+
     const history = useHistory();
+
     const [checkValidate, setCheckValidate] = useState({
         cellulare: false
-    })
+    });
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const [error, setError] = useState("");
+
     const [state, setState] = useState({
         error: {
             show: false,
@@ -26,52 +33,60 @@ export default function CredenzialiForm() {
     });
 
     useEffect(() => {
-        let inputCellulare = document.querySelector("#cellulare");
+        let campoCellulare = document.querySelector("#cellulare");
         
         // Controllo campo Cellulare
         if (checkValidate.cellulare) {
-            inputCellulare.classList.remove("border-danger", "border-success");
-            inputCellulare.value === "" ? inputCellulare.classList.add("border-danger") : inputCellulare.classList.add("border-success");
+            campoCellulare.classList.remove("border-danger", "border-success");
+            campoCellulare.value === "" ? campoCellulare.classList.add("border-danger") : campoCellulare.classList.add("border-success");
             setCheckValidate({ ...checkValidate, cellulare: false });
         }
     }, [checkValidate])
 
-    function onSubmit(e) {
+
+    async function onSubmit(e) {
         e.preventDefault();
+
+
+        const config = {
+            header: {
+              "Content-Type": "application/json",
+            },
+          };
+
+
         if (document.querySelector("#password").value !== document.querySelector("#confermaPassword").value) {
             document.querySelector("#confermaPasswordError").classList.remove("d-none");
-            return
+            return setError("password non corrispondenti");
         } else {
-            
-            const userData = {
-                ...history.location.state.payload,
-                credenziali: {
-                    cellulare: document.querySelector("#cellulare").value,
-                    email: document.querySelector("#email").value,
-                    password: document.querySelector("#password").value,
-                }
-            }
-            setState({ ...state, submit: true });
+
+
             try {
-                axios.post("api/registrazione/registrazionecliente", userData)
-                    .then((res) => {
-                        history.push("/datipatente", {payload: userData.credenziali.email});
-                    })
-                    .catch(err => {
-                        setState({
-                            error: {
-                                show: true,
-                                message: err.response.data
-                            },
-                            submit: false
-                        })
-                    })
-            } catch (err) {
-                console.log(err.response.data.msg);
-            }         
- 
+                const { data } = await axios.post(
+                    "/api/registrazione/registrazionecliente",
+                    {
+                        ...history.location.state.payload,
+                        email: document.querySelector("#email").value,
+                        telefono: document.querySelector("#cellulare").value,
+                        password: document.querySelector("#password").value
+                    },
+                    config
+                  );
+                  localStorage.setItem("authToken", data.token);
+
+                    history.push("/datipatente", {payload: data});
+                    setState({ ...state, submit: true });
+
+            } catch (error) {
+                setError(error.response.data.error);
+                    setTimeout(() => {
+                      setError("");
+                    }, 5000);
+            } 
+
         }
     }
+
 
     return (
         <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5">
@@ -84,9 +99,9 @@ export default function CredenzialiForm() {
                         <Row className="gy-4" >
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <InsertEmail controlId={"email"} placeholder={"Inserisci la tua email"} required>
+                                <CampoEmail controlId={"email"} placeholder={"Inserisci la tua email"} required>
                                     Email
-                                </InsertEmail>
+                                </CampoEmail>
                             </Col>
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
@@ -97,16 +112,25 @@ export default function CredenzialiForm() {
                             </Col>
                             
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <InsertPassword tooltip controlId={"password"} placeholder={"Inserisci la password"}>
+                                <CampoPassword tooltip controlId={"password"} placeholder={"Inserisci la password"}>
                                     Password
-                                </InsertPassword>
+                                </CampoPassword>
                             </Col>
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <InsertPassword controlId={"confermaPassword"} placeholder={"Conferma la tua password"}>
-                                    Conferma password
-                                </InsertPassword>
-                                <Form.Text id="confermaPasswordError" className="d-none text-danger">Le password non coincidono!</Form.Text>
+                            <Form.Group >
+                                <Form.Label className="pe-2">Conferma password</Form.Label>
+                                
+                                <InputGroup >
+                                    <Form.Control controlId={"confermaPassword"} type={showPassword ? "text" : "password"} placeholder={"Conferma la tua password"} pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" required />
+                                    <InputGroup.Append>
+                                        <InputGroup.Text className="h-100">
+                                        <FontAwesomeIcon onClick={() => setShowPassword(!showPassword)} icon={showPassword ? faEyeSlash : faEye} />
+                                        </InputGroup.Text>
+                                    </InputGroup.Append>
+                                    <Form.Text id="passwordFormatError" className="text-danger d-none">Formato password non valido!</Form.Text>
+                                </InputGroup>
+                            </Form.Group>
                             </Col>
 
                             <div className="d-flex justify-content-end">

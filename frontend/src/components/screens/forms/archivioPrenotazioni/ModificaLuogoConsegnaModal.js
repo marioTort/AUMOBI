@@ -9,7 +9,7 @@ import { Row, Col, Modal, Form } from 'react-bootstrap'
 // Custom Components
 import Button from '../../../utils/Button';
 import WarningMessage from '../../../utils/WarningMessage';
-import InputParcheggio from '../../../utils/InputParcheggio';
+import CampoParcheggio from '../../../utils/CampoParcheggio';
 
 export default function ModificaLuogoConsegnaModal(props) {
     
@@ -52,7 +52,7 @@ export default function ModificaLuogoConsegnaModal(props) {
                         <Form onSubmit={onClick}>
                                                 <Row className="gy-4">
                                                     
-                                                    <InputParcheggio controlId="luogoConsegna">Luogo di consegna</InputParcheggio>
+                                                    <CampoParcheggio controlId="luogoConsegna">Luogo di consegna</CampoParcheggio>
                                                    
                                                 </Row>
                                             </Form>

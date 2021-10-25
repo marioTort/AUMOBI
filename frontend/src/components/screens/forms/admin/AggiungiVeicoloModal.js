@@ -9,7 +9,7 @@ import { Row, Col, Modal, Form } from 'react-bootstrap'
 // Custom Components
 import Button from '../../../utils/Button';
 import WarningMessage from '../../../utils/WarningMessage';
-import InputParcheggio from '../../../utils/InputParcheggio';
+import CampoParcheggio from '../../../utils/CampoParcheggio';
 
 
 export default function AggiungiVeicoloModal(props) {
@@ -57,7 +57,7 @@ export default function AggiungiVeicoloModal(props) {
                                                         <Form.Control type="text" placeholder="Inserisci la targa del nuovo veicolo" required />
                                                     </Form.Group>
                                                     
-                                                        <InputParcheggio controlId="posizione">Posizione</InputParcheggio>
+                                                        <CampoParcheggio controlId="posizione">Posizione</CampoParcheggio>
                                                        
                                                     <Form.Group controlId="tipoVeicolo">
                                                         <Form.Label>Tipo veicolo</Form.Label>

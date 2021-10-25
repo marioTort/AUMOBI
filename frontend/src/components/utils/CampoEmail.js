@@ -4,13 +4,13 @@ import React, { useState, useEffect } from 'react'
 import { Form } from 'react-bootstrap';
 
 // Insert Email
-export default function InsertEmail(props) {
+export default function CampoEmail(props) {
     const [validateFormat, setValidateFormat] = useState(false);
 
     // Check email format
     useEffect(() => {
         if (validateFormat) {
-            let regex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+            let regex = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
             let emailInsert = document.getElementById(props.controlId);
             let error = document.querySelector("#emailFormatError");
             let match = regex.test(emailInsert.value);

@@ -6,8 +6,8 @@ import {Container, Row, Col, Image, Form} from "react-bootstrap";
 
 // Custom Components
 import Button from "../../utils/Button";
-import InsertEmail from '../../utils/InsertEmail';
-import InsertPassword from '../../utils/InsertPassword';
+import CampoEmail from '../../utils/CampoEmail';
+import CampoPassword from '../../utils/CampoPassword';
 
 
 
@@ -29,12 +29,12 @@ export default function AutenticazioneForm() {
                     <h1 className="h1 text-center t-bold mb-4">Accedi</h1>
                     <Form  onSubmit={onSubmit}>
                         <Row className="gy-4">
-                            <InsertEmail controlId={"loginEmail"} placeholder={"Inserisci la tua email"} required>
+                            <CampoEmail controlId={"loginEmail"} placeholder={"Inserisci la tua email"} required>
                                 Email
-                            </InsertEmail>
-                            <InsertPassword controlId={"loginPassword"} placeholder={"Inserisci la tua password"}>
+                            </CampoEmail>
+                            <CampoPassword controlId={"loginPassword"} placeholder={"Inserisci la tua password"}>
                                 Password
-                            </InsertPassword>
+                            </CampoPassword>
                             
                             
                             <Link to="/" className="link-secondary">Hai dimenticato la password?</Link>

@@ -4,7 +4,7 @@ import { Row, Col, Form } from 'react-bootstrap'
 
 import Button from '../../../utils/Button'
 
-import InputParcheggio from '../../../utils/InputParcheggio';
+import CampoParcheggio from '../../../utils/CampoParcheggio';
 
 export default function RicercaPrenotazioneAdmin() {
 
@@ -22,7 +22,7 @@ export default function RicercaPrenotazioneAdmin() {
                     </Form.Group>
                 </Col>
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
-                <InputParcheggio controlId="luogoConsegna">Posizione</InputParcheggio>
+                <CampoParcheggio controlId="luogoConsegna">Posizione</CampoParcheggio>
                 </Col>
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
                     <Form.Group controlId="tipoVeicolo">

@@ -9,7 +9,7 @@ import { Row, Col, Modal, Form } from 'react-bootstrap'
 // Custom Components
 import Button from '../../../utils/Button';
 import WarningMessage from '../../../utils/WarningMessage';
-import InputDataPrenotazione from '../../../utils/InputDataPrenotazione';
+import CampoDataPrenotazione from '../../../utils/CampoDataPrenotazione';
 
 export default function ModificaDataRitiroModal(props) {
     
@@ -51,7 +51,7 @@ export default function ModificaDataRitiroModal(props) {
                     : <Row className="gy-4" >
                         <Form onSubmit={onClick}>
                                                 <Row className="gy-4">
-                                                    <InputDataPrenotazione
+                                                    <CampoDataPrenotazione
                                                         controlDataId={"dataRitiro"}
                                                         labelData={"Data di ritiro"}
                                                         placeholderData={"Seleziona data di ritiro"}

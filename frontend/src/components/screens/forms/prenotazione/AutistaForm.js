@@ -5,8 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { Row, Col, Card, Form } from 'react-bootstrap'
 
 import Button from '../../../utils/Button';
-import InputDataPrenotazione from '../../../utils/InputDataPrenotazione';
-import InputParcheggio from '../../../utils/InputParcheggio';
+import CampoDataPrenotazione from '../../../utils/CampoDataPrenotazione';
+import CampoParcheggio from '../../../utils/CampoParcheggio';
 
 
 export default function AutoForm() {
@@ -45,7 +45,7 @@ export default function AutoForm() {
                                                         </Form.Group>
                                                     </Col>
 
-                                                    <InputDataPrenotazione
+                                                    <CampoDataPrenotazione
                                                         controlDataId={"dataRitiro"}
                                                         labelData={"Data di ritiro"}
                                                         placeholderData={"Seleziona data di ritiro"}
@@ -54,7 +54,7 @@ export default function AutoForm() {
                                                         labelOrario={"Ora di ritiro"} 
                                                     />
                                                     
-                                                    <InputDataPrenotazione
+                                                    <CampoDataPrenotazione
                                                         controlDataId={"dataConsegna"}
                                                         labelData={"Data di consegna"}
                                                         placeholderData={"Seleziona data di consegna"}

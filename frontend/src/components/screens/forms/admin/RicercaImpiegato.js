@@ -3,7 +3,7 @@ import React from 'react'
 import { Row, Col, Form } from 'react-bootstrap'
 
 import Button from '../../../utils/Button'
-import InsertEmail from '../../../utils/InsertEmail';
+import CampoEmail from '../../../utils/CampoEmail';
 
 export default function RicercaImpiegato() {
 
@@ -27,9 +27,9 @@ export default function RicercaImpiegato() {
                     </Form.Group>
                 </Col>
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
-                    <InsertEmail controlId={"cfImpiegato"} placeholder={"Inserisci codice fiscale impiegato"}>
+                    <CampoEmail controlId={"cfImpiegato"} placeholder={"Inserisci codice fiscale impiegato"}>
                         Codice fiscale
-                    </InsertEmail>
+                    </CampoEmail>
                 </Col>
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
                     <Form.Group controlId="tipoImpiegato">

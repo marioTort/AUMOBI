@@ -8,7 +8,7 @@ import { Row, Col, Modal, Form } from 'react-bootstrap'
 // Custom Components
 import Button from '../../../utils/Button';
 import WarningMessage from '../../../utils/WarningMessage';
-import InsertEmail from '../../../utils/InsertEmail';
+import CampoEmail from '../../../utils/CampoEmail';
 
 export default function CambiaEmailModal(props) {
 
@@ -51,9 +51,9 @@ export default function CambiaEmailModal(props) {
                     : <Form onSubmit={onSubmit}>
                         <Row className="gy-4" >
                             <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }}>
-                            <InsertEmail controlId={"cambiaEmail"} placeholder={"Inserisci la nuova email"} required>
+                            <CampoEmail controlId={"cambiaEmail"} placeholder={"Inserisci la nuova email"} required>
                                 Email
-                            </InsertEmail>
+                            </CampoEmail>
                             </Col>
                             <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }} className="buttonsGroup justify-content-end">
                                 <Button variant="outline-secondary" onClick={props.onHide}>Annulla</Button>

@@ -5,7 +5,7 @@ import { Col, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 
-export default function InputDataPrenotazione(props) {
+export default function CampoDataPrenotazione(props) {
     const [flag, setFlag] = useState(true)
     const now = new Date()
     const maxDate = new Date((new Date().setDate(new Date().getDate() + 23))).toISOString().substring(0, 10)

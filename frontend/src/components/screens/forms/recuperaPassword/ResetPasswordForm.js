@@ -5,7 +5,7 @@ import { Form, Container, Row, Col } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../../../utils/Button'
-import InsertPassword from '../../../utils/InsertPassword';
+import CampoPassword from '../../../utils/CampoPassword';
 
 // Recupero Password Form
 export default function ResetPasswordForm() {
@@ -25,15 +25,15 @@ export default function ResetPasswordForm() {
                     <Form onSubmit={onSubmit} >
                         <Row className="gy-4">
                         <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <InsertPassword tooltip controlId={"signupPassword"} placeholder={"Inserisci la password"}>
+                                <CampoPassword tooltip controlId={"signupPassword"} placeholder={"Inserisci la password"}>
                                     Password
-                                </InsertPassword>
+                                </CampoPassword>
                             </Col>
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <InsertPassword controlId={"confermaPassword"} placeholder={"Conferma la tua password"}>
+                                <CampoPassword controlId={"confermaPassword"} placeholder={"Conferma la tua password"}>
                                     Conferma password
-                                </InsertPassword>
+                                </CampoPassword>
                                 <Form.Text id="confermaPasswordError" className="d-none text-danger">Le password non coincidono!</Form.Text>
                             </Col>
                             <div className="d-flex justify-content-center">

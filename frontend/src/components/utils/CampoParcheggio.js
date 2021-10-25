@@ -8,7 +8,7 @@ import Parcheggi from './Parcheggi'
 
 
 // Input Luogo di nascita
-export default function InputParcheggio(props) {
+export default function CampoParcheggio(props) {
     const [renderParcheggio, setRenderParcheggio] = useState(true);
     const [optionsParcheggio, setOptionsParcheggio] = useState([]);
     const [checkParcheggio, setCheckParcheggio] = useState(true);

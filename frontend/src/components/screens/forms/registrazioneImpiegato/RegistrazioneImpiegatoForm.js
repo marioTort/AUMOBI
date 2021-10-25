@@ -5,11 +5,11 @@ import React, { useEffect } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 
 // Custom Components
-import InputDataNascita from '../../../utils/InputDataNascita';
-import InputLuogoNascita from '../../../utils/InputLuogoNascita';
+import CampoDataNascita from '../../../utils/CampoDataNascita';
+import CampoLuogoNascita from '../../../utils/CampoLuogoNascita';
 import Button from '../../../utils/Button';
-import InsertEmail from '../../../utils/InsertEmail';
-import InsertPassword from '../../../utils/InsertPassword';
+import CampoEmail from '../../../utils/CampoEmail';
+import CampoPassword from '../../../utils/CampoPassword';
 
 // Form Registrazione dati anagrafici
 export default function RegistrazioneClienteForm() {
@@ -47,7 +47,7 @@ export default function RegistrazioneClienteForm() {
                                 </Form.Group>
                             </Col>
                             <Col xs={{ span: 6 }} lg={{ span: 3 }}>
-                                <InputDataNascita />
+                                <CampoDataNascita />
                             </Col>
                             <Col xs={{ span: 6 }} lg={{ span: 3 }}>
                                 <Form.Group controlId="sesso">
@@ -59,30 +59,30 @@ export default function RegistrazioneClienteForm() {
                                     </Form.Control>
                                 </Form.Group>
                             </Col>
-                            <InputLuogoNascita />
+                            <CampoLuogoNascita />
 
                             <Col xs={{ span: 6 }} lg={{ span: 3 }}>
-                                <InsertEmail controlId={"signupEmail"} placeholder={"Inserisci email"} required>
+                                <CampoEmail controlId={"signupEmail"} placeholder={"Inserisci email"} required>
                                     Email
-                                </InsertEmail>
+                                </CampoEmail>
                             </Col>
                             <Col xs={{ span: 6 }} lg={{ span: 3 }}>
-                                <InsertEmail controlId={"confermaEmail"} placeholder={"Conferma email"} required>
+                                <CampoEmail controlId={"confermaEmail"} placeholder={"Conferma email"} required>
                                     Conferma email
-                                </InsertEmail>
+                                </CampoEmail>
                                 <Form.Text id="confermaEmailError" className="d-none text-danger">Le email non coincidono!</Form.Text>
                             </Col>
                             
                             <Col xs={{ span: 6 }} lg={{ span: 3 }}>
-                                <InsertPassword tooltip controlId={"signupPassword"} placeholder={"Inserisci password"}>
+                                <CampoPassword tooltip controlId={"signupPassword"} placeholder={"Inserisci password"}>
                                     Password
-                                </InsertPassword>
+                                </CampoPassword>
                             </Col>
 
                             <Col xs={{ span: 6 }} lg={{ span: 3 }}>
-                                <InsertPassword controlId={"confermaPassword"} placeholder={"Conferma password"}>
+                                <CampoPassword controlId={"confermaPassword"} placeholder={"Conferma password"}>
                                     Conferma password
-                                </InsertPassword>
+                                </CampoPassword>
                                 <Form.Text id="confermaPasswordError" className="d-none text-danger">Le password non coincidono!</Form.Text>
                             </Col>
 

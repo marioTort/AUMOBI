@@ -8,7 +8,7 @@ import Nazioni from './Nazioni'
 import LuogoNascita from './LuogoNascita'
 
 // Input Luogo di nascita
-export default function InputLuogoNascita() {
+export default function CampoLuogoNascita() {
     const [renderNazionalita, setRenderNazionalita] = useState(true);
     const [optionsNazionalita, setOptionsNazionalita] = useState([]);
     const [renderRegioni, setRenderRegioni] = useState(false);

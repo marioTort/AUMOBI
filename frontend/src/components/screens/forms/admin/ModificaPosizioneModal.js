@@ -9,7 +9,7 @@ import { Row, Col, Modal, Form } from 'react-bootstrap'
 // Custom Components
 import Button from '../../../utils/Button';
 import WarningMessage from '../../../utils/WarningMessage';
-import InputParcheggio from '../../../utils/InputParcheggio';
+import CampoParcheggio from '../../../utils/CampoParcheggio';
 
 export default function ModificaPosizioneModal(props) {
     
@@ -52,7 +52,7 @@ export default function ModificaPosizioneModal(props) {
                         <Form onSubmit={onClick}>
                                                 <Row className="gy-4">
                                                     <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }}>
-                                                    <InputParcheggio controlId="cambiaPosizione">Posizione</InputParcheggio>
+                                                    <CampoParcheggio controlId="cambiaPosizione">Posizione</CampoParcheggio>
                                                    </Col>
                                                 </Row>
                                             </Form>

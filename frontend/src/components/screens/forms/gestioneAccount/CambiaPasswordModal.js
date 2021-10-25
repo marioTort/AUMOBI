@@ -7,7 +7,7 @@ import { Row, Col, Modal, Form } from 'react-bootstrap'
 // Custom Components
 import Button from '../../../utils/Button';
 import WarningMessage from '../../../utils/WarningMessage';
-import InsertPassword from '../../../utils/InsertPassword';
+import CampoPassword from '../../../utils/CampoPassword';
 
 
 export default function CambiaPasswordModal(props) {
@@ -51,19 +51,19 @@ export default function CambiaPasswordModal(props) {
                     : <Form onSubmit={onSubmit}>
                         <Row className="gy-4" >
                             <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }}>
-                                <InsertPassword controlId={"vecchiaPassword"} placeholder={"Inserisci la tua password attuale"}>
+                                <CampoPassword controlId={"vecchiaPassword"} placeholder={"Inserisci la tua password attuale"}>
                                     Vecchia password
-                                </InsertPassword>
+                                </CampoPassword>
                             </Col>
                             <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }}>
-                                <InsertPassword controlId={"nuovaPassword"} placeholder={"Inserisci la tua nuova password"}>
+                                <CampoPassword controlId={"nuovaPassword"} placeholder={"Inserisci la tua nuova password"}>
                                     Nuova password
-                                </InsertPassword>
+                                </CampoPassword>
                             </Col>
                             <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }}>
-                                <InsertPassword controlId={"confermaNuovaPassword"} placeholder={"Conferma la tua password"}>
+                                <CampoPassword controlId={"confermaNuovaPassword"} placeholder={"Conferma la tua password"}>
                                     Conferma password
-                                </InsertPassword>
+                                </CampoPassword>
                             </Col>
                             <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }} className="buttonsGroup justify-content-end">
                                 <Button variant="outline-secondary" onClick={props.onHide}>Annulla</Button>
