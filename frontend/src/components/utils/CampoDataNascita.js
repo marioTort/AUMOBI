@@ -7,20 +7,62 @@ import { Form } from 'react-bootstrap'
 // Input data di nascita
 export default function CampoDataNascita() {
     const [controlloData, setControlloData] = useState(false);
-    const [dataDiNascita, setDataDiNascita] = useState("");
-    
     useEffect(() => {
-        if(){
-
-        } else {
+        if (controlloData) {
+            let dataOdierna = new Date(); // costruttore data attuale
+            let inputDataNascita = document.querySelector("#dataNascita");
+            let etaMinima = document.querySelector("#etaMinima");
+            let dataNascita = new Date(inputDataNascita.value);
+            // Controlla che il dato inserito sia una data valida
+            if (!isNaN(dataNascita.getTime())) {
+                inputDataNascita.classList.remove("border-success");
+                inputDataNascita.classList.add("border-danger");
+                etaMinima.classList.remove("d-none");
+                // Controlla requisito anno di nascita
+                if (parseInt(dataOdierna.getFullYear()) - parseInt(dataNascita.getFullYear()) < 14) {
+                    inputDataNascita.classList.add("border-danger");
+                    inputDataNascita.classList.remove("border-success");
+                    etaMinima.classList.remove("d-none");
+                } else if ((parseInt(dataOdierna.getFullYear()) - parseInt(dataNascita.getFullYear())) === 14) {
+                    // Controlla requisito mese di nascita
+                    if (parseInt(dataOdierna.getMonth()) - parseInt(dataNascita.getMonth()) < 0) {
+                        inputDataNascita.classList.add("border-danger");
+                        inputDataNascita.classList.remove("border-success");
+                        etaMinima.classList.remove("d-none");
+                    } else if ((parseInt(dataOdierna.getMonth()) - parseInt(dataNascita.getMonth())) === 0) {
+                        //controlla requisito giorno di nascita
+                        if ((parseInt(dataOdierna.getDate()) - parseInt(dataNascita.getDate())) < 0) {
+                            inputDataNascita.classList.add("border-danger");
+                            inputDataNascita.classList.remove("border-success");
+                            etaMinima.classList.remove("d-none");
+                        } else {
+                            inputDataNascita.classList.add("border-success");
+                            inputDataNascita.classList.remove("border-danger");
+                            etaMinima.classList.add("d-none");
+                        }
+                    }
+                } else {
+                    inputDataNascita.classList.add("border-success");
+                    inputDataNascita.classList.remove("border-danger");
+                    etaMinima.classList.add("d-none");
+                }
+            } else {
+                inputDataNascita.classList.add("border-danger");
+                inputDataNascita.classList.remove("border-success");
+                etaMinima.classList.remove("d-none");
+            }
 
         }
-    }, [checkData])
+        setControlloData(false);
+    }, [controlloData])
 
-    
-    
+    const [dataDiNascita, setDataDiNascita] = useState("");
     var data = new Date(dataDiNascita);
+
+
     localStorage.setItem("dataDiNascita", (data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear()));
+    
+    
     
 
     return (

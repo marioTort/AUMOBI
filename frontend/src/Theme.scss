@@ -5,7 +5,7 @@
 $primary: #2498ff;
 $primary-dark: #04222c;
 $secondary: #35393d;
-$success: #0ba525;
+$success: #008744;
 $danger: #d62d20;
 $warning: #ffa700;
 $info: #1bca9e;
@@ -267,6 +267,10 @@ footer
     }
 
     .btn-outline-secondary
+    {
+        border-radius: 5px !important;
+    }
+    .btn-outline-success
     {
         border-radius: 5px !important;
     }

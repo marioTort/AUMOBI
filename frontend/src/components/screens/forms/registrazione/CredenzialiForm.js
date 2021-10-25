@@ -1,101 +1,91 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import axios from 'axios';
-
 // Bootstrap Components
-import { ProgressBar, Form, Container, Row, Col, InputGroup } from 'react-bootstrap';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { ProgressBar, Form, Container, Row, Col } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../../../utils/Button';
 import CampoEmail from '../../../utils/CampoEmail';
 import CampoPassword from '../../../utils/CampoPassword';
 
+
+
 export default function CredenzialiForm() {
 
     const history = useHistory();
 
-    const [checkValidate, setCheckValidate] = useState({
+    const [validaDati, setValidaDati] = useState({
         cellulare: false
     });
 
-    const [showPassword, setShowPassword] = useState(false);
-
-    const [error, setError] = useState("");
-
-    const [state, setState] = useState({
-        error: {
-            show: false,
-        },
-        submit: false
-    });
+    const [telefono, setTelefono] = useState("");
 
     useEffect(() => {
-        let campoCellulare = document.querySelector("#cellulare");
-        
+        let inputCellulare = document.querySelector("#cellulare");
         // Controllo campo Cellulare
-        if (checkValidate.cellulare) {
-            campoCellulare.classList.remove("border-danger", "border-success");
-            campoCellulare.value === "" ? campoCellulare.classList.add("border-danger") : campoCellulare.classList.add("border-success");
-            setCheckValidate({ ...checkValidate, cellulare: false });
+        if (validaDati.cellulare) {
+            inputCellulare.classList.remove("border-danger", "border-success");
+            inputCellulare.value === "" ? inputCellulare.classList.add("border-danger") : inputCellulare.classList.add("border-success");
+            setValidaDati({ ...validaDati, cellulare: false });
         }
-    }, [checkValidate])
+    }, [validaDati])
 
+    async function registraCliente(event) {
+        event.preventDefault();
 
-    async function onSubmit(e) {
-        e.preventDefault();
-
-
-        const config = {
-            header: {
-              "Content-Type": "application/json",
-            },
-          };
-
+        let emailCliente = localStorage.getItem("email");
 
         if (document.querySelector("#password").value !== document.querySelector("#confermaPassword").value) {
-            document.querySelector("#confermaPasswordError").classList.remove("d-none");
-            return setError("password non corrispondenti");
+            document.querySelector("#erroreMatchPassword").classList.remove("d-none");
+            return
         } else {
+            var data = JSON.stringify({
+                nome: localStorage.getItem('nome'),
+                cognome: localStorage.getItem('cognome'),
+                sesso: localStorage.getItem('sesso'),
+                luogoDiNascita: localStorage.getItem('luogoDiNascita'),
+                dataDiNascita: localStorage.getItem('dataDiNascita'),
+                CF: localStorage.getItem('CF'),
+                email: localStorage.getItem('email'),
+                telefono: telefono,
+                password: localStorage.getItem('password')
+            });
 
+            var config = {
+                method: 'post',
+                url: '/api/registrazione/registrazionecliente',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
+            
+            await axios(config)
+                .then(function (response) {
+                    console.log(JSON.stringify(response.data));
+                    localStorage.clear();
+                    localStorage.setItem("authToken", response.data.token);
+                    localStorage.setItem("email", emailCliente);
+                    history.push("/datipatente")
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
-            try {
-                const { data } = await axios.post(
-                    "/api/registrazione/registrazionecliente",
-                    {
-                        ...history.location.state.payload,
-                        email: document.querySelector("#email").value,
-                        telefono: document.querySelector("#cellulare").value,
-                        password: document.querySelector("#password").value
-                    },
-                    config
-                  );
-                  localStorage.setItem("authToken", data.token);
-
-                    history.push("/datipatente", {payload: data});
-                    setState({ ...state, submit: true });
-
-            } catch (error) {
-                setError(error.response.data.error);
-                    setTimeout(() => {
-                      setError("");
-                    }, 5000);
-            } 
 
         }
-    }
 
+    }
 
     return (
         <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5">
             <Row className="gy-5">
                 <Col className="form" xs={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }}>
-                <br></br>
+                    <br></br>
                     <h1 className="h1 text-center t-bold mb-4">Registrazione</h1>
-                    <ProgressBar variant="secondary" now={40} className="mb-4" />
-                    <Form onSubmit={onSubmit} onClick={() => setState({ ...state, error: { show: false } })}>
+                    <ProgressBar variant="success" now={40} className="mb-4" animated label={`40%`} />
+                    <Form onSubmit={registraCliente}>
                         <Row className="gy-4" >
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
@@ -106,11 +96,11 @@ export default function CredenzialiForm() {
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                 <Form.Group controlId="cellulare">
-                                    <Form.Label>Cellulare</Form.Label>
-                                    <Form.Control type="tel" placeholder="Inserisci il numero di cellulare" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" onBlur={() => setCheckValidate({ ...checkValidate, cellulare: true })} required />
+                                    <Form.Label>Telefono</Form.Label>
+                                    <Form.Control type="tel" placeholder="Inserisci il numero di telefono" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" onBlur={() => setValidaDati({ ...validaDati, cellulare: true })} onChange={(event) => { setTelefono(event.target.value) }} required />
                                 </Form.Group>
                             </Col>
-                            
+
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                 <CampoPassword tooltip controlId={"password"} placeholder={"Inserisci la password"}>
                                     Password
@@ -118,31 +108,23 @@ export default function CredenzialiForm() {
                             </Col>
 
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                            <Form.Group >
-                                <Form.Label className="pe-2">Conferma password</Form.Label>
-                                
-                                <InputGroup >
-                                    <Form.Control controlId={"confermaPassword"} type={showPassword ? "text" : "password"} placeholder={"Conferma la tua password"} pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" required />
-                                    <InputGroup.Append>
-                                        <InputGroup.Text className="h-100">
-                                        <FontAwesomeIcon onClick={() => setShowPassword(!showPassword)} icon={showPassword ? faEyeSlash : faEye} />
-                                        </InputGroup.Text>
-                                    </InputGroup.Append>
-                                    <Form.Text id="passwordFormatError" className="text-danger d-none">Formato password non valido!</Form.Text>
-                                </InputGroup>
-                            </Form.Group>
+                                <CampoPassword controlId={"confermaPassword"} placeholder={"Conferma la tua password"}>
+                                    Conferma password
+                                </CampoPassword>
+                                <Form.Text id="erroreMatchPassword" className="d-none text-danger">Le password non coincidono!</Form.Text>
                             </Col>
 
                             <div className="d-flex justify-content-end">
                                 <Button to="/registrazionecliente" variant="outline-secondary">Indietro</Button>
-                                <Button spinner={state.submit} variant="outline-secondary" submit>Prosegui</Button>
+                                <Button variant="outline-success" submit >Prosegui</Button>
                             </div>
                         </Row>
                         <br></br>
                     </Form>
                 </Col>
             </Row>
-        </Container >
-        
+        </Container>
+
     );
+    
 }

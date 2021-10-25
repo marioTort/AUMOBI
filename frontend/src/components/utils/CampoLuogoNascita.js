@@ -7,28 +7,14 @@ import { Form } from 'react-bootstrap';
 import Nazioni from './Nazioni'
 import LuogoNascita from './LuogoNascita'
 
-// Input Luogo di nascita
+
 export default function CampoLuogoNascita() {
-    const [renderNazionalita, setRenderNazionalita] = useState(true);
-    const [optionsNazionalita, setOptionsNazionalita] = useState([]);
     const [renderRegioni, setRenderRegioni] = useState(false);
     const [optionsRegioni, setOptionsRegioni] = useState([]);
     const [renderProvince, setRenderProvince] = useState(false);
     const [optionsProvince, setOptionsProvince] = useState([]);
     const [renderComune, setRenderComune] = useState(false);
     const [optionsComune, setOptionsComune] = useState([]);
-    const [checkNazionalita, setCheckNazionalita] = useState(true);
-
-    // Popola la select delle nazioni al primo render del componente
-    useEffect(() => {
-        if (renderNazionalita) {
-            for (let index = 0; index < Object.keys(Nazioni).length; index++) {
-                const element = Object.keys(Nazioni)[index];
-                setOptionsNazionalita(optionsNazionalita => [...optionsNazionalita, <option value={element}>{element}</option>])
-            }
-        }
-        setRenderNazionalita(false);
-    }, [renderNazionalita])
 
     // Popola la select delle regioni
     useEffect(() => {
@@ -38,7 +24,7 @@ export default function CampoLuogoNascita() {
                 setOptionsRegioni(optionsRegioni => [...optionsRegioni, <option value={element}>{element.toUpperCase()}</option>])
             }
         }
-        setRenderRegioni(false);
+        setRenderRegioni(true);
     }, [renderRegioni])
 
     // Popola la select delle province in base alla regione selezionata
@@ -85,37 +71,20 @@ export default function CampoLuogoNascita() {
     // Se è Italia, allora abilita i campi regione, provincia e comune e abilita il flag per
     // popolare le regioni, altrimenti disabilita i campi precedenti
     useEffect(() => {
-        if (checkNazionalita) {
-            let nazionalita = document.querySelector("#nazionalita").value;
             let regione = document.querySelector("#regione");
             let provincia = document.querySelector("#provincia");
             let comune = document.querySelector("#comune");
-            if (nazionalita !== 'ITALIA') {
-                regione.setAttribute("disabled", "disabled");
-                provincia.value = ""
-                provincia.setAttribute("disabled", "disabled");
-                regione.value = ""
-                comune.setAttribute("disabled", "disabled");
-                comune.value = ""
-            } else {
-                regione.removeAttribute("disabled");
-                provincia.removeAttribute("disabled");
-                comune.removeAttribute("disabled");
-                setRenderRegioni(true);
-            }
-        }
-        setCheckNazionalita(false);
-    }, [checkNazionalita])
+            regione.removeAttribute("disabled");
+            provincia.removeAttribute("disabled");
+            comune.removeAttribute("disabled");
+    })
+
+    const [luogoDiNascita, setLuogoDiNascita] = useState("");
+
+    localStorage.setItem("luogoDiNascita", luogoDiNascita);
 
     return (
         <React.Fragment>
-            <Form.Group className="col-12 col-lg-6" controlId="nazionalita">
-                <Form.Label className="me-2">Nazione di nascita</Form.Label>
-                <Form.Control className="form-select" as="select" onChange={() => setCheckNazionalita(true)} required>
-                    <option value="" disabled selected>Seleziona...</option>
-                    {optionsNazionalita}
-                </Form.Control>
-            </Form.Group>
             <Form.Group className="col-12 col-lg-6" controlId="regione">
                 <Form.Label>Regione di nascita</Form.Label>
                 <Form.Control className="form-select" as="select" onChange={() => setRenderProvince(true)} required>
@@ -130,7 +99,7 @@ export default function CampoLuogoNascita() {
                     {optionsProvince}
                 </Form.Control>
             </Form.Group>
-            <Form.Group className="col-12 col-lg-6" controlId="comune">
+            <Form.Group className="col-12 col-lg-6" controlId="comune" onChange={(event) => { setLuogoDiNascita(event.target.value) }}>
                 <Form.Label>Comune di nascita</Form.Label>
                 <Form.Control className="form-select" as="select" required>
                     <option value="" disabled selected>Seleziona...</option>
