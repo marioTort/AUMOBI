@@ -123,7 +123,7 @@ export default function DatiBancariForm() {
         axios(config)
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
-                history.push("/login");
+                history.push("/registrazionecompletata");
             })
             .catch(function (error) {
                 console.log(error);
