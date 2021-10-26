@@ -53,7 +53,6 @@ exports.login = async (req, res, next) => {
 
         /* Se invece password ed email sono corrispondenti genero il token di autenticazione che sostanzialmente permette 
         di accedere alla propria area riservata */
-
         sendToken(utente, 200, res);
 
     } catch (error) {
@@ -426,6 +425,7 @@ const sendToken = (utente, statusCode, res) => {
         success: true,
         token,
         datiPatente, 
-        datiCarta
+        datiCarta,
+        utente
     });
 }

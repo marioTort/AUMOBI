@@ -13,7 +13,7 @@ import Footer from '../utils/Footer';
 // Util Card
 function LinkCard(props) {
     return (
-        <Col xs={{ span: 10 }} lg={{ span: 4 }} >
+        <Col md={{ span: 10 }} lg={{ span: 5 }} xl={{ span: 4 }}  >
             <div>
                 <Card className="border-5 shadow">
                 <Card.Header className="border-3 shadow"><h2 className="card-title">{props.title}</h2></Card.Header>
@@ -51,17 +51,17 @@ export default function SchermataCliente() {
                                     <LinkCard
                                         title={"Gestione Account"}
                                         text={"Da qui puoi visualizzare le informazioni sul tuo account, e se vuoi, modificarle."}
-                                        to={"/"}
+                                        to={"/gestioneaccount"}
                                         buttonLabel={"Il tuo account"}/>
                                     <LinkCard
                                         title={"Prenotazione"}
                                         text={"Aumobi a tua dispozione, prenota il veicolo più adatto alle tue necessità!"}
-                                        to={"/"}
+                                        to={"/schermataprenotazione"}
                                         buttonLabel={"Prenota ora!"}/>
                                     <LinkCard
                                         title={"Archivio Prenotazioni"}
                                         text={"Grazie per aver usufruito di Aumobi! Da qui puoi visualizzare e gestire le tue prenotazioni."}
-                                        to={"/"}
+                                        to={"/archivioprenotazioni"}
                                         buttonLabel={"Le tue prenotazioni"}/>
                         </Row>
                     </CardGroup>

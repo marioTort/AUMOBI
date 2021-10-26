@@ -26,31 +26,37 @@ export default function GestioneAccount() {
         rimuoviCartaModal: false
     })
 
+    let nome = JSON.parse(localStorage.getItem("datiPersonali")).nome;
+    let cognome = JSON.parse(localStorage.getItem("datiPersonali")).cognome;
+    let nomeCognome = nome + " " + cognome;
+
+    let telefono = JSON.parse(localStorage.getItem("datiPersonali")).telefono;
+    let email = JSON.parse(localStorage.getItem("datiPersonali")).email;
 
     return (
         <React.Fragment>
         <Container fluid className="p-0 h-100">
             <Row className="g-0 h-100 align-items-center">             
-                <Col xs={{ span: 10, offset: 1 }} lg={{ span: 4, offset: 1 }} className="ms-lg-auto mt-5 mt-lg-0">
+                    <Col xs={{ span: 12, offset: 1 }} md={{ span: 10, offset: 1 }} lg={{ span: 7, offset: 1 }} xl={{ span: 3, offset: 1 }} className="ms-lg-auto mt-5 mt-lg-0">
                     <div>
                         <div className="d-flex justify-content-start align-items-center mb-5">                           
                             <div className="d-flex flex-column">
-                                <h1 className="t-bold">nome  cognome</h1>
+                                <h1 className="t-bold">{nomeCognome}</h1>
                             </div>
                         </div>
                         <VisualizzaDati />
                     </div>
                 </Col>              
                     
-                    <Col xs={{ span: 10, offset: 1 }} lg={{ span: 6, offset: 0 }} className="d-flex d-lg-block me-auto mt-5 pb-5">
+                    <Col xs={{ span: 12, offset: 0 }} md={{ span: 12, offset: 0 }} lg={{ span: 10, offset: 1 }} xl={{ span: 8, offset: 0 }} className="d-flex d-lg-block me-auto mt-5 pb-5">
                     <Row className="gy-5 align-items-center justify-content-center">
                     <Col xs={{ span: 10 }} lg={{ span: 4 }} >
                         <Card className="border-5 shadow">
                         <Card.Header className="border-3 shadow"><h2 className="card-title">Credenziali</h2></Card.Header>
                         <Card.Body>
                         <div className=" py-3">
-                            <p className=" h5 t-light card-text py-3">Cellulare: <br></br> cellulare</p>
-                            <p className=" h5 t-light card-text py-3">Email: <br></br>email</p>
+                            <p className=" h5 t-light card-text py-3">Telefono: <br></br> {telefono}</p>
+                            <p className=" h5 t-light card-text py-3">Email: <br></br>{email}</p>
                             <p className=" h5 t-light card-text py-3">Password: <br></br> ********</p>
                         </div>
                             <Button className="my-3" variant="outline-primary py-2" onClick={() => setModals({ ...modals, cellulareModal: true })}>

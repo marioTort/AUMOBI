@@ -121,7 +121,7 @@ export default function AggiungiCartaModal(props) {
                                         
                                         <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }} className="buttonsGroup justify-content-end">
                                             <Button variant="outline-secondary" onClick={props.onHide}>Annulla</Button>
-                                            <Button spinner={state.submit} variant="outline-secondary" submit>Aggiungi</Button>
+                                            <Button variant="outline-success" submit>Aggiungi</Button>
                                         </Col>
                                     </Row>
                                 </Form>
