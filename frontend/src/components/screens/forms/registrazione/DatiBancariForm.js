@@ -184,7 +184,7 @@ export default function DatiBancariForm() {
                             
                             <div className="d-flex justify-content-end">
                                 <Button to="/datipatente" variant="outline-secondary">Indietro</Button>
-                                <Button variant="outline-success" submit>Completa Registrazione</Button>
+                                <Button variant="outline-success" submit onClick={localStorage.clear()}>Completa Registrazione</Button>
                             </div>
                         </Row>
                     </Form>
