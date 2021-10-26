@@ -57,7 +57,7 @@ export default function CambiaEmailModal(props) {
                             </Col>
                             <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }} className="buttonsGroup justify-content-end">
                                 <Button variant="outline-secondary" onClick={props.onHide}>Annulla</Button>
-                                <Button spinner={state.submit} variant="outline-secondary" submit>Conferma</Button>
+                                <Button spinner={state.submit} variant="outline-success" submit>Conferma</Button>
                             </Col>
                         </Row>
                     </Form>

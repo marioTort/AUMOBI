@@ -177,14 +177,14 @@ export default function Navbar() {
                         
                         <div className="buttonsGroup d-none d-lg-flex">
                             <Button className="button-menu" to={"/registrazionecliente"} variant="outline-light">Registrati</Button>
-                            <Button className="button-menu" to={"/login"} variant="outline-light">Accedi</Button>
+                            <Button className="button-menu" to={"/login"} variant="outline-warning">Accedi</Button>
                         </div>
                     </Col>
                 </Row>
                 <Sidebar>
                     <Button className="button-menu" to={"/"} variant="outline-light">Home</Button>
                     <Button className="button-menu" to={"/registrazionecliente"} variant="outline-light">Registrati</Button>
-                    <Button className="button-menu" to={"/login"} variant="outline-light">Accedi</Button>
+                    <Button className="button-menu" to={"/login"} variant="outline-warning">Accedi</Button>
                     <Button className="button-menu" to={"/aboutus"} variant="outline-light">About us</Button>
                 </Sidebar>
             </nav>
