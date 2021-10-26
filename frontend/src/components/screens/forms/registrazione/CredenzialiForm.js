@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 // Bootstrap Components
-import { ProgressBar, Form, Container, Row, Col } from 'react-bootstrap';
+import { ProgressBar, Form, Container, Row, Col, Modal } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../../../utils/Button';
@@ -12,6 +12,11 @@ import CampoPassword from '../../../utils/CampoPassword';
 
 
 export default function CredenzialiForm() {
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const history = useHistory();
 
@@ -116,7 +121,31 @@ export default function CredenzialiForm() {
 
                             <div className="d-flex justify-content-end">
                                 <Button to="/registrazionecliente" variant="outline-secondary">Indietro</Button>
-                                <Button variant="outline-success" submit >Prosegui</Button>
+                                <Button variant="outline-success" submit onClick={handleShow}>Prosegui</Button>
+
+                                <Modal
+                                    size="m"
+                                    aria-labelledby="richiestaPatenteModal"
+                                    centered
+                                    animation={false}
+                                    show={show} onHide={handleClose}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title className="t-bold" id="richiestaPatenteModal">
+                                            Inserimento Patente
+                                        </Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                            <Row className="gy-4" >
+                                                <Col >
+                                                    <h3 className="t-bold text-center h5">Vuoi inserire adesso la tua patente? Clicca su "Registra Patente". Ricorda che la potrai inserire anche in un secondo momento</h3>
+                                                </Col>
+                                                <div className="buttonsGroup mx-auto">
+                                                    <Button variant="outline-secondary" onClick={handleClose} >Lo farò dopo</Button>
+                                                    <Button variant="outline-warning" to="/datipatente">Registra Patente</Button>
+                                                </div>
+                                            </Row>
+                                    </Modal.Body>
+                                </Modal>
                             </div>
                         </Row>
                         <br></br>
