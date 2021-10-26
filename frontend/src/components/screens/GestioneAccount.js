@@ -76,13 +76,13 @@ export default function GestioneAccount() {
                                                 <p className=" h5 t-bold card-text py-1">Password:</p>
                                                 <p className=" h5 t-light card-text">********</p>
                                             </div>
-                                            <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cellulareModal: true })}>
+                                            <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaCellulareModal: true })}>
                                                 Modifica cellulare
                                             </Button>
-                                            <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, emailModal: true })}>
+                                            <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaEmailModal: true })}>
                                                 Modifica email
                                             </Button>
-                                            <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, passwordModal: true })}>
+                                            <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaPasswordModal: true })}>
                                                 Modifica password
                                             </Button>
                                         </Card.Body>
