@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+
 // Bootstrap Components
 import { Container, Row, Col, Card, CardColumns } from 'react-bootstrap';
 
@@ -20,31 +19,6 @@ import SchermataErrore from "../screens/forms/gestioneAccount/SchermataErrore";
 // Schermata profilo
 export default function GestioneAccount() {
     
-    const history = useHistory();
-
-    async function getPatente() {
-        var data = JSON.stringify({
-            "email": "mariotortorici09@gmail.com"
-        });
-
-        var config = {
-            method: 'get',
-            url: 'http://localhost:5000/api/fetch/fetchPatente',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: data
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
     const [modals, setModals] = useState({
         cambiaCellulareModal: false,
         cambiaEmailModal: false,
@@ -54,9 +28,7 @@ export default function GestioneAccount() {
         aggiungiCartaModal: false,
         rimuoviCartaModal: false
     })
-
-
-
+    
     if (localStorage.getItem('authToken') === null) {
         return (
             <SchermataErrore />
@@ -70,6 +42,10 @@ export default function GestioneAccount() {
         let telefono = JSON.parse(localStorage.getItem("datiPersonali")).telefono;
         let email = JSON.parse(localStorage.getItem("datiPersonali")).email;
 
+        let numeroPatente = JSON.parse(localStorage.getItem("datiPatente")).numeroPatente;
+        let dataScadenza = JSON.parse(localStorage.getItem("datiPatente")).dataScadenza;
+        let tipologiaPatente = JSON.parse(localStorage.getItem("datiPatente")).categoria;
+        
 
         return (
             <React.Fragment>
@@ -122,10 +98,13 @@ export default function GestioneAccount() {
                                         <Card.Body>
                                             <div className=" py-3">
                                                 <CardColumns className="col-10 offset-1">
-                                                    <div className=" py-3">
-                                                        <p className=" h5 t-light card-text py-4">Numero patente: <br></br> numeroPatente </p>
-                                                        <p className=" h5 t-light card-text py-4">Data di scadenza: <br></br> dataScadenza</p>
-                                                        <p className=" h5 t-light card-text py-4">Tipologia patente: <br></br> tipologiaPatente</p>
+                                                    <div className=" py-5">
+                                                        <p className=" h5 t-bold card-text py-2">Numero patente:</p>
+                                                        <p className=" h5 t-light card-text">{numeroPatente}</p>
+                                                        <p className=" h5 t-bold card-text py-2">Data di scadenza:</p>
+                                                        <p className=" h5 t-light card-text">{dataScadenza}</p>
+                                                        <p className=" h5 t-bold card-text py-2">Tipologia patente:</p>
+                                                        <p className=" h5 t-light card-text">{tipologiaPatente}</p>
                                                     </div>
                                                     <Button className="my-3" onClick={() => setModals({ ...modals, rimuoviPatenteModal: true })} variant="outline-danger py-2">
                                                         Elimina
@@ -140,7 +119,7 @@ export default function GestioneAccount() {
 
                                 <Col xs={{ span: 10 }} lg={{ span: 4 }} >
                                     <Card className="border-5 shadow">
-                                        <Card.Header className="border-3 shadow"><h2 className="card-title">Carta di pagamento</h2></Card.Header>
+                                        <Card.Header className="border-3 shadow"><h2 className="card-title">Carta di Credito</h2></Card.Header>
                                         <Card.Body>
                                             <div className=" py-3">
                                                 <CardColumns className="col-10 offset-1">

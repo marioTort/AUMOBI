@@ -55,7 +55,7 @@ exports.patenteUtente = async (req, res, next) => {
         const patente = await Patente.find(
             {email: email}
         );
-        res.json({datiPatente: patente});
+        res.json(patente);
     } catch (error) {
         res.status(500).json({
             success: false,

@@ -36,9 +36,11 @@ export default function AutenticazioneForm() {
         await axios(config)
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
+                localStorage.clear();
                 localStorage.setItem("authToken", response.data.token);
                 localStorage.setItem("datiPersonali", JSON.stringify(response.data.utente));
-
+                localStorage.setItem("datiCarta", JSON.stringify(response.data.datiCarta));
+                localStorage.setItem("datiPatente", JSON.stringify(response.data.datiPatente));
                 
                 if (response.data.utente.tipoUtente === "Parcheggiatore") {
                     localStorage.setItem("tipoUtente", "Parcheggiatore");
