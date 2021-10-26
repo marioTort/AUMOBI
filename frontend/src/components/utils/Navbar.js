@@ -1,7 +1,6 @@
-import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-//import useAuthentication from '../../Hooks/useAuthentication';
-//import useSession from '../../Hooks/useSession';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import useSession from './useSession';
 
 // Bootstrap Components
 import { Image, Row, Col } from 'react-bootstrap';
@@ -13,159 +12,184 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 // Custom Components
 import Button from './Button';
 import Sidebar from './Sidebar';
+import LogoutModal from './LogoutModal';
+import IsLogged from './IsLogged';
 
 // Navbar
 export default function Navbar() {
-    /*const { auth, setAuth } = useAuthentication();
+    const { login, setLogin } = IsLogged();
     const { session, setSession } = useSession()
-    const history = useHistory();*/
+    
+
+    const [modals, setModals] = useState({
+        logoutModal: false,
+    })
 
     function openSidebar() {
         let sidebar = document.querySelector("#sidebar");
         sidebar.style.width = "200px";
     }
 
-    /*function logout() {
-        try {
-            axios.get("/")
-                .then(res => {
-                    window.localStorage.clear();
-                    setAuth(false)
-                    history.push("/")
-                })
-                .catch(err => {
-                    console.log(err.response.data)
-                })
-        } catch (error) {
-            console.log(error.response.data.msg)
-        }
-    }*/
-
-    /*if (auth) {   
-        return (
-            <React.Fragment>
+    if (login) {
+        if (session.user === "Amministratore") {
+            return ( // NAVBAR AMMINISTRATORE
                 <nav className="container-fluid navbar py-3 shadow">
                     <Row className="w-100 mx-auto align-items-center">
                         <Col>
-                            <Link to="/">
-                                <Image fluid src="/logo.png" alt="Logo PickMeUp!" />
-                                <p className="h4">Il futuro del noleggio online!</p>
+                            <Link to="/schermataadmin">
+                                <Image className="logo-site" fluid src="/logo.png" alt="Logo" />
                             </Link>
                         </Col>
                         
-                        <Col className="d-none d-lg-flex justify-content-center">
-                            <div className="buttonsGroup">
-                                <Button className="btn-lg" to={"/prenota"} variant={"Warning"}>Prenota ora!</Button>
-                            </div>
-                        </Col>
                         <Col className="justify-content-end d-flex">
-                            
-                            <Button onClick={openSidebar} variant={"Primary"}>
-                                <FontAwesomeIcon icon={faBars} fixedWidth />
-                            </Button>
+                            <FontAwesomeIcon onClick={openSidebar} className="iconButton d-lg-none" icon={faBars} size="lg" color="white" />
+                            <div className="buttonsGroup d-none d-lg-flex">
+                                <Button className="button-menu" to={"/gestioneveicoli"} variant="outline-light">Gestione Veicoli</Button>                       
+                                <Button className="button-menu" to={"/gestioneimpiegati"} variant="outline-light">Gestione Impiegati</Button>
+                                <Button className="button-menu" to={"/visualizzaprenotazioniadmin"} variant="outline-light">Visualizza Prenotazioni</Button>
+                                <Button className="button-menu" to={"/registrazioneimpiegato"} variant="outline-light">Registra Impiegato</Button>
+                                <Button className="button-menu" to={"/gestioneaccountadmin"} variant="outline-light">Mio Account</Button>
+                                <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })} >Logout</Button>
+                            </div>
                         </Col>
                     </Row>
                     <Sidebar>
-                        <Button to={"/home"} variant={"Light"}>Home</Button>
-                        {
-                            session.user === "CLIENTE" &&
-                            <>
-                                <Button to={"/prenota"} variant={"Light"}>Prenota</Button>
-                                <Button to={"/gestione-prenotazioni"} variant={"Light"}>Le mie prenotazioni</Button>
-                            </>
-                        }
-                        {session.user === "AMMINISTRATORE" &&
-                            <>
-                                <Button to={"/gestione-prenotazioni"} variant={"Light"}>Gestione prenotazioni</Button>
-                                <Button to={"/gestione-mezzi"} variant={"Light"}>Ricerca mezzi</Button>
-                                <Button to={"/registrazione-impiegato"} variant={"Light"}>Registra impiegato</Button>
-                                <Button to={"/gestione-utenti"} variant={"Light"}>Modifica utente</Button>
-                                <Button to={"/gestione-impiegati"} variant={"Light"}>Cambia ruoli</Button>
-                            </>
-                        }
-                        {session.user === "GESTORE_MEZZI" &&
-                            <>
-                                <Button to={"/gestione-mezzi"} variant={"Light"}>Ricerca mezzi</Button>
-                            </>
-                        }
-                        {session.user === "AUTISTA" &&
-                            <>
-                                <Button to={"/gestione-prenotazioni"} variant={"Light"}>Le mie corse</Button>
-                                <Button to={"/gestione-account/patente"} variant={"Light"}>Visualizza patente</Button>
-                            </>
-                        }
-                        <Button to={"/gestione-account/profilo"} variant={"Light"}>Visualizza profilo</Button>
-                        {session.user === "CLIENTE" &&
-                            <>
-                                <Button to={"/gestione-account/wallet"} variant={"Light"}>Visualizza Wallet</Button>
-                                <Button to={"/gestione-account/patente"} variant={"Light"}>Visualizza patente</Button>
-                            </>
-                        }
-                        <Button onClick={logout} variant={"Danger"}>Logout</Button>
+                        <Button className="button-menu" to={"/gestioneveicoli"} variant="outline-light">Gestione Veicoli</Button>                       
+                        <Button className="button-menu" to={"/gestioneimpiegati"} variant="outline-light">Gestione Impiegati</Button>
+                        <Button className="button-menu" to={"/visualizzaprenotazioniadmin"} variant="outline-light">Visualizza Prenotazioni</Button>
+                        <Button className="button-menu" to={"/registrazioneimpiegato"} variant="outline-light">Registra Impiegato</Button>
+                        <Button className="button-menu" to={"/gestioneaccountadmin"} variant="outline-light">Mio Account</Button>
+                        <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })} >Logout</Button>
                     </Sidebar>
+                    <LogoutModal show={modals.logoutModal} onHide={() => setModals({ ...modals, logoutModal: false })} />
                 </nav>
-            </React.Fragment>
-        );
-    } else { 
-        return (
+            );
+        } else if (session.user === "Autista") {
+            return ( // NAVBAR AUTISTA
+                <nav className="container-fluid navbar py-3 shadow">
+                    <Row className="w-100 mx-auto align-items-center">
+                        <Col>
+                            <Link to="/schermataautista">
+                                <Image className="logo-site" fluid src="/logo.png" alt="Logo" />
+                            </Link>
+                        </Col>
+            
+                        <Col className="justify-content-end d-flex">
+                                <FontAwesomeIcon onClick={openSidebar} className="iconButton d-lg-none" icon={faBars} size="lg" color="white" />
+                                
+                                <div className="buttonsGroup d-none d-lg-flex">
+                                    <Button className="button-menu" to={"/gestioneaccountimpiegato"} variant="outline-light">Gestione Account</Button>
+                                    <Button className="button-menu" to={"/confermaprenotazione"} variant="outline-light">Conferma Prenotazione</Button>
+                                    <Button className="button-menu" to={"/visualizzaprenotazioniautista"} variant="outline-light">Visualizza Prenotazioni</Button>
+                                    <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button>                        
+                                </div>
+                            </Col>
+                        </Row>
+                        <Sidebar>
+                            <Button className="button-menu" to={"/gestioneaccountimpiegato"} variant="outline-light">Gestione Account</Button>
+                            <Button className="button-menu" to={"/confermaprenotazione"} variant="outline-light">Conferma Prenotazione</Button>
+                            <Button className="button-menu" to={"/visualizzaprenotazioniautista"} variant="outline-light">Visualizza Prenotazioni</Button>
+                            <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button> 
+                        </Sidebar>
+                    
+                    <LogoutModal show={modals.logoutModal} onHide={() => setModals({ ...modals, logoutModal: false })} />
+                </nav>
+            );
+        } else if (session.user === "Parcheggiatore") {
+            return ( // NAVBAR PARCHEGGIATORE
+                <nav className="container-fluid navbar py-3 shadow">
+                    <Row className="w-100 mx-auto align-items-center">
+                        <Col>
+                            <Link to="/schermataparcheggiatore">
+                                <Image className="logo-site" fluid src="/logo.png" alt="Logo" />
+                            </Link>
+                        </Col>
+                        
+                        <Col className="justify-content-end d-flex">
+                            <FontAwesomeIcon onClick={openSidebar} className="iconButton d-lg-none" icon={faBars} size="lg" color="white" />
+                            
+                            <div className="buttonsGroup d-none d-lg-flex">
+                                <Button className="button-menu" to={"/gestioneaccountimpiegato"} variant="outline-light">Gestione Account</Button>
+                                <Button className="button-menu" to={"/confermaprenotazione"} variant="outline-light">Conferma Prenotazione</Button>
+                                <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button>                        
+                            </div>
+                        </Col>
+                    </Row>
+                    <Sidebar>
+                        <Button className="button-menu" to={"/gestioneaccountimpiegato"} variant="outline-light">Gestione Account</Button>
+                        <Button className="button-menu" to={"/confermaprenotazione"} variant="outline-light">Conferma Prenotazione</Button>
+                        <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button> 
+                    </Sidebar>
+                    <LogoutModal show={modals.logoutModal} onHide={() => setModals({ ...modals, logoutModal: false })} />
+        
+                </nav>
+            );
+        } else {
+            return ( // NAVBAR CLIENTE
+                <nav className="container-fluid navbar py-3 shadow">
+                    <Row className="w-100 mx-auto align-items-center">
+                        <Col>
+                            <Link to="/schermatacliente">
+                                <Image className="logo-site" fluid src="/logo.png" alt="Logo" />
+                            </Link>
+                        </Col>
+                        <Col className="d-none d-lg-flex justify-content-center">
+                        <Link to="/aboutus">
+                            <u className="h3 text-underline text-light menu-page-item">About us</u>
+                        </Link>
+                        </Col>
+                        <Col className="justify-content-end d-flex">
+                            <FontAwesomeIcon onClick={openSidebar} className="iconButton d-lg-none" icon={faBars} size="lg" color="white" />
+                            
+                            <div className="buttonsGroup d-none d-lg-flex">
+                                <Button className="button-menu" to={"/schermataprenotazione"} variant="outline-light">Prenota</Button>
+                                <Button className="button-menu" to={"/gestioneaccount"} variant="outline-light">Account</Button>
+                                <Button className="button-menu" to={"/archivioprenotazioni"} variant="outline-light">Prenotazioni</Button>
+                                <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Sidebar>
+                        <Button className="button-menu" to={"/schermataprenotazione"} variant="outline-light">Prenota</Button>
+                        <Button className="button-menu" to={"/gestioneaccount"} variant="outline-light">Account</Button>
+                        <Button className="button-menu" to={"/archivioprenotazioni"} variant="outline-light">Prenotazioni</Button>
+                        <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button>
+                        <Button className="button-menu" to={"/aboutus"} variant="outline-light">About us</Button>
+                    </Sidebar>
+                    <LogoutModal show={modals.logoutModal} onHide={() => setModals({ ...modals, logoutModal: false })} />
+                </nav>
+            );
+        }
+    } else {
+        return ( // NAVBAR SENZA LOGIN
             <nav className="container-fluid navbar py-3 shadow">
                 <Row className="w-100 mx-auto align-items-center">
                     <Col>
                         <Link to="/">
-                            <Image fluid src="/logo.png" alt="Logo" />
+                            <Image className="logo-site" fluid src="/logo.png" alt="Logo" />
                         </Link>
                     </Col>
                     <Col className="d-none d-lg-flex justify-content-center">
-                    <Link to="/">
-                        <u className="h3 text-underline text-light">About us</u>
+                    <Link to="/aboutus">
+                        <u className="h3 text-underline text-light menu-page-item">About us</u>
                     </Link>
                     </Col>
                     <Col className="justify-content-end d-flex">
                         <FontAwesomeIcon onClick={openSidebar} className="iconButton d-lg-none" icon={faBars} size="lg" color="white" />
                         
                         <div className="buttonsGroup d-none d-lg-flex">
-                            <Button to={"/"} variant="outline-light">Registrati</Button>
-                            <Button to={"/"} variant="outline-light">Accedi</Button>
+                            <Button className="button-menu" to={"/registrazionecliente"} variant="outline-light">Registrati</Button>
+                            <Button className="button-menu" to={"/login"} variant="outline-light">Accedi</Button>
                         </div>
                     </Col>
                 </Row>
                 <Sidebar>
-                    <Button to={"/"} variant="outline-light">Home</Button>
-                    <Button to={"/"} variant="outline-light">Registrati</Button>
-                    <Button to={"/"} variant="outline-light">Accedi</Button>
-                    <Button to={"/"} variant="outline-light">About us</Button>
+                    <Button className="button-menu" to={"/"} variant="outline-light">Home</Button>
+                    <Button className="button-menu" to={"/registrazionecliente"} variant="outline-light">Registrati</Button>
+                    <Button className="button-menu" to={"/login"} variant="outline-light">Accedi</Button>
+                    <Button className="button-menu" to={"/aboutus"} variant="outline-light">About us</Button>
                 </Sidebar>
             </nav>
         );
-    }    */
-
-    return (
-        <nav className="container-fluid navbar py-3 shadow">
-            <Row className="w-100 mx-auto align-items-center">
-                <Col>
-                    <Link to="/">
-                        <Image className="logo-site" fluid src="/logo.png" alt="Logo" />
-                    </Link>
-                </Col>
-                <Col className="d-none d-lg-flex justify-content-center">
-                </Col>
-                <Col className="justify-content-end d-flex">
-                    <FontAwesomeIcon onClick={openSidebar} className="iconButton d-lg-none" icon={faBars} size="lg" color="white" />
-                    
-                    <div className="buttonsGroup d-none d-lg-flex">
-                        <Button className="button-menu" to={"/"} variant="outline-light">Prenota</Button>
-                        <Button className="button-menu" to={"/"} variant="outline-light">Account</Button>
-                        <Button className="button-menu" to={"/"} variant="outline-light">Prenotazioni</Button>
-                        <Button className="button-menu" to={"/"} variant="outline-warning">Logout</Button>
-                    </div>
-                </Col>
-            </Row>
-            <Sidebar>
-                <Button className="button-menu" to={"/"} variant="outline-light">Prenota</Button>
-                <Button className="button-menu" to={"/"} variant="outline-light">Account</Button>
-                <Button className="button-menu" to={"/"} variant="outline-light">Prenotazioni</Button>
-                <Button className="button-menu" to={"/"} variant="outline-warning">Logout</Button>
-            </Sidebar>
-        </nav>
-    );
-}
+    }
+}    
