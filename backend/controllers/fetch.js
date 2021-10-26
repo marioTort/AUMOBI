@@ -46,6 +46,24 @@ exports.prenotazioniUtente = async (req, res, next) => {
 
 //Patente
 
+exports.patenteUtente = async (req, res, next) => {
+
+    const {
+        email
+    } = req.body;
+    try {
+        const patente = await Patente.find(
+            {email: email}
+        );
+        res.json({datiPatente: patente});
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+};
+
 exports.elencoPatenti = async (req, res, next) => {
     const patenti = await Patente.find();
     res.json(patenti);
