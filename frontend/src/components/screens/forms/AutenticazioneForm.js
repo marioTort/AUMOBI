@@ -41,6 +41,7 @@ export default function AutenticazioneForm() {
                 localStorage.setItem("datiPersonali", JSON.stringify(response.data.utente));
                 localStorage.setItem("datiCarta", JSON.stringify(response.data.datiCarta));
                 localStorage.setItem("datiPatente", JSON.stringify(response.data.datiPatente));
+                localStorage.setItem("cifre", JSON.stringify(response.data.quattroCifre));
                 
                 if (response.data.utente.tipoUtente === "Parcheggiatore") {
                     localStorage.setItem("tipoUtente", "Parcheggiatore");

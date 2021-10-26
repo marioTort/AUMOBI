@@ -8,9 +8,11 @@ const Prenotazione = require('../models/Prenotazioni');
 const invioEmail = require("../utils/invioEmail");
 const crypto = require("crypto");
 
+const StringCrypto = require('string-crypto');
+
 let datiPatente;
 let datiCarta;
-
+let quattroCifre;
 exports.login = async (req, res, next) => {
     const { email, password } = req.body;
 
@@ -27,10 +29,33 @@ exports.login = async (req, res, next) => {
     try {
         const utente = await Utente.findOne({ email }).select("+password");
         
-        datiPatente = await Patente.findOne({ email });
-        datiCarta = await Wallet.findOne({ email });
+        try {
+            datiPatente = await Patente.findOne({ email });
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                error: error.message
+            });
+        }
 
-        
+        try {
+            datiCarta = await Wallet.findOne({ email });
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                error: error.message
+            });
+        }
+
+        const {
+            decryptString,
+        } = new StringCrypto();
+
+        quattroCifre = (decryptString(datiCarta.numeroCartaCredito, "AuMoBi"));
+
+        quattroCifre = quattroCifre.toString();
+
+        quattroCifre = quattroCifre.substring(12, 16);
 
         //Se l'utente non è presente nel DB...
         if (!utente) {
@@ -426,6 +451,7 @@ const sendToken = (utente, statusCode, res) => {
         token,
         datiPatente, 
         datiCarta,
-        utente
+        utente,
+        quattroCifre
     });
 }

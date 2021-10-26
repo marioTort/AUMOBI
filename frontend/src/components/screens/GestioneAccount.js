@@ -45,7 +45,10 @@ export default function GestioneAccount() {
         let numeroPatente = JSON.parse(localStorage.getItem("datiPatente")).numeroPatente;
         let dataScadenza = JSON.parse(localStorage.getItem("datiPatente")).dataScadenza;
         let tipologiaPatente = JSON.parse(localStorage.getItem("datiPatente")).categoria;
-        
+
+        let numeroCarta = JSON.parse(localStorage.getItem("cifre"));
+        let intestatario = JSON.parse(localStorage.getItem("datiCarta")).intestatario;
+        let dataScadenzaCarta = (JSON.parse(localStorage.getItem("datiCarta")).meseScadenzaCarta + "/" + JSON.parse(localStorage.getItem("datiCarta")).annoScadenzaCarta);
 
         return (
             <React.Fragment>
@@ -123,22 +126,23 @@ export default function GestioneAccount() {
                                         <Card.Body>
                                             <div className=" py-3">
                                                 <CardColumns className="col-10 offset-1">
-                                                    <h5 className="t-light card-text py-3">Nessuna carta trovata...</h5>
-                                                    <Button className="my-3" onClick={() => setModals({ ...modals, aggiungiCartaModal: true })} variant="outline-primary py-2">
-                                                        Aggiungi
-                                                    </Button>
-                                                    {/*} 
-                                <div className=" py-3">
-                                    <p className=" h5 t-light card-text py-3">Numero carta: <br></br> numeroCarta</p>
-                                    <p className=" h5 t-light card-text py-3">Intestatario: <br></br> intestatario</p>
-                                    <p className=" h5 t-light card-text py-3">Data di scadenza: <br></br> dataScadenza</p>
-                                    <p className=" h5 t-light card-text py-3">CVV: <br></br> cvv</p>
-                                </div>
-                                <Button className="my-3" onClick={() => setModals({ ...modals, rimuoviCartaModal: true })} variant="outline-danger py-2">
-                                    Elimina
-                                </Button>
+         
+                                                <div className=" py-2">
+
+                                                    <p className=" h5 t-bold card-text py-2">Numero carta:</p>
+                                                    <p className=" h5 t-light card-text">**** **** **** {numeroCarta}</p>
+                                                    <p className=" h5 t-bold card-text py-2">Intestatario:</p>
+                                                    <p className=" h5 t-light card-text">{intestatario}</p>
+                                                    <p className=" h5 t-bold card-text py-2">Data di scadenza:</p>
+                                                    <p className=" h5 t-light card-text">{dataScadenzaCarta}</p>
+                                                    <p className=" h5 t-bold card-text py-2">CVV:</p>
+                                                    <p className=" h5 t-light card-text">***</p>
+                                                    
+                                                </div>
+                                                <Button className="my-3" onClick={() => setModals({ ...modals, rimuoviCartaModal: true })} variant="outline-danger py-2">
+                                                    Elimina
+                                                </Button>
                             
-                            */}
                                                 </CardColumns>
                                             </div>
                                             <RimuoviCartaModal show={modals.rimuoviCartaModal} onHide={() => setModals({ ...modals, rimuoviCartaModal: false })} />
