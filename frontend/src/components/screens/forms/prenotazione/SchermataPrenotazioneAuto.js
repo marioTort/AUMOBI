@@ -14,7 +14,7 @@ export default function SchermataPrenotazioneAuto() {
                         <AutoForm />
                     </div>
                 </Col>
-                <Col xs={{ span: 10 }} lg={{ span: 6 }} className="h-100 d-flex">
+                <Col xs={{ span: 10 }} lg={{ span: 6 }} className="h-100 d-flex pb-5">
                     <Map />
                 </Col>
             </Row>

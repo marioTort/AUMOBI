@@ -23,8 +23,8 @@ export default function ConfermaPrenotazione() {
                             <p className=" h3 t-light card-text py-3">Clicca su 'Inizia prenotazione' per confermare l'inizio di una prenotazione <br/> oppure su 'Termina prenotazione' per confermarne la terminazione.</p>
                         </div>
                         <div className="d-flex justify-content-center">
-                            <center><Button className="btn-lg"  onClick={() => setIniziaPrenotazioneModal(true)} variant="outline-primary">Inizia prenotazione</Button></center>
-                            <center><Button className="btn-lg"  onClick={() => setTerminaPrenotazioneModal(true)} variant="outline-danger">Termina prenotazione</Button></center>
+                            <center><Button className=" button-menu"  onClick={() => setIniziaPrenotazioneModal(true)} variant="outline-primary">Inizia prenotazione</Button></center>
+                            <center><Button className=" button-menu"  onClick={() => setTerminaPrenotazioneModal(true)} variant="outline-danger">Termina prenotazione</Button></center>
                         </div>    
                             </Card.Body>
                             <IniziaPrenotazioneModal show={iniziaPrenotazioneModal} onHide={() => setIniziaPrenotazioneModal(false)} />
