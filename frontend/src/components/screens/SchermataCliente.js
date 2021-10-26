@@ -31,7 +31,7 @@ function LinkCard(props) {
 
 // Schermata personale utente
 export default function SchermataCliente() {
-
+    let nome = JSON.parse(localStorage.getItem("datiPersonali")).nome;
     return (<>
         <div style={{  backgroundImage:`url(${process.env.PUBLIC_URL + '/cliente1.jpg'})`,
         
@@ -41,7 +41,7 @@ export default function SchermataCliente() {
                     <Container fluid className="d-flex justify-content-center align-items-center my-5">
                         
                         <div className="d-flex flex-column align-items-start">
-                            <h1 className="t-bold">Benvenuto su AUMOBI!</h1>
+                            <h1 className="t-bold">Ciao, {nome}</h1>
                         </div>
                     </Container >
                 </div>
