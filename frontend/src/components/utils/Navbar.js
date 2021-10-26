@@ -148,9 +148,6 @@ export default function Navbar() {
                     </Link>
                 </Col>
                 <Col className="d-none d-lg-flex justify-content-center">
-                <Link to="/">
-                    <u className="h3 text-underline text-light menu-page-item">About us</u>
-                </Link>
                 </Col>
                 <Col className="justify-content-end d-flex">
                     <FontAwesomeIcon onClick={openSidebar} className="iconButton d-lg-none" icon={faBars} size="lg" color="white" />
