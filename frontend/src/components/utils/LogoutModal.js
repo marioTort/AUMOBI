@@ -23,20 +23,11 @@ export default function LogoutModal(props) {
         submit: false
     })
 
-    function logout() {
-        {/*try {
-            axios.get("/")
-                .then(res => {
-                    window.localStorage.clear();
-                    setAuth(false)
-                    history.push("/")
-                })
-                .catch(err => {
-                    console.log(err.response.data)
-                })
-        } catch (error) {
-            console.log(error.response.data.msg)
-        }*/}
+    function logout(event) {
+        event.preventDefault();
+        localStorage.clear();
+        
+        history.push("/login");
     }
 
     return (
@@ -45,6 +36,7 @@ export default function LogoutModal(props) {
             size="m"
             aria-labelledby="logoutModal"
             centered
+            onHide={logout}
             animation={false}>
             <Modal.Header>
                 <Modal.Title className="t-bold" id="logoutModal">
@@ -66,7 +58,7 @@ export default function LogoutModal(props) {
                         </Col>
                         <div className="buttonsGroup mx-auto">
                             <Button variant="outline-secondary" onClick={props.onHide}>Annulla</Button>
-                            <Button spinner={state.submit} variant="outline-danger" onClick={logout}>Logout</Button>
+                            <Button variant="outline-danger" onClick={logout}>Logout</Button>
                         </div>
                     </Row>
                 }

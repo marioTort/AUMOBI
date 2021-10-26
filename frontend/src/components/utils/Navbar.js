@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useSession from './useSession';
 
 // Bootstrap Components
 import { Image, Row, Col } from 'react-bootstrap';
@@ -13,13 +12,12 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import Button from './Button';
 import Sidebar from './Sidebar';
 import LogoutModal from './LogoutModal';
-import IsLogged from './IsLogged';
 
 // Navbar
 export default function Navbar() {
-    const { login, setLogin } = IsLogged();
-    const { session, setSession } = useSession()
-    
+
+    let tipoUtente = localStorage.getItem("tipoUtente");
+    let authToken = localStorage.getItem("authToken");
 
     const [modals, setModals] = useState({
         logoutModal: false,
@@ -30,8 +28,8 @@ export default function Navbar() {
         sidebar.style.width = "200px";
     }
 
-    if (login) {
-        if (session.user === "Amministratore") {
+    if (authToken) {
+        if (tipoUtente === "Admin") {
             return ( // NAVBAR AMMINISTRATORE
                 <nav className="container-fluid navbar py-3 shadow">
                     <Row className="w-100 mx-auto align-items-center">
@@ -64,7 +62,7 @@ export default function Navbar() {
                     <LogoutModal show={modals.logoutModal} onHide={() => setModals({ ...modals, logoutModal: false })} />
                 </nav>
             );
-        } else if (session.user === "Autista") {
+        } else if (tipoUtente === "Autista") {
             return ( // NAVBAR AUTISTA
                 <nav className="container-fluid navbar py-3 shadow">
                     <Row className="w-100 mx-auto align-items-center">
@@ -95,7 +93,7 @@ export default function Navbar() {
                     <LogoutModal show={modals.logoutModal} onHide={() => setModals({ ...modals, logoutModal: false })} />
                 </nav>
             );
-        } else if (session.user === "Parcheggiatore") {
+        } else if (tipoUtente === "Parcheggiatore") {
             return ( // NAVBAR PARCHEGGIATORE
                 <nav className="container-fluid navbar py-3 shadow">
                     <Row className="w-100 mx-auto align-items-center">
