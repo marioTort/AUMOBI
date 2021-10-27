@@ -5,19 +5,14 @@ import { Container, Row, Col, Card, CardColumns } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../utils/Button';
+
 import VisualizzaDati from './forms/gestioneAccount/VisualizzaDati';
-import CambiaEmailModal from './forms/gestioneAccount/CambiaEmailModal';
-import CambiaCellulareModal from './forms/gestioneAccount/CambiaCellulareModal';
-import CambiaPasswordModal from './forms/gestioneAccount/CambiaPasswordModal';
-
 import AggiungiPatente from './forms/gestioneAccount/AggiungiPatente';
-import AggiungiPatenteModal from './forms/gestioneAccount/AggiungiPatenteModal';
+import AggiornaCarta from './forms/gestioneAccount/AggiornaCarta';
+import ModificaCellulare from './forms/gestioneAccount/ModificaCellulare';
+import ModificaEmail from './forms/gestioneAccount/ModificaEmail';
+import ModificaPassword from './forms/gestioneAccount/ModificaPassword';
 
-import RimuoviPatenteModal from './forms/gestioneAccount/RimuoviPatenteModal';
-
-
-import AggiungiCartaModal from './forms/gestioneAccount/AggiungiCartaModal';
-import RimuoviCartaModal from './forms/gestioneAccount/RimuoviCartaModal';
 
 import SchermataErrore from "../screens/forms/gestioneAccount/SchermataErrore";
 
@@ -26,16 +21,6 @@ export default function GestioneAccount() {
     
     let authToken = localStorage.getItem('authToken');
     let Patente = JSON.parse(localStorage.getItem("datiPatente"));
-    
-    const [modals, setModals] = useState({
-        cambiaCellulareModal: false,
-        cambiaEmailModal: false,
-        cambiaPasswordModal: false,
-        aggiungiPatenteModal: false,
-        rimuoviPatenteModal: false,
-        aggiungiCartaModal: false,
-        rimuoviCartaModal: false
-    })
     
     //GIUSTI...
     const [AggiungiPatenteShow, setAggiungiPatenteShow] = useState(false);
@@ -93,8 +78,6 @@ export default function GestioneAccount() {
 
             if (!Patente) {
 
-                
-
                 return (
                     <React.Fragment>
                         <Container fluid className="p-0 h-100">
@@ -125,24 +108,33 @@ export default function GestioneAccount() {
                                                         <p className=" h5 t-light card-text">********</p>
                                                     </div>
                                                     <div className="d-flex justify-content-center">
-                                                        <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaCellulareModal: true })}>
+                                                        <Button className="my-3" variant="outline-primary py-1" onClick={() => setModificaCellulareShow(true)}>
                                                             Modifica cellulare
                                                         </Button>
-                                                        <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaEmailModal: true })}>
+                                                        <Button className="my-3" variant="outline-primary py-1" onClick={() => setModificaEmailShow(true)}>
                                                             Modifica email
                                                         </Button>
 
                                                     </div>
                                                     <div className="d-flex justify-content-center">
 
-                                                        <Button className="my-3" variant="outline-primary py-2" onClick={() => setModals({ ...modals, cambiaPasswordModal: true })}>
+                                                        <Button className="my-3" variant="outline-primary py-2" onClick={() => setModificaPasswordShow(true)}>
                                                             Modifica password
                                                         </Button>
                                                     </div>
+                                                    <ModificaCellulare
+                                                        show={ModificaCellulareShow}
+                                                        onHide={() => setModificaCellulareShow(false)}
+                                                    />
+                                                    <ModificaEmail
+                                                        show={ModificaEmailShow}
+                                                        onHide={() => setModificaEmailShow(false)}
+                                                    />
+                                                    <ModificaPassword
+                                                        show={ModificaPasswordShow}
+                                                        onHide={() => setModificaPasswordShow(false)}
+                                                    />
                                                 </Card.Body>
-                                                <CambiaCellulareModal show={modals.cambiaCellulareModal} onHide={() => setModals({ ...modals, cambiaCellulareModal: false })} />
-                                                <CambiaEmailModal show={modals.cambiaEmailModal} onHide={() => setModals({ ...modals, cambiaEmailModal: false })} />
-                                                <CambiaPasswordModal show={modals.cambiaPasswordModal} onHide={() => setModals({ ...modals, cambiaPasswordModal: false })} />
                                             </Card>
                                         </Col>
 
@@ -198,12 +190,16 @@ export default function GestioneAccount() {
 
                                                             </div>
                                                             <div className="d-flex justify-content-center">
-                                                                <Button className="my-1" variant="outline-primary py-1">
+                                                                <Button className="my-1" variant="outline-primary py-1" onClick={() => setAggiornaCartaShow(true)}>
                                                                     Aggiorna
                                                                 </Button>
                                                             </div>
                                                         </CardColumns>
                                                     </div>
+                                                    <AggiornaCarta
+                                                        show={AggiornaCartaShow}
+                                                        onHide={() => setAggiornaCartaShow(false)}
+                                                    />
                                                 </Card.Body>
                                             </Card>
                                         </Col>
@@ -247,24 +243,34 @@ export default function GestioneAccount() {
                                                         <p className=" h5 t-light card-text">********</p>
                                                     </div>
                                                     <div className="d-flex justify-content-center">
-                                                        <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaCellulareModal: true })}>
+                                                        <Button className="my-3" variant="outline-primary py-1" onClick={() => setModificaCellulareShow(true)}>
                                                             Modifica cellulare
                                                         </Button>
-                                                        <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaEmailModal: true })}>
+                                                        <Button className="my-3" variant="outline-primary py-1" onClick={() => setModificaEmailShow(true)}>
                                                             Modifica email
                                                         </Button>
 
                                                     </div>
                                                     <div className="d-flex justify-content-center">
 
-                                                        <Button className="my-3" variant="outline-primary py-2" onClick={() => setModals({ ...modals, cambiaPasswordModal: true })}>
+                                                        <Button className="my-3" variant="outline-primary py-2" onClick={() => setModificaPasswordShow(true)}>
                                                             Modifica password
                                                         </Button>
                                                     </div>
+                                                    <ModificaCellulare
+                                                        show={ModificaCellulareShow}
+                                                        onHide={() => setModificaCellulareShow(false)}
+                                                    />
+                                                    <ModificaEmail
+                                                        show={ModificaEmailShow}
+                                                        onHide={() => setModificaEmailShow(false)}
+                                                    />
+                                                    <ModificaPassword
+                                                        show={ModificaPasswordShow}
+                                                        onHide={() => setModificaPasswordShow(false)}
+                                                    />
                                                 </Card.Body>
-                                                <CambiaCellulareModal show={modals.cambiaCellulareModal} onHide={() => setModals({ ...modals, cambiaCellulareModal: false })} />
-                                                <CambiaEmailModal show={modals.cambiaEmailModal} onHide={() => setModals({ ...modals, cambiaEmailModal: false })} />
-                                                <CambiaPasswordModal show={modals.cambiaPasswordModal} onHide={() => setModals({ ...modals, cambiaPasswordModal: false })} />
+                
                                             </Card>
                                         </Col>
 
@@ -292,9 +298,7 @@ export default function GestioneAccount() {
 
                                                         </CardColumns>
                                                     </div>
-                                                    <RimuoviPatenteModal show={modals.rimuoviPatenteModal} onHide={() => setModals({ ...modals, rimuoviPatenteModal: false })} />
                                                 </Card.Body>
-                                                <AggiungiPatenteModal show={modals.aggiungiPatenteModal} onHide={() => setModals({ ...modals, aggiungiPatenteModal: false })} />
                                             </Card>
                                         </Col>
 
@@ -318,12 +322,16 @@ export default function GestioneAccount() {
 
                                                             </div>
                                                             <div className="d-flex justify-content-center">
-                                                                <Button className="my-1" variant="outline-primary py-1">
+                                                                <Button className="my-1" variant="outline-primary py-1" onClick={() => setAggiornaCartaShow(true)}>
                                                                     Aggiorna
                                                                 </Button>
                                                             </div>
                                                         </CardColumns>
                                                     </div>
+                                                    <AggiornaCarta
+                                                        show={AggiornaCartaShow}
+                                                        onHide={() => setAggiornaCartaShow(false)}
+                                                    />
                                                 </Card.Body>
                                             </Card>
                                         </Col>

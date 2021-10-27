@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 // Bootstrap Components
-import { Row, Col, Modal, Form , Container, Button } from 'react-bootstrap'
+import { Row, Col, Modal, Form , Button } from 'react-bootstrap'
 
 export default function AggiungiPatente(props) {
-
-    const history = useHistory();
 
     const [validaDati, setValidaDati] = useState({
         numeroPatente: false,

@@ -209,6 +209,16 @@ exports.modificaEmailCliente = async (req, res, next) => {
 
                         if (patentePresente) {
                             await patentePresente.updateOne({ email: nuovaEmail });
+
+                            try {
+                                await patentePresente.save();
+                            } catch (error) {
+                                res.status(500).json({
+                                    success: false,
+                                    error: error.message,
+                                });
+                            }
+
                         }
                         
                        try {
@@ -217,6 +227,7 @@ exports.modificaEmailCliente = async (req, res, next) => {
                                { email: vecchiaEmail },
                                { $set: { email: nuovaEmail } }
                            );
+                           
                        } catch (error) {
                            res.status(500).json({
                                success: false,
@@ -230,6 +241,7 @@ exports.modificaEmailCliente = async (req, res, next) => {
                                {emailCliente: vecchiaEmail},
                                 {$set: { emailCliente: nuovaEmail } }
                            );
+                           
                        } catch (error) {
                            res.status(500).json({
                                success: false,
@@ -239,13 +251,21 @@ exports.modificaEmailCliente = async (req, res, next) => {
                         
 
                         await vecchioUtentePresente.updateOne({ email: nuovaEmail });
-
-                        res.json({
-                            datiUtente: vecchioUtentePresente,
-                            datiPatente: patentePresente,
-                            datiCarta: cartaPresente,
-                            success: "Email utente modificata con successo!"
-                        });
+                            try {
+                                await vecchioUtentePresente.save();
+                                res.json({
+                                    datiUtente: vecchioUtentePresente,
+                                    datiPatente: patentePresente,
+                                    datiCarta: cartaPresente,
+                                    success: "Email utente modificata con successo!"
+                                });
+                                
+                            } catch (error) {
+                                res.status(500).json({
+                                    success: false,
+                                    error: error.message,
+                                });
+                            }
                     } catch (error) {
                         res.status(500).json({
                             success: false,
@@ -410,11 +430,15 @@ exports.modificaTelefono = async (req, res, next) => {
             await utentePresente.updateOne({
                 telefono: nuovoTelefono
             });
-
-            res.json({ 
-                datiUtente: utentePresente,
-                success: "Telefono modificato con successo!"
-            });
+                try {
+                    await utentePresente.save();
+                    res.json({ 
+                        datiUtente: utentePresente,
+                        success: "Telefono modificato con successo!"
+                    });
+                } catch (error) {
+                    res.json({ result: false });
+                }
 
         }
 
