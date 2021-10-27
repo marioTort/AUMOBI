@@ -9,7 +9,7 @@ import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
 import Button from "../utils/Button";
 import Footer from '../utils/Footer';
 
-let authToken = localStorage.getItem('authToken');
+
 
 // Util Card
 function LinkCard(props) {
@@ -32,7 +32,7 @@ function LinkCard(props) {
 
 // Schermata personale utente
 export default function SchermataCliente() {
-
+    let authToken = localStorage.getItem('authToken');
     if(!authToken) {
         window.location.replace("/login");
     } else {
