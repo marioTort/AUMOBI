@@ -24,6 +24,7 @@ import CredenzialiForm from './components/screens/forms/registrazione/Credenzial
 import RegistrazioneCompletata from './components/screens/forms/registrazione/RegistrazioneCompletata';
 import RegistrazioneImpiegato from './components/screens/RegistrazioneImpiegato';
 import RegistrazioneImpiegatoCompletata from './components/screens/forms/registrazioneImpiegato/RegistrazioneImpiegatoCompletata';
+import RichiestaPatente from './components/screens/forms/registrazione/RichiestaPatente'
 
 //Autenticazione
 import Autenticazione from './components/screens/Autenticazione';
@@ -82,6 +83,7 @@ const App = () => {
           <Route exact path="/registrazionecompletata" component = { RegistrazioneCompletata } />
           <Route exact path="/registrazioneimpiegato" component = { RegistrazioneImpiegato } />
           <Route exact path="/registrazioneimpiegatocompletata" component = { RegistrazioneImpiegatoCompletata } />
+          <Route exact path="/richiestapatente" component={RichiestaPatente} />
 
           <Route exact path ="/login" component = { Autenticazione } />
           <Route exact path="/recuperapassword" component = { RecuperaPassword } />

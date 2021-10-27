@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap';
 
 // JSON
-import Nazioni from './Nazioni'
 import LuogoNascita from './LuogoNascita'
 
 
@@ -88,21 +87,21 @@ export default function CampoLuogoNascita() {
             <Form.Group className="col-12 col-lg-6" controlId="regione">
                 <Form.Label>Regione di nascita</Form.Label>
                 <Form.Control className="form-select" as="select" onChange={() => setRenderProvince(true)} required>
-                    <option value="" disabled selected>Seleziona...</option>
+                    <option value="" disabled selected>Seleziona</option>
                     {optionsRegioni}
                 </Form.Control>
             </Form.Group>
             <Form.Group className="col-12 col-lg-6" controlId="provincia">
                 <Form.Label>Provincia di nascita</Form.Label>
                 <Form.Control className="form-select" as="select" onChange={() => setRenderComune(true)} required>
-                    <option value="" disabled selected>Seleziona...</option>
+                    <option value="" disabled selected>Seleziona</option>
                     {optionsProvince}
                 </Form.Control>
             </Form.Group>
             <Form.Group className="col-12 col-lg-6" controlId="comune" onChange={(event) => { setLuogoDiNascita(event.target.value) }}>
                 <Form.Label>Comune di nascita</Form.Label>
                 <Form.Control className="form-select" as="select" required>
-                    <option value="" disabled selected>Seleziona...</option>
+                    <option value="" disabled selected>Seleziona</option>
                     {optionsComune}
                 </Form.Control>
             </Form.Group>

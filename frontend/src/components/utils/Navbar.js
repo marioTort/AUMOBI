@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 // Bootstrap Components
 import { Image, Row, Col } from 'react-bootstrap';
@@ -11,21 +11,25 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 // Custom Components
 import Button from './Button';
 import Sidebar from './Sidebar';
-import LogoutModal from './LogoutModal';
 
 // Navbar
 export default function Navbar() {
+    
+    const history = useHistory();
 
     let tipoUtente = localStorage.getItem("tipoUtente");
     let authToken = localStorage.getItem("authToken");
 
-    const [modals, setModals] = useState({
-        logoutModal: false,
-    })
-
     function openSidebar() {
         let sidebar = document.querySelector("#sidebar");
         sidebar.style.width = "200px";
+    }
+
+
+    function logout(event) {
+        event.preventDefault();
+        localStorage.clear();
+        history.push("/login");
     }
 
     if (authToken) {
@@ -47,7 +51,7 @@ export default function Navbar() {
                                 <Button className="button-menu" to={"/visualizzaprenotazioniadmin"} variant="outline-light">Visualizza Prenotazioni</Button>
                                 <Button className="button-menu" to={"/registrazioneimpiegato"} variant="outline-light">Registra Impiegato</Button>
                                 <Button className="button-menu" to={"/gestioneaccountadmin"} variant="outline-light">Mio Account</Button>
-                                <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })} >Logout</Button>
+                                <Button className="button-menu" variant="outline-warning" onClick={logout} >Logout</Button>
                             </div>
                         </Col>
                     </Row>
@@ -57,9 +61,8 @@ export default function Navbar() {
                         <Button className="button-menu" to={"/visualizzaprenotazioniadmin"} variant="outline-light">Visualizza Prenotazioni</Button>
                         <Button className="button-menu" to={"/registrazioneimpiegato"} variant="outline-light">Registra Impiegato</Button>
                         <Button className="button-menu" to={"/gestioneaccountadmin"} variant="outline-light">Mio Account</Button>
-                        <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })} >Logout</Button>
+                        <Button className="button-menu" variant="outline-warning" onClick={logout} >Logout</Button>
                     </Sidebar>
-                    <LogoutModal show={modals.logoutModal} onHide={() => setModals({ ...modals, logoutModal: false })} />
                 </nav>
             );
         } else if (tipoUtente === "Autista") {
@@ -79,7 +82,7 @@ export default function Navbar() {
                                     <Button className="button-menu" to={"/gestioneaccountimpiegato"} variant="outline-light">Gestione Account</Button>
                                     <Button className="button-menu" to={"/confermaprenotazione"} variant="outline-light">Conferma Prenotazione</Button>
                                     <Button className="button-menu" to={"/visualizzaprenotazioniautista"} variant="outline-light">Visualizza Prenotazioni</Button>
-                                    <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button>                        
+                                    <Button className="button-menu" variant="outline-warning" onClick={logout}>Logout</Button>                        
                                 </div>
                             </Col>
                         </Row>
@@ -87,10 +90,9 @@ export default function Navbar() {
                             <Button className="button-menu" to={"/gestioneaccountimpiegato"} variant="outline-light">Gestione Account</Button>
                             <Button className="button-menu" to={"/confermaprenotazione"} variant="outline-light">Conferma Prenotazione</Button>
                             <Button className="button-menu" to={"/visualizzaprenotazioniautista"} variant="outline-light">Visualizza Prenotazioni</Button>
-                            <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button> 
+                            <Button className="button-menu" variant="outline-warning" onClick={logout}>Logout</Button> 
                         </Sidebar>
                     
-                    <LogoutModal show={modals.logoutModal} onHide={() => setModals({ ...modals, logoutModal: false })} />
                 </nav>
             );
         } else if (tipoUtente === "Parcheggiatore") {
@@ -109,16 +111,15 @@ export default function Navbar() {
                             <div className="buttonsGroup d-none d-lg-flex">
                                 <Button className="button-menu" to={"/gestioneaccountimpiegato"} variant="outline-light">Gestione Account</Button>
                                 <Button className="button-menu" to={"/confermaprenotazione"} variant="outline-light">Conferma Prenotazione</Button>
-                                <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button>                        
+                                <Button className="button-menu" variant="outline-warning" onClick={logout}>Logout</Button>                        
                             </div>
                         </Col>
                     </Row>
                     <Sidebar>
                         <Button className="button-menu" to={"/gestioneaccountimpiegato"} variant="outline-light">Gestione Account</Button>
                         <Button className="button-menu" to={"/confermaprenotazione"} variant="outline-light">Conferma Prenotazione</Button>
-                        <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button> 
+                        <Button className="button-menu" variant="outline-warning" onClick={logout}>Logout</Button> 
                     </Sidebar>
-                    <LogoutModal show={modals.logoutModal} onHide={() => setModals({ ...modals, logoutModal: false })} />
         
                 </nav>
             );
@@ -143,7 +144,7 @@ export default function Navbar() {
                                 <Button className="button-menu" to={"/schermataprenotazione"} variant="outline-light">Prenota</Button>
                                 <Button className="button-menu" to={"/gestioneaccount"} variant="outline-light">Account</Button>
                                 <Button className="button-menu" to={"/archivioprenotazioni"} variant="outline-light">Prenotazioni</Button>
-                                <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button>
+                                <Button className="button-menu" variant="outline-warning" onClick={logout}>Logout</Button>
                             </div>
                         </Col>
                     </Row>
@@ -151,10 +152,9 @@ export default function Navbar() {
                         <Button className="button-menu" to={"/schermataprenotazione"} variant="outline-light">Prenota</Button>
                         <Button className="button-menu" to={"/gestioneaccount"} variant="outline-light">Account</Button>
                         <Button className="button-menu" to={"/archivioprenotazioni"} variant="outline-light">Prenotazioni</Button>
-                        <Button className="button-menu" variant="outline-warning" onClick={() => setModals({ ...modals, logoutModal: true })}>Logout</Button>
+                        <Button className="button-menu" variant="outline-warning" onClick={logout}>Logout</Button>
                         <Button className="button-menu" to={"/aboutus"} variant="outline-light">About us</Button>
                     </Sidebar>
-                    <LogoutModal show={modals.logoutModal} onHide={() => setModals({ ...modals, logoutModal: false })} />
                 </nav>
             );
         }

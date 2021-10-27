@@ -8,6 +8,8 @@ import { ProgressBar, Container, Row, Col, Form } from 'react-bootstrap';
 // Custom Components
 import Button from '../../../utils/Button';
 
+let authToken = localStorage.getItem('authToken');
+
 // Form dati patente
 export default function DatiPatenteForm() {
     const history = useHistory();
@@ -97,59 +99,64 @@ export default function DatiPatenteForm() {
 
     }
 
-    return (
-        <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5">
-            <Row>
-                <Col className="form" xs={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }}>
-                    <br></br>
-                    <h1 className="h1 text-center t-bold mb-4">Registrazione</h1>
-                    <ProgressBar variant="success" className="mb-4" now={60} animated label={`60%`} />
-                    <Form onSubmit={registraPatente}>
-                        <Row className="gy-4">
-
-                            <p className="h4 text-center t-extralight">Se lo desideri puoi inserire la tua patente di guida adesso, <br></br>
-                             altrimenti lascia i seguenti campi vuoti e clicca sul tasto "Prosegui"</p>
-                            
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <Form.Group controlId="numeroPatente">
-                                    <Form.Label>Numero patente</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il numero di patente" onBlur={() => setValidaDati({ ...validaDati, numeroPatente: true })} onChange={(event) => { setNumeroPatente(event.target.value) }} required />
-                                    <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Formato patente non valido!</Form.Text>
-                                </Form.Group>
-                            </Col>
-
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <Form.Group controlId="dataScadenzaPatente">
-                                    <Form.Label>Data di scadenza (mm/aaaa)</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci data di scadenza (mm/aaaa)" onBlur={() => setValidaDati({ ...validaDati, dataScadenza: true })} onChange={(event) => { setDataScadenza(event.target.value) }} required/>
-                                    <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato data di scadenza non valido!</Form.Text>
-                                </Form.Group>                             
-                            </Col>
-                            
-
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <Form.Group controlId="tipoPatente">
-                                    <Form.Label>Tipo patente</Form.Label>
-                                    <Form.Control className="form-select" as="select" onBlur={() => setValidaDati({ ...validaDati, categoria: true })} onChange={(event) => { setCategoria(event.target.value) }} required>
-                                        <option value="" disabled selected>Seleziona</option>
-                                        <option value="AM">AM</option>
-                                        <option value="A1">A1</option>
-                                        <option value="B">B</option>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                            
-                            <div className="d-flex justify-content-end">
-                                <Button to="/credenziali" variant="outline-secondary">Indietro</Button>
-                                <Button variant="outline-success" submit>Prosegui</Button>
-                            </div>
-                        </Row>
+    if(!authToken) {
+        window.location.replace("/registrazionecliente");
+    } else {
+        return (
+            <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5">
+                <Row>
+                    <Col className="form" xs={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }}>
                         <br></br>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
-        
-    );
+                        <h1 className="h1 text-center t-bold mb-4">Registrazione</h1>
+                        <ProgressBar variant="success" className="mb-4" now={60} animated label={`60%`} />
+                        <Form onSubmit={registraPatente}>
+                            <Row className="gy-4">
+
+                                <p className="h4 text-center t-extralight">Se lo desideri puoi inserire la tua patente di guida adesso, <br></br>
+                                    altrimenti lascia i seguenti campi vuoti e clicca sul tasto "Prosegui"</p>
+
+                                <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                    <Form.Group controlId="numeroPatente">
+                                        <Form.Label>Numero patente</Form.Label>
+                                        <Form.Control type="text" placeholder="Inserisci il numero di patente" onBlur={() => setValidaDati({ ...validaDati, numeroPatente: true })} onChange={(event) => { setNumeroPatente(event.target.value) }} required />
+                                        <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Formato patente non valido!</Form.Text>
+                                    </Form.Group>
+                                </Col>
+
+                                <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                    <Form.Group controlId="dataScadenzaPatente">
+                                        <Form.Label>Data di scadenza (mm/aaaa)</Form.Label>
+                                        <Form.Control type="text" placeholder="Inserisci data di scadenza (mm/aaaa)" onBlur={() => setValidaDati({ ...validaDati, dataScadenza: true })} onChange={(event) => { setDataScadenza(event.target.value) }} required />
+                                        <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato data di scadenza non valido!</Form.Text>
+                                    </Form.Group>
+                                </Col>
+
+
+                                <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                    <Form.Group controlId="tipoPatente">
+                                        <Form.Label>Tipo patente</Form.Label>
+                                        <Form.Control className="form-select" as="select" onBlur={() => setValidaDati({ ...validaDati, categoria: true })} onChange={(event) => { setCategoria(event.target.value) }} required>
+                                            <option value="" disabled selected>Seleziona</option>
+                                            <option value="AM">AM</option>
+                                            <option value="A1">A1</option>
+                                            <option value="B">B</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+
+                                <div className="d-flex justify-content-end">
+                                    <Button variant="outline-success" submit>Prosegui</Button>
+                                </div>
+                            </Row>
+                            <br></br>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
+
+        );
+    }
+
+    
 }
     
