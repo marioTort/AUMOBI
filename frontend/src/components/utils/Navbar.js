@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Bootstrap Components
 import { Image, Row, Col } from 'react-bootstrap';
@@ -14,8 +14,6 @@ import Sidebar from './Sidebar';
 
 // Navbar
 export default function Navbar() {
-    
-    const history = useHistory();
 
     let tipoUtente = localStorage.getItem("tipoUtente");
     let authToken = localStorage.getItem("authToken");
@@ -29,7 +27,7 @@ export default function Navbar() {
     function logout(event) {
         event.preventDefault();
         localStorage.clear();
-        history.push("/login");
+        window.location.replace("/");;
     }
 
     if (authToken) {

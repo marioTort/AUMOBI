@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router';
 import axios from 'axios';
 // Bootstrap Components
 import {Container, Row, Col, Form} from "react-bootstrap";
@@ -10,11 +9,7 @@ import Button from "../../utils/Button";
 import CampoEmail from '../../utils/CampoEmail';
 import CampoPassword from '../../utils/CampoPassword';
 
-import SchermataErroreLogin from "./SchermataErroreLogin"
-
 export default function AutenticazioneForm() {
-
-    const history = useHistory();
 
     async function effettuaLogin(event) {
         event.preventDefault();
@@ -45,23 +40,23 @@ export default function AutenticazioneForm() {
                 
                 if (response.data.utente.tipoUtente === "Parcheggiatore") {
                     localStorage.setItem("tipoUtente", "Parcheggiatore");
-                    history.push("/schermataparcheggiatore");
+                    window.location.replace("/schermataparcheggiatore");
                 }
                 
                 if (response.data.utente.tipoUtente === "Autista") {
                     localStorage.setItem("tipoUtente", "Autista");
-                    history.push("/schermataautista");
+                    window.location.replace("/schermataautista");
                 }
                 
                 if (response.data.utente.tipoUtente === "Admin") {
                     localStorage.setItem("tipoUtente", "Admin");
-                    history.push("/schermataadmin");
+                    window.location.replace("/schermataadmin");
                 }
                 
                 if (response.data.utente.tipoUtente !== "Admin" && response.data.utente.tipoUtente !== "Autista" && response.data.utente.tipoUtente !== "Parcheggiatore") {
                     //Cliente...
                     localStorage.setItem("tipoUtente", "Cliente");
-                    history.push("/schermatacliente");
+                    window.location.replace("/schermatacliente");
                 }
 
             })
@@ -71,10 +66,8 @@ export default function AutenticazioneForm() {
 
     }
 
-    if (localStorage.getItem('authToken') !== null) {
-        return (
-            <SchermataErroreLogin />
-        );
+    if (localStorage.getItem('authToken')) {
+        window.location.replace("/");
     } else {
         return (
             <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5">
