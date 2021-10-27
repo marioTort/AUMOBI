@@ -1,22 +1,18 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router';
-
 
 export default function RichiestaPatente() {
     
     let authToken = localStorage.getItem('authToken');
-    
-    const history = useHistory();
 
     function inserisciCarta(event) {
         event.preventDefault();
-        history.push("/datibancari");
+        window.location.replace("/datibancari");
     }
 
     function inserisciPatente(event) {
         event.preventDefault();
-        history.push("/datipatente");
+        window.location.replace("/datipatente");
     }
     if(!authToken) {
         window.location.replace("/registrazionecliente");

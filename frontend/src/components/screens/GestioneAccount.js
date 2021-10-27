@@ -39,20 +39,20 @@ export default function GestioneAccount() {
         } else {
             
             let nome = JSON.parse(localStorage.getItem("datiPersonali")).nome;
-        let cognome = JSON.parse(localStorage.getItem("datiPersonali")).cognome;
-        let nomeCognome = nome + " " + cognome;
-        
-        let telefono = JSON.parse(localStorage.getItem("datiPersonali")).telefono;
-        let email = JSON.parse(localStorage.getItem("datiPersonali")).email;
-        
-        let numeroCarta = JSON.parse(localStorage.getItem("cifre"));
-        let intestatario = JSON.parse(localStorage.getItem("datiCarta")).intestatario;
-        let dataScadenzaCarta = (JSON.parse(localStorage.getItem("datiCarta")).meseScadenzaCarta + "/" + JSON.parse(localStorage.getItem("datiCarta")).annoScadenzaCarta);
-        
-        let numeroPatente = JSON.parse(localStorage.getItem("datiPatente")).numeroPatente;
-        let dataScadenza = JSON.parse(localStorage.getItem("datiPatente")).dataScadenza;
-        let tipologiaPatente = JSON.parse(localStorage.getItem("datiPatente")).categoria;
-        
+            let cognome = JSON.parse(localStorage.getItem("datiPersonali")).cognome;
+            let nomeCognome = nome + " " + cognome;
+            
+            let telefono = JSON.parse(localStorage.getItem("datiPersonali")).telefono;
+            let email = JSON.parse(localStorage.getItem("datiPersonali")).email;
+            
+            let numeroCarta = JSON.parse(localStorage.getItem("cifre"));
+            let intestatario = JSON.parse(localStorage.getItem("datiCarta")).intestatario;
+            let dataScadenzaCarta = (JSON.parse(localStorage.getItem("datiCarta")).meseScadenzaCarta + "/" + JSON.parse(localStorage.getItem("datiCarta")).annoScadenzaCarta);
+            
+            let numeroPatente = JSON.parse(localStorage.getItem("datiPatente")).numeroPatente;
+            let dataScadenza = JSON.parse(localStorage.getItem("datiPatente")).dataScadenza;
+            let tipologiaPatente = JSON.parse(localStorage.getItem("datiPatente")).categoria;
+            
         return (
             <React.Fragment>
                 <Container fluid className="p-0 h-100">
@@ -82,15 +82,21 @@ export default function GestioneAccount() {
                                                 <p className=" h5 t-bold card-text py-1">Password:</p>
                                                 <p className=" h5 t-light card-text">********</p>
                                             </div>
-                                            <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaCellulareModal: true })}>
-                                                Modifica cellulare
-                                            </Button>
-                                            <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaEmailModal: true })}>
-                                                Modifica email
-                                            </Button>
-                                            <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaPasswordModal: true })}>
-                                                Modifica password
-                                            </Button>
+                                            <div className="d-flex justify-content-center">
+                                                <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaCellulareModal: true })}>
+                                                    Modifica cellulare
+                                                </Button>
+                                                <Button className="my-3" variant="outline-primary py-1" onClick={() => setModals({ ...modals, cambiaEmailModal: true })}>
+                                                    Modifica email
+                                                </Button>
+
+                                            </div>
+                                            <div className="d-flex justify-content-center">
+
+                                                <Button className="my-3" variant="outline-primary py-2" onClick={() => setModals({ ...modals, cambiaPasswordModal: true })}>
+                                                    Modifica password
+                                                </Button>
+                                            </div>
                                         </Card.Body>
                                         <CambiaCellulareModal show={modals.cambiaCellulareModal} onHide={() => setModals({ ...modals, cambiaCellulareModal: false })} />
                                         <CambiaEmailModal show={modals.cambiaEmailModal} onHide={() => setModals({ ...modals, cambiaEmailModal: false })} />
@@ -103,13 +109,9 @@ export default function GestioneAccount() {
                                     <Card className="border-5 shadow">
                                         <Card.Header className="border-3 shadow"><h2 className="card-title">Patente</h2></Card.Header>
                                         <Card.Body>
-                                            <div className=" py-3">
+                                            <div className=" py-2">
                                                 <CardColumns className="col-10 offset-1">
-                                                    {!numeroPatente ? <> <h5 className="t-light card-text py-3">Nessuna patente trovata...</h5>
-                                                        <Button className="my-3" onClick={() => setModals({ ...modals, aggiungiPatenteModal: true })} variant="outline-primary py-2">
-                                                            Aggiungi
-                                                        </Button> </> :
-                                                        <>
+                    
                                                             <div className=" py-5">
                                                                 <p className=" h5 t-bold card-text py-2">Numero patente:</p>
                                                                 <p className=" h5 t-light card-text">{numeroPatente}</p>
@@ -118,11 +120,15 @@ export default function GestioneAccount() {
                                                                 <p className=" h5 t-bold card-text py-2">Tipologia patente:</p>
                                                                 <p className=" h5 t-light card-text">{tipologiaPatente}</p>
                                                             </div>
-                                                            <Button className="my-3" onClick={() => setModals({ ...modals, rimuoviPatenteModal: true })} variant="outline-danger py-2">
-                                                                Elimina
-                                                            </Button>
-                                                        </>
-                                                    }
+                                                            <div className="d-flex justify-content-center">
+                                                                <Button className="my-1" onClick={() => setModals({ ...modals, aggiungiPatenteModal: true })} variant="outline-primary py-1">
+                                                                    Aggiungi
+                                                                </Button>
+                                                                <Button className="my-1" onClick={() => setModals({ ...modals, rimuoviPatenteModal: true })} variant="outline-danger py-1">
+                                                                    Elimina
+                                                                </Button>
+                                                            </div>
+                                                        
                                                 </CardColumns>
                                             </div>
                                             <RimuoviPatenteModal show={modals.rimuoviPatenteModal} onHide={() => setModals({ ...modals, rimuoviPatenteModal: false })} />
@@ -135,10 +141,10 @@ export default function GestioneAccount() {
                                     <Card className="border-5 shadow">
                                         <Card.Header className="border-3 shadow"><h2 className="card-title">Carta di Credito</h2></Card.Header>
                                         <Card.Body>
-                                            <div className=" py-3">
+                                            <div className=" py-1">
                                                 <CardColumns className="col-10 offset-1">
         
-                                                    <div className=" py-2">
+                                                    <div className=" py-1">
         
                                                         <p className=" h5 t-bold card-text py-2">Numero carta:</p>
                                                         <p className=" h5 t-light card-text">**** **** **** {numeroCarta}</p>
@@ -150,9 +156,12 @@ export default function GestioneAccount() {
                                                         <p className=" h5 t-light card-text">***</p>
         
                                                     </div>
-                                                    <Button className="my-3" onClick={() => setModals({ ...modals, rimuoviCartaModal: true })} variant="outline-danger py-2">
-                                                        Elimina
-                                                    </Button>
+                                                    <div className="d-flex justify-content-center">
+
+                                                        <Button className="my-1" onClick={() => setModals({ ...modals, rimuoviCartaModal: true })} variant="outline-danger py-2">
+                                                            Elimina
+                                                        </Button>
+                                                    </div>
         
                                                 </CardColumns>
                                             </div>

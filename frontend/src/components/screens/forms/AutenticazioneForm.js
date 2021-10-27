@@ -86,14 +86,11 @@ export default function AutenticazioneForm() {
                                     Password
                                 </CampoPassword>
 
-
                                 <Link to="/recuperapassword" className="link-secondary">Hai dimenticato la password?</Link>
-
-
                                 <Link to="/registrazionecliente" className="link-secondary">Non hai ancora un account? Registrati?</Link>
-
-                                <Button variant="outline-success" submit>Accedi</Button>
-
+                                <div className="d-flex justify-content-center">
+                                    <Button variant="outline-success" submit>Accedi</Button>
+                                </div>
                             </Row>
                             <br></br>
                         </Form>

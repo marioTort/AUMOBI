@@ -1,16 +1,44 @@
-import React, { useState } from 'react';
-
+import React from 'react';
+import axios from 'axios';
 // Bootstrap Components
 import { Row, Col } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../../../utils/Button';
-import EliminaAccountModal from './EliminaAccountModal';
 import SchermataErrore from './SchermataErrore'
 
 // Riepilogo profilo
 export default function VisualizzaDati() {
-    const [eliminaAccountModal, setEliminaAccountModal] = useState(false)
+
+    async function eliminaAccount(event) {
+        event.preventDefault();
+
+        var data = JSON.stringify({
+            email: JSON.parse(localStorage.getItem("datiPersonali")).email
+        });
+
+        var config = {
+            method: 'delete',
+            url: '/api/autenticazione/eliminaaccount',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        await axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                localStorage.clear();
+                window.location.replace("/");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+
+
     if (localStorage.getItem('authToken') === null) {
         return(
             <SchermataErrore />
@@ -38,10 +66,9 @@ export default function VisualizzaDati() {
                     <h6 className="t-bold">CODICE FISCALE</h6>
                     <p className="t-light">{cf}</p>
                 </Col>
-                 <Button variant="outline-danger" onClick={() => setEliminaAccountModal(true)}>
+                 <Button variant="outline-danger" onClick={eliminaAccount}>
                     Elimina account
                 </Button>
-                <EliminaAccountModal show={eliminaAccountModal} onHide={() => setEliminaAccountModal(false)} />
             </Row>
         );
     }
