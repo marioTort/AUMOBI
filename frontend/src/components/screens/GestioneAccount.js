@@ -20,7 +20,7 @@ import SchermataErrore from "../screens/forms/gestioneAccount/SchermataErrore";
 export default function GestioneAccount() {
     
     let authToken = localStorage.getItem('authToken');
-    let numeroPatente = JSON.parse(localStorage.getItem("datiPatente")).numeroPatente;
+    let numeroPatente = JSON.parse(localStorage.getItem("datiPatente"));
     
     const [modals, setModals] = useState({
         cambiaCellulareModal: false,
