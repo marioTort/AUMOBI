@@ -2,10 +2,11 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
-let authToken = localStorage.getItem('authToken');
 
 export default function RichiestaPatente() {
-
+    
+    let authToken = localStorage.getItem('authToken');
+    
     const history = useHistory();
 
     function inserisciCarta(event) {

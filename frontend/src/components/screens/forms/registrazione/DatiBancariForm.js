@@ -159,7 +159,7 @@ export default function DatiBancariForm() {
                             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                     <Form.Group >
                                         <Form.Label>Numero carta</Form.Label>
-                                                <Form.Control type="number" placeholder="Numero carta" onBlur={() => setValidaDati({ ...validaDati, numeroCartaCredito: true })} onChange={(event) => { setNumeroCartaCredito(event.target.value) }} required />
+                                                <Form.Control type="number" id="cardNumber" placeholder="Numero carta" onBlur={() => setValidaDati({ ...validaDati, numeroCartaCredito: true })} onChange={(event) => { setNumeroCartaCredito(event.target.value) }} required />
                                             <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Formato patente non valido!</Form.Text>
                                     </Form.Group>
                                 </Col>
@@ -167,14 +167,14 @@ export default function DatiBancariForm() {
                                 <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                     <Form.Group >
                                         <Form.Label>Intestatario</Form.Label>
-                                                <Form.Control type="text" placeholder="Intestatario" onBlur={() => setValidaDati({ ...validaDati, intestatario: true })} onChange={(event) => { setIntestatario(event.target.value) }} required />
+                                                <Form.Control type="text" id="cardName" placeholder="Intestatario" onBlur={() => setValidaDati({ ...validaDati, intestatario: true })} onChange={(event) => { setIntestatario(event.target.value) }} required />
                                     </Form.Group>
                                 </Col>
 
                                 <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                     <Form.Group>
                                         <Form.Label>Data di scadenza</Form.Label>
-                                                <Form.Control type="text" placeholder="Data di scadenza" onBlur={() => setValidaDati({ ...validaDati, dataScadenzaCarta: true })} onChange={(event) => { setDataScadenzaCarta(event.target.value) }} required />
+                                                <Form.Control type="text" id="cardExpiration" placeholder="Data di scadenza" onBlur={() => setValidaDati({ ...validaDati, dataScadenzaCarta: true })} onChange={(event) => { setDataScadenzaCarta(event.target.value) }} required />
                                             <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato carta non valido!</Form.Text>
                                     </Form.Group>
                                 </Col>
@@ -182,7 +182,7 @@ export default function DatiBancariForm() {
                                 <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                     <Form.Group >
                                         <Form.Label>CVV</Form.Label>
-                                                <Form.Control type="number" placeholder="CVV" onBlur={() => setValidaDati({ ...validaDati, CVV: true })} onChange={(event) => { setCVV(event.target.value) }} required/>
+                                                <Form.Control type="number" id="cardSecurityCode" placeholder="CVV" onBlur={() => setValidaDati({ ...validaDati, CVV: true })} onChange={(event) => { setCVV(event.target.value) }} required/>
                                     </Form.Group> 
                                 </Col>
                                 
@@ -200,59 +200,3 @@ export default function DatiBancariForm() {
         );
     }
 }
-
-/*
-<>
-        <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5">
-            <Row>
-                <Col className="form" xs={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }}>
-                    <br></br>
-                    <h1 className="h1 text-center t-bold mb-4">Registrazione</h1>
-                    <ProgressBar variant="secondary" className="mb-4" now={80} />
-                    <Form onSubmit={onSubmit}>
-                        <Row className="gy-4">
-
-                            <p className="h4 text-center t-extralight">Se lo desideri puoi inserire la tua carta di credito adesso, <br></br>
-                             altrimenti lascia i seguenti campi vuoti e clicca sul tasto prosegui.</p>
-                            
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <Form.Group controlId="numeroCarta">
-                                    <Form.Label>Numero carta</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il numero della carta" pattern="[0-9]{16}" />
-                                </Form.Group>
-                            </Col>
-
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                            <Form.Group controlId="nomeCarta">
-                                    <Form.Label>Intestatario</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il nome e il cognome dell'intestatario" pattern="[A-z]+\ [A-z]+" />
-                                </Form.Group>
-                            </Col>
-
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <Form.Group controlId="dataScadenza">
-                                    <Form.Label>Data di scadenza</Form.Label>
-                                    <Form.Control type="month" placeholder="Inserisci data di scadenza" />
-                                </Form.Group>
-                                
-                            </Col>
-
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <Form.Group controlId="CVV">
-                                    <Form.Label>CVV</Form.Label>
-                                    <Form.Control type="month" placeholder="Inserisci il CVV" pattern="[0-9]{3}"/>
-                                </Form.Group>     
-                            </Col>
-                            
-                            <div className="d-flex justify-content-end">
-                                <Button to="/datipatente" variant="outline-secondary" submit>Indietro</Button>
-                                <Button to="/registrazionecompletata" variant="outline-secondary" submit>Prosegui</Button>
-                            </div>
-                        </Row>
-                        <br></br>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
-        <Footer/>
-        </>*/
