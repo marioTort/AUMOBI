@@ -155,7 +155,8 @@ export default function RegistrazioneClienteForm() {
         axios(config)
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
-                window.location.replace("/schermataadmin");
+                localStorage.removeItem("emailImpiegato");
+                window.location.replace("/registrazioneimpiegatocompletata");
             })
             .catch(function (error) {
                 console.log(error);

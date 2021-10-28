@@ -47,27 +47,27 @@ export default function SchermataAdmin() {
                                     <LinkCard
                                         title={"Gestione Veicoli"}
                                         text={"Aggiungi, rimuovi o modifica i veicoli. "}
-                                        to={"/"}
+                                        to={"/gestioneveicoli"}
                                         buttonLabel={"Prosegui"}/>
                                     <LinkCard
                                         title={"Gestione Impiegati"}
                                         text={"Modifica tutti i dati che vuoi degli impiegati registrati su Aumobi."}
-                                        to={"/"}
+                                        to={"/gestioneimpiegati"}
                                         buttonLabel={"Prosegui"}/>
                                     <LinkCard
                                         title={"Visualizza Prenotazioni"}
                                         text={"Visualizza i dettagli delle prenotazioni degli utenti."}
-                                        to={"/"}
+                                        to={"/visualizzaprenotazioniadmin"}
                                         buttonLabel={"Prosegui"}/>
                                     <LinkCard
                                         title={"Registra Impiegato"}
                                         text={"Registra un nuovo impiegato: Autista o Parcheggiatore."}
-                                        to={"/"}
+                                        to={"/registrazioneimpiegato"}
                                         buttonLabel={"Prosegui"}/>
                                     <LinkCard
                                         title={"Mio Account"}
                                         text={"Visualizza e modifica i dati del tuo account."}
-                                        to={"/"}
+                                        to={"/gestioneaccountadmin"}
                                         buttonLabel={"Prosegui"}/>
                         </Row>
                     </CardGroup>

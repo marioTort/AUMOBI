@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Row, Col} from 'react-bootstrap';
 // Custom Components
 import OperazioneCompletata from '../../../utils/OperazioneCompletata';
-import Footer from '../../../utils/Footer';
 
 // Schermata Registrazione Completata
 export default function RegistrazioneImpiegatoCompletata() {
@@ -14,8 +13,8 @@ export default function RegistrazioneImpiegatoCompletata() {
                     <br></br>
                     <OperazioneCompletata
                         title={"Registrazione impiegato completata"}
-                        buttonTo={"/"}
-                        buttonLabel={"Vai a Registrazione Impiegato"}>
+                        buttonTo={"/schermataadmin"}
+                        buttonLabel={"Home"}>
                         
                         Vuoi continuare a registrare?
                     </OperazioneCompletata>
@@ -23,7 +22,6 @@ export default function RegistrazioneImpiegatoCompletata() {
                 </Col>
             </Row>
         </Container> 
-        <Footer/>
         </div>          
     );
 }
