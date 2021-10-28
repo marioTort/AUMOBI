@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import {Carousel, Container, Row, Image, Card, Button} from "react-bootstrap";
 // Framer Motion Componets
 
@@ -52,9 +51,9 @@ export default function Home() {
                     <Container className="info-section-container ">
                         <div className="info-section-wrapper">
                             <div className="info-content">
-                                <p className="h5">How it Works</p>
-                                <h2>Better Way to Find your Perfect Cars</h2>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                <p className="h5">Programma una prenotazione</p>
+                                <h2>Il miglior modo per trovare il veicolo più adatto a te</h2>
+                                <p>Il nostro servizio di prenotazione si basa su tre semplici step.</p>
                             </div>
                             <div className="cards-wrapper">
                                 <div className="card-info">
@@ -63,7 +62,7 @@ export default function Home() {
                                     </div>
                                     <div className="content-card">
                                         <h3>Seleziona uno stallo</h3>
-                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                                        <p>Scegli lo stallo più vicino alla tua posizione per prelevare e consegnare i nostri mezzi oppure un luogo dove un nostro autista verrà a prenderti e a lasciarti.</p>
                                     </div>
                                 </div>
                                 <div className="card-info">
@@ -72,7 +71,7 @@ export default function Home() {
                                     </div>
                                     <div className="content-card">
                                         <h3>Scegli una data</h3>
-                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                                        <p>Seleziona la data di ritiro e consegna. Ricorda che, qualora riscontrassi un ritardo, potrai sempre modificare la data di ritiro in base alle tue esigenze.</p>
                                     </div>
                                 </div>
                                 <div className="card-info">
@@ -81,7 +80,7 @@ export default function Home() {
                                     </div>
                                     <div className="content-card">
                                         <h3>Fissa la prenotazione</h3>
-                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                                        <p>Una volta ultimata la prenotazione, ti verrà inviata un'email di conferma.</p>
                                     </div>
                                 </div>
                             </div>
@@ -93,18 +92,17 @@ export default function Home() {
                     <Container className="info-section-container red-mode">
                         <div className="info-section-wrapper">
                             <div className="info-content">
-                                <p className="h5 text-white">How it Works</p>
-                                <h2 className="text-white">Better Way to Find your Perfect Cars</h2>
-                                <p className="text-white">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                <p className="h5 text-white">Ancora non ti abbiamo convinto?</p>
+                                <h2 className="text-white">Dai un'occhiata alle nostre auto più richieste</h2>
+                                <p className="text-white">Vantiamo di una vasta gamma di veicoli, oltre alle auto, sempre a prezzi più convenienti rispetto alla concorrenza! Registrati per visionare tutti i mezzi a tua disposizione.</p>
                             </div>
                             <div className="cards-wrapper">
                                 <Card className="card-item">
                                     <Card.Img variant="top" src="images/home/panda.png" />
                                     <Card.Body>
-                                        <Card.Title>Fiat Panda</Card.Title>
+                                        <Card.Title>Fiat Panda 4X4</Card.Title>
                                         <Card.Text>
-                                        Some quick example text to build on the card title and make up the bulk of
-                                        the card's content.
+                                        Il classico evergreen italiano. Perfetta per chi ha necessità di andare in montagna.
                                         </Card.Text>
                                         <Button className="btn-red-outline" variant="primary">Go somewhere</Button>
                                     </Card.Body>
@@ -114,8 +112,7 @@ export default function Home() {
                                     <Card.Body>
                                         <Card.Title>Fiat 500</Card.Title>
                                         <Card.Text>
-                                        Some quick example text to build on the card title and make up the bulk of
-                                        the card's content.
+                                        L'utilitaria per eccellenza. Elegante, maneggevole e adatta per ogni occasione.
                                         </Card.Text>
                                         <Button className="btn-red-outline" variant="primary">Go somewhere</Button>
                                     </Card.Body>
@@ -125,8 +122,7 @@ export default function Home() {
                                     <Card.Body>
                                         <Card.Title>Fiat 500X</Card.Title>
                                         <Card.Text>
-                                        Some quick example text to build on the card title and make up the bulk of
-                                        the card's content.
+                                        La monovolume più richiesta. Comoda, spaziosa e adatta a tutte le famiglie.
                                         </Card.Text>
                                         <Button className="btn-red-outline" variant="primary">Go somewhere</Button>
                                     </Card.Body>
