@@ -71,7 +71,7 @@ export default function SchermataPrenotazione() {
                                                 </div>
                                             </Card.Body>
                                             <div className="d-flex justify-content-center">
-                                                <Button className="btn-lg" to="schermataselezioneveicolo" variant="outline-primary">Prenota</Button>
+                                                <Button className="btn-lg" to="schermataprenotazioneauto" variant="outline-primary">Prenota</Button>
                                                 <Button className="btn-lg" to="schermataprenotazioneautista" variant="outline-primary">Prenota con autista</Button>
                                             </div>
                                         </Card>

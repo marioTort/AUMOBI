@@ -6,10 +6,10 @@ import { Row, Col, Card, Form } from 'react-bootstrap'
 
 import Button from '../../../utils/Button';
 import CampoDataPrenotazione from '../../../utils/CampoDataPrenotazione';
-import CampoParcheggio from '../../../utils/CampoParcheggio';
 
 
-export default function AutoForm() {
+
+export default function AutistaForm() {
 
     function onClick(){
 
