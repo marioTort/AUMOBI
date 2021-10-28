@@ -69,6 +69,11 @@ export default function SchermataAdmin() {
                                         text={"Visualizza e modifica i dati del tuo account."}
                                         to={"/gestioneaccountadmin"}
                                         buttonLabel={"Prosegui"}/>
+                                    <LinkCard
+                                        title={"Gestione Stalli"}
+                                        text={"Rimuovi o aggiungi nuovi stalli ad Aumobi."}
+                                        to={"/gestionestalli"}
+                                        buttonLabel={"Prosegui"}/>
                         </Row>
                     </CardGroup>
                 </Container>

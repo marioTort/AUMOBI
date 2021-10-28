@@ -112,6 +112,3 @@ export default function AggiungiVeicoloModal(props) {
         </Modal>
     );
 }
-
-                        
-                        <th><p className=" h5 t-bold card-text">Stato Veicolo</p></th>

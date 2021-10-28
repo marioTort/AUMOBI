@@ -56,6 +56,7 @@ import GestioneAccountAdmin from './components/screens/GestioneAccountAdmin';
 import VisualizzaPrenotazioniAdmin from './components/screens/VisualizzaPrenotazioniAdmin';
 import GestioneImpiegati from './components/screens/GestioneImpiegati';
 import GestioneVeicoli from './components/screens/GestioneVeicoli';
+import GestioneStalli from './components/screens/GestioneStalli';
 
 //Impiegato
 import SchermataParcheggiatore from './components/screens/SchermataParcheggiatore';
@@ -109,6 +110,7 @@ const App = () => {
           <Route exact path="/visualizzaprenotazioniadmin" component = {VisualizzaPrenotazioniAdmin} />
           <Route exact path="/gestioneimpiegati" component = {GestioneImpiegati} />
           <Route exact path="/gestioneveicoli" component = {GestioneVeicoli} />
+          <Route exact path="/gestionestalli" component = {GestioneStalli} />
 
           <Route exact path="/schermataparcheggiatore" component = {SchermataParcheggiatore} />
           <Route exact path="/gestioneaccountimpiegato" component = {GestioneAccountImpiegato} />
