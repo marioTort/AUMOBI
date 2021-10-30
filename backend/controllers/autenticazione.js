@@ -47,15 +47,20 @@ exports.login = async (req, res, next) => {
             });
         }
 
-        const {
-            decryptString,
-        } = new StringCrypto();
+        if (datiCarta) {
+            //Abbiamo a che fare con un cliente...
+            const {
+                decryptString,
+            } = new StringCrypto();
+            
+            quattroCifre = (decryptString(datiCarta.numeroCartaCredito, "AuMoBi"));
+            
+            quattroCifre = quattroCifre.toString();
+            
+            quattroCifre = quattroCifre.substring(12, 16);
+        } 
+        //Altimenti abbiamo a che fare sicuramente con un impiegato e i dati della carta non ci servono...
 
-        quattroCifre = (decryptString(datiCarta.numeroCartaCredito, "AuMoBi"));
-
-        quattroCifre = quattroCifre.toString();
-
-        quattroCifre = quattroCifre.substring(12, 16);
 
         //Se l'utente non è presente nel DB...
         if (!utente) {
@@ -75,10 +80,14 @@ exports.login = async (req, res, next) => {
                 error: "Password errata. Riprovare."
             });
         }
-
-        /* Se invece password ed email sono corrispondenti genero il token di autenticazione che sostanzialmente permette 
-        di accedere alla propria area riservata */
-        sendToken(utente, 200, res);
+        if (!datiCarta) {
+            sendTokenImpiegato(utente, 200, res);
+        } else {
+            /* Se invece password ed email sono corrispondenti genero il token di autenticazione che sostanzialmente permette 
+            di accedere alla propria area riservata */
+            sendToken(utente, 200, res);
+            
+        }
 
     } catch (error) {
         res.status(500).json({
@@ -475,6 +484,17 @@ const sendToken = (utente, statusCode, res) => {
         token,
         datiPatente, 
         datiCarta,
+        utente,
+        quattroCifre
+    });
+}
+
+const sendTokenImpiegato = (utente, statusCode, res) => {
+    const token = utente.getSignedToken();
+    res.status(statusCode).json({
+        success: true,
+        token,
+        datiPatente,
         utente,
         quattroCifre
     });

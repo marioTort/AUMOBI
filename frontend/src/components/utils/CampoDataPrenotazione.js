@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 
-import { Col, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { Col, Form } from 'react-bootstrap';
 
 export default function CampoDataPrenotazione(props) {
     const [flag, setFlag] = useState(true)
@@ -12,9 +9,9 @@ export default function CampoDataPrenotazione(props) {
 
     let minDate
     if (props.dataConsegna && parseInt(props.dataConsegna.substring(3, 4)) > 9) {
-        minDate = props.dataConsegna.substring(5, 9) + "-" + props.dataConsegna.substring(3, 5) + "-" + props.dataConsegna.substring(0, 2)
+        minDate = props.dataConsegna.substring(5, 9) + "/" + props.dataConsegna.substring(3, 5) + "/" + props.dataConsegna.substring(0, 2)
     } else if (props.dataConsegna && parseInt(props.dataConsegna.substring(3, 4)) < 10) {
-        minDate = props.dataConsegna.substring(5, 9) + "-0" + props.dataConsegna.substring(3, 4) + "-" + props.dataConsegna.substring(0, 2)
+        minDate = props.dataConsegna.substring(5, 9) + "/" + props.dataConsegna.substring(3, 4) + "/" + props.dataConsegna.substring(0, 2)
     } else {
         minDate = null
     }
@@ -33,14 +30,6 @@ export default function CampoDataPrenotazione(props) {
             <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                 <Form.Group controlId={props.controlDataId}>
                     <Form.Label className="pe-2">{props.labelData}</Form.Label>
-                    <OverlayTrigger
-                        placement={"top"}
-                        overlay={
-                            <Tooltip id="dataRitiroInfo">
-                                Formato valido: AAAA-MM-GG.
-                            </Tooltip>}>
-                        <FontAwesomeIcon icon={faInfoCircle} />
-                    </OverlayTrigger>
                     <Form.Control onBlur={checkDate} type="date" placeholder={props.placeholderData}
                         min={new Date().toISOString().substring(0, 10)}
                         max={maxDate} pattern="[0-9]{4}-[0-1][0-9]-[0-3][0-9]" required />

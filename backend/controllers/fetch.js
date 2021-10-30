@@ -38,12 +38,48 @@ exports.prenotazioniUtente = async (req, res, next) => {
 
 };
 
+exports.listaVeicoliAutistaDisponibili = async (req, res) => {
+
+    try {
+        
+        const veicoli = await Mezzo.find(
+            {
+                emailAutista: {$ne: null},
+                stato: {$ne: "Occupato"}
+        }
+        )
+        res.json({ listaVeicoli: veicoli });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+
+}
+
 //Mezzo
 
 //Wallet
 
 //Stallo
+exports.listaStalli = async (req, res, next) => {
 
+    const {
+        tipoMezzi
+    } = req.body;
+    try {
+        const stallo = await Stallo.find(
+            { tipoMezzi: tipoMezzi}
+        );
+        res.json({listaStalli: stallo});
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+};
 //Patente
 
 exports.patenteUtente = async (req, res, next) => {

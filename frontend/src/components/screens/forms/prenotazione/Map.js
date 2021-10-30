@@ -47,11 +47,11 @@ export default function Mappa() {
 
     return (
         <React.Fragment>
-        <Col xs={{ span: 12, offset: 1 }} >
+        <Col xs={{ span: 11, offset: 0 }} >
         <MapContainer center={[38.1202, 13.3572]} zoom={15} className="h-100 ms-auto">
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
+                attribution="&copy; Aumobi" />
                 
             {/*history.location.state.payload.depositi.map((key) => {
                 return (<MarkerMap 

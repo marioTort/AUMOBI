@@ -1,18 +1,50 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-//import axios from 'axios'
+import React, { useState, useEffect } from 'react';
 
 import { Row, Col, Card, Form } from 'react-bootstrap'
 
 import Button from '../../../utils/Button';
-import CampoDataPrenotazione from '../../../utils/CampoDataPrenotazione';
-import CampoParcheggio from '../../../utils/CampoParcheggio';
+import StringCrypto from 'string-crypto';
 
+import DataRitiro from './DataRitiro';
+import DataConsegna from './DataConsegna';
 
 export default function AutoForm() {
 
-    function onClick(){
+    const key = 'AuMoBi';
 
+    const {
+        decryptString
+    } = new StringCrypto();
+
+    const [DataRitiroShow, setDataRitiroShow] = useState(false);
+    const [DataConsegnaShow, setDataConsegnaShow] = useState(false);
+
+    const [luogoRitiro, setLuogoRitiro] = useState("");
+    const [luogoConsegna, setLuogoConsegna] = useState("");
+
+    const [renderParcheggio, setRenderParcheggio] = useState(true);
+    const [optionsParcheggio, setOptionsParcheggio] = useState([]);
+
+    useEffect(() => {
+        if (renderParcheggio) {
+            for (let index = 0; index < JSON.parse(localStorage.getItem('listaStalli')).listaStalli.length; index++) {
+                const element = JSON.parse(localStorage.getItem('listaStalli')).listaStalli[index].indirizzoStallo;
+                setOptionsParcheggio(optionsParcheggio => [...optionsParcheggio, <option value={element}>{element}</option>])
+            }
+        }
+        setRenderParcheggio(false);
+    }, [renderParcheggio])
+
+    function settaDatiPrenotazione(event) {
+
+        event.preventDefault();
+        
+        localStorage.setItem("luogoRitiro", luogoRitiro);
+        localStorage.setItem("luogoConsegna", luogoConsegna);
+
+        localStorage.setItem("numeroCartaCliente", decryptString(JSON.parse(localStorage.getItem("datiCarta")).numeroCartaCredito, key));
+
+        //window.location.replace("/");
     }
     
     return (
@@ -28,37 +60,51 @@ export default function AutoForm() {
                                                 <p className=" h4 t-light card-text py-4">In questa pagina puoi visualizzare una mappa con gli stalli contenenti le automobili che puoi prenotare! <br/> Inserisci il luogo, la data e l'ora di ritiro e di consegna e premi su 'Prosegui' per visualizzare tutti i veicoli che puoi avere a dispozione per il tuo noleggio!</p>
                                             </div>
 
-                                            <Form onSubmit={onClick}>
+                                            <Form>
                                                 <Row className="gy-4">
                                                     
-                                                    <CampoParcheggio controlId="luogoRitiro">Luogo di ritiro</CampoParcheggio>
+                                                    <Form.Group>
+                                                        <Form.Label className="me-2">Luogo di ritiro</Form.Label>
+                                                        <Form.Control className="form-select" as="select" onChange={(event) => {setLuogoRitiro(event.target.value)}} required>
+                                                            <option value="" disabled selected>Seleziona</option>
+                                                            {optionsParcheggio}
+                                                        </Form.Control>
+                                                    </Form.Group>
                                                     
-                                                    <CampoParcheggio controlId="luogoConsegna">Luogo di consegna</CampoParcheggio>
+                                                    <Form.Group>
+                                                        <Form.Label className="me-2">Luogo di consegna</Form.Label>
+                                                        <Form.Control className="form-select" as="select" onChange={(event) => { setLuogoConsegna(event.target.value) }} required>
+                                                            <option value="" disabled selected>Seleziona</option>
+                                                            {optionsParcheggio}
+                                                        </Form.Control>
+                                                    </Form.Group>
 
-                                                    <CampoDataPrenotazione
-                                                        controlDataId={"dataRitiro"}
-                                                        labelData={"Data di ritiro"}
-                                                        placeholderData={"Seleziona data di ritiro"}
-                                                        controlOrarioId={"oraRitiro"}
-                                                        defaultOrario={"Seleziona ora di ritiro"}
-                                                        labelOrario={"Ora di ritiro"} 
-                                                    />
-                                                    
-                                                    <CampoDataPrenotazione
-                                                        controlDataId={"dataConsegna"}
-                                                        labelData={"Data di consegna"}
-                                                        placeholderData={"Seleziona data di consegna"}
-                                                        controlOrarioId={"oraConsegna"}
-                                                        defaultOrario={"Seleziona ora di consegna"}
-                                                        labelOrario={"Ora di consegna"}
-                                                    />
+                                                    <div className="d-flex justify-content-center">
+                                                        <Button className="my-3" variant="outline-primary py-1" onClick={() => setDataRitiroShow(true)} required>
+                                                            Inserisci data di ritiro
+                                                        </Button>
+                                                    </div>
+                                                        <DataRitiro
+                                                            show={DataRitiroShow}
+                                                            onHide={() => setDataRitiroShow(false)}
+                                                        />
 
+                                                    <div className="d-flex justify-content-center">
+                                                        <Button className="my-3" variant="outline-primary py-1" onClick={() => setDataConsegnaShow(true)} required>
+                                                            Inserisci data di consegna
+                                                        </Button>
+                                                    </div>
+                                                    <DataConsegna
+                                                        show={DataConsegnaShow}
+                                                        onHide={() => setDataConsegnaShow(false)}
+                                                    />
+                                        
                                                 </Row>
                                             </Form>
 
                                         </Card.Body>
-                                    <div className="d-flex justify-content-center">
-                                        <Button className="btn-lg"  onClick={onClick} variant="outline-primary">Prosegui</Button>
+                                    <div className="d-flex justify-content-end">
+                                <Button className="btn-lg" onClick={settaDatiPrenotazione} variant="outline-success">Prosegui</Button>
                                     </div>
                                 </Card>
                             </div>  

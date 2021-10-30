@@ -78,13 +78,14 @@ const App = () => {
           <Route exact path ="/aboutus" component = { AboutUs } />
 
           <Route exact path="/registrazionecliente" component = { RegistrazioneCliente } />
-          <Route exact path="/datibancari" component = { DatiBancariForm } />
-          <Route exact path="/datipatente" component = { DatiPatenteForm } />
           <Route exact path="/credenziali" component = { CredenzialiForm } />
+          <Route exact path="/richiestapatente" component={RichiestaPatente} />
+          <Route exact path="/datipatente" component = { DatiPatenteForm } />
+          <Route exact path="/datibancari" component = { DatiBancariForm } />
           <Route exact path="/registrazionecompletata" component = { RegistrazioneCompletata } />
+          
           <Route exact path="/registrazioneimpiegato" component = { RegistrazioneImpiegato } />
           <Route exact path="/registrazioneimpiegatocompletata" component = { RegistrazioneImpiegatoCompletata } />
-          <Route exact path="/richiestapatente" component={RichiestaPatente} />
 
           <Route exact path ="/login" component = { Autenticazione } />
           <Route exact path="/recuperapassword" component = { RecuperaPassword } />

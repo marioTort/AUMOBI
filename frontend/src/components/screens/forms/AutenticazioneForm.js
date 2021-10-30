@@ -34,9 +34,9 @@ export default function AutenticazioneForm() {
                 localStorage.clear();
                 localStorage.setItem("authToken", response.data.token);
                 localStorage.setItem("datiPersonali", JSON.stringify(response.data.utente));
-                localStorage.setItem("datiCarta", JSON.stringify(response.data.datiCarta));
                 localStorage.setItem("datiPatente", JSON.stringify(response.data.datiPatente));
                 localStorage.setItem("cifre", JSON.stringify(response.data.quattroCifre));
+                localStorage.setItem("isRegistrato", true);
                 
                 if (response.data.utente.tipoUtente === "Parcheggiatore") {
                     localStorage.setItem("tipoUtente", "Parcheggiatore");
@@ -51,12 +51,14 @@ export default function AutenticazioneForm() {
                 if (response.data.utente.tipoUtente === "Admin") {
                     localStorage.setItem("tipoUtente", "Admin");
                     window.location.replace("/schermataadmin");
+                    localStorage.setItem("datiCarta", JSON.stringify(response.data.datiCarta));
                 }
                 
                 if (response.data.utente.tipoUtente !== "Admin" && response.data.utente.tipoUtente !== "Autista" && response.data.utente.tipoUtente !== "Parcheggiatore") {
                     //Cliente...
                     localStorage.setItem("tipoUtente", "Cliente");
                     window.location.replace("/schermatacliente");
+                    localStorage.setItem("datiCarta", JSON.stringify(response.data.datiCarta));
                 }
 
             })

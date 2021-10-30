@@ -65,7 +65,9 @@ exports.programmaPrenotazione = async (req, res, next) => {
                         var oraCorrente = (dataAttuale.getHours() + ':' + dataAttuale.getMinutes());
                         var dataCompletaAttuale = Date.parse(convertFromStringToDate(dataCorrente, oraCorrente));
 
-                        if (dataR < dataCompletaAttuale || dataC < dataCompletaAttuale || dataC < dataR) {
+                        if (dataC < dataCompletaAttuale || dataC < dataR) {
+                            //console.log(dataR < dataCompletaAttuale);
+                            //console.log(dataC < dataCompletaAttuale);
                             res.json({ result: "Non disponiamo ancora della DeLorean di Emmett Brown per tornare indietro nel tempo! Scegli una data di ritiro maggiore di quella attuale!" });
                         } else {
                             //verifico che la carta di credito inserita dal cliente sia esistente...
@@ -163,8 +165,11 @@ exports.programmaPrenotazione = async (req, res, next) => {
                                             var motoPrenotabile = (patentePresente.categoria === "A1" && mezzoPresente.tipoMezzo === "Moto"); 
     
                                             var scooterPrenotabile = (patentePresente.categoria === "AM" && mezzoPresente.categoriaMezzo < 50); 
+
+                                            //var autoAutistaPrenotabile = (mezzoPresente.emailAutista);
+                                            //console.log(autoAutistaPrenotabile)
                                             //console.log(scooterPrenotabile, motoPrenotabile, autoPrenotabile);
-                                            if (!autoPrenotabile && !motoPrenotabile && !scooterPrenotabile) {
+                                            if (!autoPrenotabile && !motoPrenotabile && !scooterPrenotabile ) {
                                                 res.json({ result: "Impossibile prenotare il mezzo!" });
                                             } else {
                                                 const stalloRitiro = await Stallo.findOne({ indirizzoStallo: mezzoPresente.posizione });
@@ -1282,7 +1287,7 @@ exports.iniziaPrenotazioneBM = async (req, res, next) => {
             try {
                 //Verifico che sia presente la carta di credito inserita...
                 const cartaPresente = await Wallet.findOne({ email: emailCliente });
-                
+
                 const numeroCartaDecriptato = decryptString(cartaPresente.numeroCartaCredito, key);
                 console.log(numeroCartaDecriptato);
                 if (!cartaPresente || numeroCartaDecriptato !== numeroCartaCliente) {
@@ -1293,7 +1298,7 @@ exports.iniziaPrenotazioneBM = async (req, res, next) => {
                         //Verifico adesso che l'id sia presente tra i mezzi...
                         const veicoloPresente = await Mezzo.findOne({targa: idMezzo});
 
-                        if (!veicoloPresente || veicoloPresente.stato === "Occupato" || mezzoPresente.stato === "Guasto") {
+                        if (!veicoloPresente || veicoloPresente.stato === "Occupato" || veicoloPresente.stato === "Guasto") {
                             res.json({ result: "Impossibile noleggiare il veicolo!"});
                         } else {
                             const stallo = await Stallo.findOne({ indirizzoStallo: veicoloPresente.posizione });
@@ -1368,24 +1373,34 @@ exports.iniziaPrenotazioneBM = async (req, res, next) => {
 
 exports.terminaPrenotazioneBM = async (req, res, next) => {
     //Serve ad impostare lo stato a "Libero", a vedere dove è stato depositato il veicolo e a calcolare il prezzo da pagare...
+    
     const {
-        idPrenotazione,
+        emailCliente,
+        idMezzo,
         luogoConsegna
     } = req.body;
+    
 
     try {
         var data = new Date();
-
+        console.log(data);
         var dataC = (data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear());
         var oraC = (data.getHours() + ':' + data.getMinutes());
-
+console.log(dataC);
+console.log(oraC);
         var dataMS = Date.parse(convertFromStringToDate(dataC, oraC));
 
-        const prenotazioneDaTerminare = await Prenotazione.findOne({ _id: idPrenotazione })
-
+        const prenotazioneDaTerminare = await Prenotazione.findOne({
+                                            emailCliente: emailCliente,
+                                            targaVeicolo: idMezzo,
+                                            statoPrenotazione: "INIZIATA",
+                                            //$or: [{ categoriaVeicolo: "Bici" }, { categoriaVeicolo: "Monopattino" } ]
+                                            })
+        console.log(prenotazioneDaTerminare);
+                                            console.log(prenotazioneDaTerminare.dataRitiro);
+                                            console.log(prenotazioneDaTerminare.oraRitiro)
         var dataR = Date.parse(convertFromStringToDate(prenotazioneDaTerminare.dataRitiro, prenotazioneDaTerminare.oraRitiro));
-
-        const mezzoDaConsegnare = await Mezzo.findOne({ targa: prenotazioneDaTerminare.targaVeicolo });
+        const mezzoDaConsegnare = await Mezzo.findOne({ targa: idMezzo });
         // CONTROLLARE CHE LO STALLO ESISTA, CHE IL TIPO DEI VEICOLI SIA LO STESSO DEL VEICOLO NOLEGGIATO
         const stalloConsegna = await Stallo.findOne({ indirizzoStallo: luogoConsegna });
         
@@ -1407,21 +1422,21 @@ exports.terminaPrenotazioneBM = async (req, res, next) => {
 
                     try {
                         // SUCCESSIVAMENTE PASSARE LO STATO DEL MEZZO A "Libero" E DECREMENTARE IL NUMERO DEI POSTI DISPONIBILI NELLO STALLO
-                        await prenotazioneDaTerminare.save();
                         notifica.inviaEmailFinePrenotazione(prenotazioneDaTerminare.emailCliente, prenotazioneDaTerminare._id);
-
+                        
                         await mezzoDaConsegnare.updateOne({ stato: "Libero" });
-
+                        
                         await stalloConsegna.updateOne({ postiDisponibili: (stalloConsegna.postiDisponibili - 1) });
-
+                        
                         try {
+                            await prenotazioneDaTerminare.save();
 
-                            const utente = await Utente.findOne({ email: prenotazioneDaTerminare.emailCliente });
+                            const utente = await Utente.findOne({ email: emailCliente });
                             notifica.inviaEmailDettaglioNoleggio(
-                                prenotazioneDaTerminare.emailCliente,
+                                emailCliente,
                                 utente.nome,
                                 utente.cognome,
-                                idPrenotazione,
+                                prenotazioneDaTerminare._id,
                                 prenotazioneDaTerminare.targaVeicolo,
                                 prenotazioneDaTerminare.categoriaVeicolo,
                                 prenotazioneDaTerminare.luogoRitiro,

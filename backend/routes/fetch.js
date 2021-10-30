@@ -5,20 +5,27 @@ const {
     storicoPrenotazioni,
     prenotazioniUtente,
     patenteUtente,
-    elencoPatenti
+    elencoPatenti,
+    listaStalli,
+    listaVeicoliAutistaDisponibili
 } = require("../controllers/fetch");
 
 // RICHIESTE
 
 //PRENOTAZIONE
-router.route("/storicoprenotazioni").get(storicoPrenotazioni);
+router.route("/storicoprenotazioni").post(storicoPrenotazioni);
 
-router.route("/prenotazioniutente").get(prenotazioniUtente);
+router.route("/prenotazioniutente").post(prenotazioniUtente);
+
+router.route("/veicoliautistadisponibili").post(listaVeicoliAutistaDisponibili);
+
 
 //PATENTE
-router.route("/fetchPatente").get(patenteUtente);
+router.route("/fetchPatente").post(patenteUtente);
 
-router.route("/elencopatenti").get(elencoPatenti);
+router.route("/elencopatenti").post(elencoPatenti);
+
+router.route("/listastalli").post(listaStalli);
 
 //ESPORTAZIONI
 module.exports = router;

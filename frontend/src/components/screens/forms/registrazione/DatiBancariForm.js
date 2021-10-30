@@ -135,68 +135,77 @@ export default function DatiBancariForm() {
     if (!authToken) {
         window.location.replace("/registrazionecliente");
     } else {
-        return (       
-                <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5 pb-5">
-                    <Row>
-                    <Col className="form" xs={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }}>
-                        <br></br>
-                        <h1 className="h1 text-center t-bold mb-4">Registrazione</h1>
-                        <ProgressBar variant="success" className="mb-4" now={80} animated label={`80%`}/>
-                        <p className="h4 pb-4 text-center t-extralight">Per terminare la registrazione inserisci la tua carta di credito adesso.</p>
-                <div className="box justify-content-center align-items-center">
-                    <div className="formDiv">
-                        <div className="credit-card">
-                            <Cards
-                                cvc={CVV}
-                                expiry={dataScadenzaCarta}
-                                name={intestatario}
-                                number={numeroCartaCredito}
-                            />
+
+        let isRegistrato = localStorage.getItem('isRegistrato');
+
+        if (isRegistrato) {
+            window.location.replace("/schermatacliente");
+        } else {
+
+            return (       
+                    <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5 pb-5">
+                        <Row>
+                        <Col className="form" xs={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }}>
                             <br></br>
+                            <h1 className="h1 text-center t-bold mb-4">Registrazione</h1>
+                            <ProgressBar variant="success" className="mb-4" now={80} animated label={`80%`}/>
+                            <p className="h4 pb-4 text-center t-extralight">Per terminare la registrazione inserisci la tua carta di credito adesso.</p>
+                    <div className="box justify-content-center align-items-center">
+                        <div className="formDiv">
+                            <div className="credit-card">
+                                <Cards
+                                    cvc={CVV}
+                                    expiry={dataScadenzaCarta}
+                                    name={intestatario}
+                                    number={numeroCartaCredito}
+                                />
+                                <br></br>
+                            </div>
+                            <Form onSubmit={registraCarta}>
+                                <Row className="gy-4" >
+                                <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                        <Form.Group >
+                                            <Form.Label>Numero carta</Form.Label>
+                                                    <Form.Control type="number" id="cardNumber" placeholder="Numero carta" onBlur={() => setValidaDati({ ...validaDati, numeroCartaCredito: true })} onChange={(event) => { setNumeroCartaCredito(event.target.value) }} required />
+                                                <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Formato patente non valido!</Form.Text>
+                                        </Form.Group>
+                                    </Col>
+    
+                                    <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                        <Form.Group >
+                                            <Form.Label>Intestatario</Form.Label>
+                                                    <Form.Control type="text" id="cardName" placeholder="Intestatario" onBlur={() => setValidaDati({ ...validaDati, intestatario: true })} onChange={(event) => { setIntestatario(event.target.value) }} required />
+                                        </Form.Group>
+                                    </Col>
+    
+                                    <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                        <Form.Group>
+                                            <Form.Label>Data di scadenza</Form.Label>
+                                                    <Form.Control type="text" id="cardExpiration" placeholder="Data di scadenza" onBlur={() => setValidaDati({ ...validaDati, dataScadenzaCarta: true })} onChange={(event) => { setDataScadenzaCarta(event.target.value) }} required />
+                                                <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato carta non valido!</Form.Text>
+                                        </Form.Group>
+                                    </Col>
+    
+                                    <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                        <Form.Group >
+                                            <Form.Label>CVV</Form.Label>
+                                                    <Form.Control type="number" id="cardSecurityCode" placeholder="CVV" onBlur={() => setValidaDati({ ...validaDati, CVV: true })} onChange={(event) => { setCVV(event.target.value) }} required/>
+                                        </Form.Group> 
+                                    </Col>
+                                    
+                                    <div className="d-flex justify-content-end">
+                                        <Button variant="outline-success" submit>Completa Registrazione</Button>
+                                    </div>
+                                </Row>
+                            </Form>
                         </div>
-                        <Form onSubmit={registraCarta}>
-                            <Row className="gy-4" >
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                    <Form.Group >
-                                        <Form.Label>Numero carta</Form.Label>
-                                                <Form.Control type="number" id="cardNumber" placeholder="Numero carta" onBlur={() => setValidaDati({ ...validaDati, numeroCartaCredito: true })} onChange={(event) => { setNumeroCartaCredito(event.target.value) }} required />
-                                            <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Formato patente non valido!</Form.Text>
-                                    </Form.Group>
-                                </Col>
-
-                                <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                    <Form.Group >
-                                        <Form.Label>Intestatario</Form.Label>
-                                                <Form.Control type="text" id="cardName" placeholder="Intestatario" onBlur={() => setValidaDati({ ...validaDati, intestatario: true })} onChange={(event) => { setIntestatario(event.target.value) }} required />
-                                    </Form.Group>
-                                </Col>
-
-                                <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                    <Form.Group>
-                                        <Form.Label>Data di scadenza</Form.Label>
-                                                <Form.Control type="text" id="cardExpiration" placeholder="Data di scadenza" onBlur={() => setValidaDati({ ...validaDati, dataScadenzaCarta: true })} onChange={(event) => { setDataScadenzaCarta(event.target.value) }} required />
-                                            <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato carta non valido!</Form.Text>
-                                    </Form.Group>
-                                </Col>
-
-                                <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                    <Form.Group >
-                                        <Form.Label>CVV</Form.Label>
-                                                <Form.Control type="number" id="cardSecurityCode" placeholder="CVV" onBlur={() => setValidaDati({ ...validaDati, CVV: true })} onChange={(event) => { setCVV(event.target.value) }} required/>
-                                    </Form.Group> 
-                                </Col>
-                                
-                                <div className="d-flex justify-content-end">
-                                    <Button variant="outline-success" submit>Completa Registrazione</Button>
-                                </div>
-                            </Row>
-                        </Form>
+                        <br></br>   
                     </div>
-                    <br></br>   
-                </div>
-                </Col>
-                </Row>
-                </Container>
-        );
+                    </Col>
+                    </Row>
+                    </Container>
+            );
+        }
+
     }
 }

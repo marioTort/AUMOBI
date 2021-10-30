@@ -17,7 +17,13 @@ export default function RichiestaPatente() {
     if(!authToken) {
         window.location.replace("/registrazionecliente");
     } else {
-        return (
+
+        let isRegistrato = localStorage.getItem('isRegistrato'); 
+
+        if (isRegistrato) {
+            window.location.replace("/schermatacliente");
+        } else {
+            return (
                 <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5">
                     <Row>
                         <Col className="form" xs={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }}>
@@ -27,7 +33,7 @@ export default function RichiestaPatente() {
                                     <Row className="gy-3">
                                         <h1 className="h1 text-secondary t-bold text-center">
                                             Se lo desideri, puoi inserire la tua patente di guida adesso.<br></br>
-                                            Ti ricordiamo che potrai farlo in qualsiasi altro momento. 
+                                            Ti ricordiamo che potrai farlo in qualsiasi altro momento.
                                         </h1>
 
                                         <Col className="d-flex justify-content-center">
@@ -41,6 +47,9 @@ export default function RichiestaPatente() {
                         </Col>
                     </Row>
                 </Container>
-    );
+            );
+        }
+
+        
     }
 }

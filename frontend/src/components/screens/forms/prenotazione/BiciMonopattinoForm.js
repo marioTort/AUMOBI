@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-//import axios from 'axios'
+
 
 import { Row, Col, Card } from 'react-bootstrap'
 
@@ -28,7 +28,7 @@ export default function BiciMonopattinoForm() {
                                             </div>
                                         </Card.Body>
                                     <div className="d-flex justify-content-center">
-                                        <Button className="btn-lg"  onClick={() => setIniziaNoleggioModal(true)} variant="outline-primary">Inizia noleggio</Button>
+                                        <Button className="btn-lg"  onClick={() => setIniziaNoleggioModal(true)} variant="outline-success">Inizia noleggio</Button>
                                         <Button className="btn-lg"  onClick={() => setTerminaNoleggioModal(true)} variant="outline-danger">Termina noleggio</Button>
                                         <IniziaNoleggioModal show={iniziaNoleggioModal} onHide={() => setIniziaNoleggioModal(false)} />
                                         <TerminaNoleggioModal show={terminaNoleggioModal} onHide={() => setTerminaNoleggioModal(false)} />

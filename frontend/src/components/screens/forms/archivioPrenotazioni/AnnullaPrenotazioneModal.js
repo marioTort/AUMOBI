@@ -53,7 +53,7 @@ export default function AnnullaPrenotazioneModal(props) {
                         </Col>
                         <div className="buttonsGroup mx-auto">
                             <Button variant="outline-secondary" onClick={props.onHide}>Indietro</Button>
-                            <Button spinner={state.submit} variant="outline-danger" onClick={onClick}>Elimina</Button>
+                            <Button variant="outline-danger" onClick={onClick}>Elimina</Button>
                         </div>
                     </Row>
                 }

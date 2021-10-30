@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
+import axios from 'axios'
 
 // Bootstrap Components
 import { Row, Col, Modal, Form } from 'react-bootstrap'
@@ -8,9 +9,18 @@ import { Row, Col, Modal, Form } from 'react-bootstrap'
 import Button from '../../../utils/Button';
 import WarningMessage from '../../../utils/WarningMessage';
 import QRCode from '../../../utils/QRCode';
+import StringCrypto from 'string-crypto';
 
 export default function IniziaNoleggioModal(props) {
     
+    const [targa, setTarga] = useState("");
+
+    const key = 'AuMoBi';
+
+    const {
+        decryptString
+    } = new StringCrypto();
+
     const history = useHistory()
     const [state, setState] = useState({
         error: {
@@ -22,8 +32,34 @@ export default function IniziaNoleggioModal(props) {
         submit: false
     })
 
-    function onClick(e) {
+    async function iniziaNoleggioBM(event) {
+        event.preventDefault();
         
+        var data = JSON.stringify({
+            idMezzo: targa,
+            emailCliente: JSON.parse(localStorage.getItem("datiPersonali")).email,
+            numeroCartaCliente: decryptString(JSON.parse(localStorage.getItem("datiCarta")).numeroCartaCredito, key)
+        });
+
+        var config = {
+            method: 'put',
+            url: '/api/prenotazione/iniziaprenotazionebm',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                console.log(decryptString(JSON.parse(localStorage.getItem("datiCarta")).numeroCartaCredito, key));
+                localStorage.setItem("datiPrenotazione", JSON.stringify(response.data.datiPrenotazione));
+                window.location.replace("/schermataprenotazione");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     return (
         <Modal
@@ -54,12 +90,12 @@ export default function IniziaNoleggioModal(props) {
                         <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }}>
                                 <Form.Group controlId="cambiaCellulare">
                                     <Form.Label>Codice veicolo</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il codice del veicolo" />
+                                <Form.Control type="text" placeholder="Inserisci il codice del veicolo" onChange={(event) => { setTarga(event.target.value) }} required />
                                 </Form.Group>
                             </Col>
                         <div className="buttonsGroup mx-auto">
                             <Button variant="outline-secondary" onClick={props.onHide}>Annulla</Button>
-                            <Button spinner={state.submit} variant="outline-primary" onClick={onClick}>Prosegui</Button>
+                            <Button variant="outline-success" onClick={iniziaNoleggioBM}>Prosegui</Button>
                         </div>
                     </Row>
                 }

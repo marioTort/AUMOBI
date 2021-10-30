@@ -30,33 +30,39 @@ function LinkCard(props) {
 
 // Schermata personale utente
 export default function SchermataParcheggiatore() {
-
-    return (
-        <div>
+    let authToken = localStorage.getItem('authToken');
+    let tipoUtente = localStorage.getItem('tipoUtente');
+    if (!authToken || tipoUtente!=="Parcheggiatore") {
+        window.location.replace("/login");
+    } else {
+        let nome = JSON.parse(localStorage.getItem("datiPersonali")).nome;
+        return (
+            <div>
                 <div>
                     <Container fluid className="d-flex justify-content-center align-items-center my-5 ">
-                        
+
                         <div className="d-flex flex-column align-items-start">
-                            <h1 className="t-bold">Benvenuto Parcheggiatore!</h1>
+                            <h1 className="t-bold">Benvenuto, {nome}!</h1>
                         </div>
                     </Container >
                 </div>
                 <Container className="d-flex justify-content-center mt-5 pb-5">
                     <CardGroup >
-                        <Row className="gy-5 align-items-center justify-content-center">   
-                                    <LinkCard
-                                        title={"Gestione Account"}
-                                        text={"Visualizza e modifica i dati del tuo account. "}
-                                        to={"/"}
-                                        buttonLabel={"Prosegui"}/>
-                                    <LinkCard
-                                        title={"Conferma Prenotazione"}
-                                        text={"Conferma l'inizio o la fine delle prenotazioni dei clienti."}
-                                        to={"/"}
-                                        buttonLabel={"Prosegui"}/>
+                        <Row className="gy-5 align-items-center justify-content-center">
+                            <LinkCard
+                                title={"Gestione Account"}
+                                text={"Visualizza e modifica i dati del tuo account. "}
+                                to={"/gestioneaccountimpiegato"}
+                                buttonLabel={"Prosegui"} />
+                            <LinkCard
+                                title={"Conferma Prenotazione"}
+                                text={"Conferma l'inizio o la fine delle prenotazioni dei clienti."}
+                                to={"/"}
+                                buttonLabel={"Prosegui"} />
                         </Row>
                     </CardGroup>
-                </Container>               
-       </div>
-    );
+                </Container>
+            </div>
+        );
+    } 
 }

@@ -9,6 +9,8 @@ import Button from '../../../utils/Button';
 import CampoEmail from '../../../utils/CampoEmail';
 import CampoPassword from '../../../utils/CampoPassword';
 
+let authToken = localStorage.getItem('authToken');
+
 export default function CredenzialiForm() {
 
     const history = useHistory();
@@ -69,54 +71,63 @@ export default function CredenzialiForm() {
                 });
         }
     }
+    if (!authToken) {
+        window.location.replace("/registrazionecliente");
+    } else {
+        let isRegistrato = localStorage.getItem('isRegistrato');
 
-    return (
-        <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5">
-            <Row className="gy-5">
-                <Col className="form" xs={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }}>
-                    <br></br>
-                    <h1 className="h1 text-center t-bold mb-4">Registrazione</h1>
-                    <ProgressBar variant="success" now={40} className="mb-4" animated label={`40%`} />
-                    <Form onSubmit={registraCliente}>
-                        <Row className="gy-4" >
+        if (isRegistrato) {
+            window.location.replace("/schermatacliente");
+        } else {
+            return (
+                <Container fluid className="d-flex align-items-center justify-content-center h-100 mt-5">
+                    <Row className="gy-5">
+                        <Col className="form" xs={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }}>
+                            <br></br>
+                            <h1 className="h1 text-center t-bold mb-4">Registrazione</h1>
+                            <ProgressBar variant="success" now={40} className="mb-4" animated label={`40%`} />
+                            <Form onSubmit={registraCliente}>
+                                <Row className="gy-4" >
 
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <CampoEmail controlId={"email"} placeholder={"Inserisci la tua email"} required>
-                                    Email
-                                </CampoEmail>
-                            </Col>
+                                    <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                        <CampoEmail controlId={"email"} placeholder={"Inserisci la tua email"} required>
+                                            Email
+                                        </CampoEmail>
+                                    </Col>
 
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <Form.Group controlId="cellulare">
-                                    <Form.Label>Telefono</Form.Label>
-                                    <Form.Control type="tel" placeholder="Inserisci il numero di telefono" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" onBlur={() => setValidaDati({ ...validaDati, cellulare: true })} onChange={(event) => { setTelefono(event.target.value) }} required />
-                                </Form.Group>
-                            </Col>
+                                    <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                        <Form.Group controlId="cellulare">
+                                            <Form.Label>Telefono</Form.Label>
+                                            <Form.Control type="tel" placeholder="Inserisci il numero di telefono" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" onBlur={() => setValidaDati({ ...validaDati, cellulare: true })} onChange={(event) => { setTelefono(event.target.value) }} required />
+                                        </Form.Group>
+                                    </Col>
 
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <CampoPassword tooltip controlId={"password"} placeholder={"Inserisci la password"}>
-                                    Password
-                                </CampoPassword>
-                            </Col>
+                                    <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                        <CampoPassword tooltip controlId={"password"} placeholder={"Inserisci la password"}>
+                                            Password
+                                        </CampoPassword>
+                                    </Col>
 
-                            <Col xs={{ span: 12 }} lg={{ span: 6 }}>
-                                <CampoPassword controlId={"confermaPassword"} placeholder={"Conferma la tua password"}>
-                                    Conferma password
-                                </CampoPassword>
-                                <Form.Text id="erroreMatchPassword" className="d-none text-danger">Le password non coincidono!</Form.Text>
-                            </Col>
+                                    <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                                        <CampoPassword controlId={"confermaPassword"} placeholder={"Conferma la tua password"}>
+                                            Conferma password
+                                        </CampoPassword>
+                                        <Form.Text id="erroreMatchPassword" className="d-none text-danger">Le password non coincidono!</Form.Text>
+                                    </Col>
 
-                            <div className="d-flex justify-content-end">
-                                <Button to="/registrazionecliente" variant="outline-secondary">Indietro</Button>
-                                <Button variant="outline-success" submit>Prosegui</Button>
-                            </div>
-                        </Row>
-                        <br></br>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
+                                    <div className="d-flex justify-content-end">
+                                        <Button to="/registrazionecliente" variant="outline-secondary">Indietro</Button>
+                                        <Button variant="outline-success" submit>Prosegui</Button>
+                                    </div>
+                                </Row>
+                                <br></br>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
 
-    );
+            );
+        }
+    }
     
 }

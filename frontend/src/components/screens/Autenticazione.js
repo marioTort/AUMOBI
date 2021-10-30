@@ -11,8 +11,7 @@ export default function Autenticazione() {
 
     return (
         <div>      
-            <AutenticazioneForm />                
-            <Footer/>         
+            <AutenticazioneForm />                         
         </div>
     );
 }

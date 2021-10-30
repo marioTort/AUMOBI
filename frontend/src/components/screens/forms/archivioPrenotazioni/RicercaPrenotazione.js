@@ -8,12 +8,13 @@ import CampoParcheggio from '../../../utils/CampoParcheggio';
 
 export default function RicercaPrenotazione() {
 
-    function onSubmit(e) {
+    async function annullaPrenotazione(event) {
+        event.preventDefault();
         
     }
 
     return (
-        <Form onSubmit={onSubmit}>
+        <Form>
             <Row className="gy-3 align-items-end">
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
                     <Form.Group controlId="#Prenotazione">
@@ -21,14 +22,12 @@ export default function RicercaPrenotazione() {
                         <Form.Control type="text" placeholder="Inserisci # prenotazione" />
                     </Form.Group>
                 </Col>
-                <Col lg={{ span: 6 }} xl={{ span: 3 }}>
-                    <CampoParcheggio controlId="luogoConsegna">Posizione</CampoParcheggio>
-                </Col>
+                
                 <Col lg={{ span: 6 }} xl={{ span: 3 }}>
                     <Form.Group controlId="tipoVeicolo">
                         <Form.Label>Tipo veicolo</Form.Label>
                         <Form.Control className="form-select" as="select">
-                            <option value="" disabled selected>Seleziona...</option>
+                            <option value="" disabled selected>Seleziona</option>
                             <option value="Auto">Auto</option>
                             <option value="Moto">Moto</option>
                             <option value="Bici">Bici</option>
@@ -40,16 +39,23 @@ export default function RicercaPrenotazione() {
                     <Form.Group controlId="prezzo">
                         <Form.Label>Stato</Form.Label>
                         <Form.Control className="form-select" as="select">
-                            <option value="" disabled selected>Seleziona...</option>
-                            <option value="P">PROGRAMMATA</option>
-                            <option value="I">INIZIATA</option>
-                            <option value="T">TERMINATA</option>
-                            <option value="A">ANNULLATA</option>
+                            <option value="" disabled selected>Seleziona</option>
+                            <option value="PROGRAMMATA">PROGRAMMATA</option>
+                            <option value="INIZIATA">INIZIATA</option>
+                            <option value="TERMINATA">TERMINATA</option>
+                            <option value="ANNULLATA">ANNULLATA</option>
                         </Form.Control>
                     </Form.Group>
                 </Col>
-                <Col xs={{ span: 12 }} className="justify-content-end d-flex">
-                    <Button variant="outline-primary" submit>Cerca</Button>
+                <Col lg={{ span: 6 }} xl={{ span: 3 }} className="justify-content-end d-flex">
+                    <Button variant="outline-primary" submit>Avvia Ricerca</Button>
+                </Col>
+                <Col xs={{ span: 12 }} className="justify-content-center d-flex">
+                    <Button variant="outline-success" >Modifica data di ritiro</Button>
+                    <Button variant="outline-success" >Modifica data di consegna</Button>
+                    <Button variant="outline-success" >Modifica luogo di consegna</Button>
+                    <Button variant="outline-danger" onClick={annullaPrenotazione}>Annulla Prenotazione</Button>
+                    <Button variant="outline-danger" >Segnala Guasto</Button>
                 </Col>
             </Row>
         </Form>
