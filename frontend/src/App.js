@@ -48,7 +48,11 @@ import SchermataPrenotazioneBici from './components/screens/forms/prenotazione/S
 import SchermataPrenotazioneAuto from './components/screens/forms/prenotazione/SchermataPrenotazioneAuto';
 import SchermataPrenotazioneAutista from './components/screens/forms/prenotazione/SchermataPrenotazioneAutista';
 import SchermataPrenotazioneMoto from './components/screens/forms/prenotazione/SchermataPrenotazioneMoto';
-import SchermataSelezioneVeicolo from './components/screens/forms/prenotazione/selezioneVeicolo/SchermataSelezioneVeicolo';
+import SelezioneAuto from './components/screens/forms/prenotazione/SelezioneAuto';
+import SelezioneMoto from './components/screens/forms/prenotazione/SelezioneMoto';
+import SelezioneAutista from './components/screens/forms/prenotazione/SelezioneAutista';
+import PrenotazioneCompletata from './components/screens/forms/prenotazione/PrenotazioneCompletata';
+
 
 //Amministratore
 import SchermataAdmin from './components/screens/SchermataAdmin';
@@ -104,7 +108,10 @@ const App = () => {
           <Route exact path="/schermataprenotazioneauto" component = {SchermataPrenotazioneAuto} />
           <Route exact path="/schermataprenotazionemoto" component = {SchermataPrenotazioneMoto} />
           <Route exact path="/schermataprenotazioneautista" component = {SchermataPrenotazioneAutista} />
-          <Route exact path="/schermataselezioneveicolo" component = {SchermataSelezioneVeicolo} />
+          <Route exact path="/selezioneauto" component = {SelezioneAuto} />
+          <Route exact path="/selezionemoto" component = {SelezioneMoto} />
+          <Route exact path="/selezioneautista" component = {SelezioneAutista} />
+          <Route exact path="/prenotazionecompletata" component = {PrenotazioneCompletata} />
 
           <Route exact path="/schermataadmin" component = {SchermataAdmin} />
           <Route exact path="/gestioneaccountadmin" component = {GestioneAccountAdmin} />
