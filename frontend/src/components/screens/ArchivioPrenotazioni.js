@@ -3,13 +3,6 @@ import axios from 'axios';
 // Bootstrap Components
 import { Container, Table } from 'react-bootstrap';
 
-// Custom Components
-import Button from '../utils/Button';
-import AnnullaPrenotazioneModal from './forms/archivioPrenotazioni/AnnullaPrenotazioneModal';
-import ModificaDataConsegnaModal from './forms/archivioPrenotazioni/ModificaDataConsegnaModal';
-import ModificaDataRitiroModal from './forms/archivioPrenotazioni/ModificaDataRitiroModal';
-import ModificaLuogoConsegnaModal from './forms/archivioPrenotazioni/ModificaLuogoConsegnaModal';
-import SegnalaGuastoModal from './forms/archivioPrenotazioni/SegnalaGuastoModal';
 import RicercaPrenotazione from './forms/archivioPrenotazioni/RicercaPrenotazione';
 
 // Schermata profilo
@@ -17,15 +10,6 @@ export default function ArchivioPrenotazioni() {
 
 
     const [prenotazioni, setPrenotazioni] = useState([]);
-
-
-    const [modals, setModals] = useState({
-        modificaDataConsegnaModal: false,
-        modificaDataRitiroModal: false,
-        modificaLuogoConsegnaModal: false,
-        annullaPrenotazioneModal: false,
-        segnalaGuastoModal: false,
-    })
 
 
     useEffect(() => {
@@ -130,11 +114,6 @@ export default function ArchivioPrenotazioni() {
                             }
                             
                 </tbody>
-                <ModificaDataRitiroModal show={modals.modificaDataRitiroModal} onHide={() => setModals({ ...modals, modificaDataRitiroModal: false })} />
-                <ModificaLuogoConsegnaModal show={modals.modificaLuogoConsegnaModal} onHide={() => setModals({ ...modals, modificaLuogoConsegnaModal: false })} />
-                <ModificaDataConsegnaModal show={modals.modificaDataConsegnaModal} onHide={() => setModals({ ...modals, modificaDataConsegnaModal: false })} />
-                <AnnullaPrenotazioneModal show={modals.annullaPrenotazioneModal} onHide={() => setModals({ ...modals, annullaPrenotazioneModal: false })} />
-                <SegnalaGuastoModal show={modals.segnalaGuastoModal} onHide={() => setModals({ ...modals, segnalaGuastoModal: false })} />
             </Table>
             </Container>
         </React.Fragment>
