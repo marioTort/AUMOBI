@@ -7,7 +7,8 @@ const {
     patenteUtente,
     elencoPatenti,
     listaStalli,
-    listaVeicoliAutistaDisponibili
+    listaVeicoliAutistaDisponibili,
+    listaVeicoliDisponibiliStallo
 } = require("../controllers/fetch");
 
 // RICHIESTE
@@ -19,6 +20,7 @@ router.route("/prenotazioniutente").post(prenotazioniUtente);
 
 router.route("/veicoliautistadisponibili").post(listaVeicoliAutistaDisponibili);
 
+router.route("/veicolidisponibilistallo").post(listaVeicoliDisponibiliStallo);
 
 //PATENTE
 router.route("/fetchPatente").post(patenteUtente);

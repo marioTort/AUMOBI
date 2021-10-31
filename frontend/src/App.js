@@ -108,9 +108,10 @@ const App = () => {
           <Route exact path="/schermataprenotazioneauto" component = {SchermataPrenotazioneAuto} />
           <Route exact path="/schermataprenotazionemoto" component = {SchermataPrenotazioneMoto} />
           <Route exact path="/schermataprenotazioneautista" component = {SchermataPrenotazioneAutista} />
-          <Route exact path="/selezioneauto" component = {SelezioneAuto} />
-          <Route exact path="/selezionemoto" component = {SelezioneMoto} />
-          <Route exact path="/selezioneautista" component = {SelezioneAutista} />
+          
+          <Route exact path="/schermataprenotazioneauto/selezioneauto" component = {SelezioneAuto} />
+          <Route exact path="/schermataprenotazionemoto/selezionemoto" component = {SelezioneMoto} />
+          <Route exact path="/schermataprenotazioneautista/selezioneautista" component = {SelezioneAutista} />
           <Route exact path="/prenotazionecompletata" component = {PrenotazioneCompletata} />
 
           <Route exact path="/schermataadmin" component = {SchermataAdmin} />

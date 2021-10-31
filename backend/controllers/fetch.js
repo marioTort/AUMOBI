@@ -58,6 +58,30 @@ exports.listaVeicoliAutistaDisponibili = async (req, res) => {
 
 }
 
+exports.listaVeicoliDisponibiliStallo = async (req, res) => {
+
+    const { indirizzoStallo } = req.body;
+
+    try {
+        const auto = await Mezzo.find(
+            {
+                posizione: indirizzoStallo,
+                stato: "Libero",
+                emailAutista: null
+            }
+        )
+        res.json({ listaMezzi: auto });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+
+    
+
+}
+
 //Mezzo
 
 //Wallet

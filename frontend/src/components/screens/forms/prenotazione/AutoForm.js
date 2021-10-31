@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { Row, Col, Card, Form } from 'react-bootstrap'
 
@@ -44,7 +45,8 @@ export default function AutoForm() {
 
         localStorage.setItem("numeroCartaCliente", decryptString(JSON.parse(localStorage.getItem("datiCarta")).numeroCartaCredito, key));
 
-        //window.location.replace("/");
+        window.location.replace("/schermataprenotazioneauto/selezioneauto");
+
     }
     
     return (
