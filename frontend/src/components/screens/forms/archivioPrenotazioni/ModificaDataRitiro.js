@@ -60,7 +60,7 @@ export default function ModificaDataRitiro(props) {
                             <Row className="gy-8">
 
                                 <Col xs={{ span: 12 }}>
-                                    <Form.Group controlId="cellulare">
+                                    <Form.Group>
                                         <Form.Label>#Prenotazione</Form.Label>
                                         <Form.Control type="text" placeholder="Inserisci id prenotazione" onChange={(event) => { setIdPrenotazione(event.target.value) }} required />
                                     </Form.Group>

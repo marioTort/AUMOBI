@@ -4,10 +4,10 @@ import { Row, Col, Form } from 'react-bootstrap'
 
 import Button from '../../../utils/Button'
 import ModificaDataRitiro from './ModificaDataRitiro';
-//import ModificaDataConsegna from './ModificaDataConsegna';
-//import ModificaLuogoConsegna from './ModificaLuogoConsegna';
-//import AnnullaPrenotazione from './AnnullaPrenotazione';
-//import SegnalaGuasto from './SegnalaGuasto';
+import ModificaDataConsegna from './ModificaDataConsegna';
+import ModificaLuogoConsegna from './ModificaLuogoConsegna';
+import AnnullaPrenotazione from './AnnullaPrenotazione';
+import SegnalaGuasto from './SegnalaGuasto';
 
 
 
@@ -34,7 +34,7 @@ export default function RicercaPrenotazione() {
                     show={ModificaDataRitiroShow}
                     onHide={() => setModificaDataRitiroShow(false)}
                 />
-                {/*<ModificaDataConsegna
+                <ModificaDataConsegna
                     show={ModificaDataConsegnaShow}
                     onHide={() => setModificaDataConsegnaShow(false)}
                 />
@@ -49,7 +49,7 @@ export default function RicercaPrenotazione() {
                 <SegnalaGuasto
                     show={SegnalaGuastoShow}
                     onHide={() => setSegnalaGuastoShow(false)}
-                />*/}
+                />
             </Row>
         </Form>
     );
