@@ -6,7 +6,6 @@ import { Container, Table } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../utils/Button';
-import EliminaImpiegatoModal from './forms/admin/EliminaImpiegatoModal';
 
 import AssegnaAutistaModal from './forms/admin/AssegnaAutistaModal';
 import AssegnaParcheggiatoreModal from './forms/admin/AssegnaParcheggiatoreModal';
@@ -91,8 +90,8 @@ export default function GestioneImpiegati() {
                                     <th><p className=" h5 t-bold card-text">Cognome</p></th>
                                     <th><p className=" h5 t-bold card-text">Codice Fiscale</p></th>
                                     <th><p className=" h5 t-bold card-text">Tipo Impiegato</p></th>
-                                    <th><p className=" h5 t-bold card-text">Indirizzo Stallo Assegnato(SE PARCHEGGIATORE)</p></th>
-                                    <th><p className=" h5 t-bold card-text">Elimina Impiegato</p></th>
+                                    <th><p className=" h5 t-bold card-text">Indirizzo Stallo Assegnato (SE PARCHEGGIATORE)</p></th>
+                                    <th><p className=" h5 t-bold card-text">Operazioni</p></th>
                                 </tr>
                             </thead>
                             <tbody className="t-light">

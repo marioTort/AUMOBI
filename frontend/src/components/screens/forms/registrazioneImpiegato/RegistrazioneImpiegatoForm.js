@@ -190,7 +190,7 @@ export default function RegistrazioneClienteForm() {
                                 <Form.Group controlId="sesso">
                                     <Form.Label>Sesso </Form.Label>
                                     <Form.Control className="form-select" as="select" onBlur={() => setValidaDati({ ...validaDati, sesso: true })} onChange={(event) => { setSesso(event.target.value) }} required>
-                                        <option value="" disabled selected>Seleziona...</option>
+                                        <option value="" disabled selected>Seleziona</option>
                                         <option value="M">M</option>
                                         <option value="F">F</option>
                                     </Form.Control>

@@ -29,9 +29,16 @@ exports.listaImpiegati = async (req, res)  => {
 
 exports.storicoPrenotazioni = async (req, res, next) => {
     //Semplice get che mi ritorna la lista di tutte le prenotazioni effettuate. Lo riciclo anche per l'autista. Gli passo l'email tanto
-
-    const prenotazioni = await Prenotazione.find();
-    res.json(prenotazioni);
+    try {
+        const prenotazioni = await Prenotazione.find();
+        res.json({ listaPrenotazioni: prenotazioni });
+        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
 
 };
 
@@ -102,7 +109,17 @@ exports.listaVeicoliDisponibiliStallo = async (req, res) => {
 
 }
 
-//Mezzo
+exports.listaVeicoli = async (req, res) => {
+    try {
+        const auto = await Mezzo.find()
+        res.json({ listaMezzi: auto });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+}
 
 //Wallet
 

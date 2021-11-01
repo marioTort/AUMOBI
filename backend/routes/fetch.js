@@ -9,7 +9,8 @@ const {
     listaStalli,
     listaVeicoliAutistaDisponibili,
     listaVeicoliDisponibiliStallo,
-    listaImpiegati
+    listaImpiegati,
+    listaVeicoli
 } = require("../controllers/fetch");
 
 // RICHIESTE
@@ -22,6 +23,9 @@ router.route("/prenotazioniutente").post(prenotazioniUtente);
 router.route("/veicoliautistadisponibili").post(listaVeicoliAutistaDisponibili);
 
 router.route("/veicolidisponibilistallo").post(listaVeicoliDisponibiliStallo);
+
+router.route("/listaveicoli").post(listaVeicoli);
+
 
 //PATENTE
 router.route("/fetchPatente").post(patenteUtente);
