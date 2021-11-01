@@ -9,7 +9,7 @@ import RicercaPrenotazioneAdmin from './forms/admin/RicercaPrenotazioneAdmin';
 
 // Schermata profilo
 export default function VisualizzaPrenotazioniAdmin() {
-    
+
     let authToken = localStorage.getItem('authToken');
 
     const [prenotazioni, setPrenotazioni] = useState([]);

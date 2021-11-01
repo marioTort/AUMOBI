@@ -6,7 +6,8 @@ import { Container, Table } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../utils/Button';
-import EliminaVeicoloModal from './forms/admin/EliminaVeicoloModal';
+import Ritarga from './forms/admin/Ritarga';
+
 import ModificaTargaModal from './forms/admin/ModificaTargaModal';
 import ModificaPosizioneModal from './forms/admin/ModificaPosizioneModal';
 import ModificaPrezzoModal from './forms/admin/ModificaPrezzoModal';
@@ -20,6 +21,13 @@ export default function GestioneVeicoli() {
     let authToken = localStorage.getItem('authToken');
 
     const [veicoli, setVeicoli] = useState([]);
+
+    const [RitargaShow, setRitargaShow] = useState(false);
+
+    function ritarga(targa) {
+        localStorage.setItem('targaVeicoloDaRitargare', targa);
+        setRitargaShow(true)
+    }
 
     useEffect(() => {
 
@@ -101,12 +109,15 @@ export default function GestioneVeicoli() {
                                     <td>
 
                                         <div className="d-flex justify-content">
-                                            <Button variant="outline-success">Ritarga</Button>
+                                            <Button variant="outline-success" onClick={() => ritarga(row.targa)}>Ritarga</Button>
                                             <Button variant="outline-success">Sposta</Button>
                                             <Button variant="outline-success">Riprezza</Button>
                                             <Button variant="outline-danger">Elimina</Button>
                                         </div>
-
+                                        <Ritarga
+                                            show={RitargaShow}
+                                            onHide={() => setRitargaShow(false)}
+                                        />
                                     </td>
                                 </tr>
                                 ))}
