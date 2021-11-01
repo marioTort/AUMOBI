@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Col, Row, Container } from 'react-bootstrap'
 
-import Map from './Map';
 import AutoForm from './AutoForm';
+import MappaAuto from './MappaAuto';
 
 export default function SchermataPrenotazioneAuto() {
     let authToken = localStorage.getItem('authToken');
@@ -25,7 +25,7 @@ export default function SchermataPrenotazioneAuto() {
                             </div>
                         </Col>
                         <Col xs={{ span: 10 }} lg={{ span: 5 }} className="h-100 d-flex pb-5">
-                            <Map />
+                            <MappaAuto />
                         </Col>
                     </Row>
                 </Container>
