@@ -23,6 +23,8 @@ export default function AutoForm() {
     const [luogoRitiro, setLuogoRitiro] = useState("");
     const [luogoConsegna, setLuogoConsegna] = useState("");
 
+    const [tipoVeicolo, setTipoVeicolo] = useState("");
+
     const [renderParcheggio, setRenderParcheggio] = useState(true);
     const [optionsParcheggio, setOptionsParcheggio] = useState([]);
 
@@ -42,6 +44,8 @@ export default function AutoForm() {
         
         localStorage.setItem("luogoRitiro", luogoRitiro);
         localStorage.setItem("luogoConsegna", luogoConsegna);
+
+        localStorage.setItem("TIPOVEICOLO", tipoVeicolo);
 
         localStorage.setItem("numeroCartaCliente", decryptString(JSON.parse(localStorage.getItem("datiCarta")).numeroCartaCredito, key));
 
@@ -100,7 +104,16 @@ export default function AutoForm() {
                                                         show={DataConsegnaShow}
                                                         onHide={() => setDataConsegnaShow(false)}
                                                     />
-                                        
+                                                    <Form.Group >
+                                                        <Form.Label>Categoria veicolo</Form.Label>
+                                                        <Form.Control as="select" classe="form-select" onChange={(event) => { setTipoVeicolo(event.target.value) }} required >
+                                                            <option value="" disabled selected>Seleziona la categoria di veicolo che vuoi prenotare</option>
+                                                            <option value="Fuoristrada">FUORISTRADA</option>
+                                                            <option value="Monovolume">MONOVOLUME</option>
+                                                            <option value="Utilitaria">UTILITARIA</option>
+                                                        </Form.Control>
+
+                                                    </Form.Group>
                                                 </Row>
                                             </Form>
 

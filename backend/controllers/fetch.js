@@ -60,14 +60,18 @@ exports.listaVeicoliAutistaDisponibili = async (req, res) => {
 
 exports.listaVeicoliDisponibiliStallo = async (req, res) => {
 
-    const { indirizzoStallo } = req.body;
+    const { 
+        indirizzoStallo,
+        categoriaMezzo
+    } = req.body;
 
     try {
         const auto = await Mezzo.find(
             {
                 posizione: indirizzoStallo,
                 stato: "Libero",
-                emailAutista: null
+                emailAutista: null,
+                categoriaMezzo: categoriaMezzo
             }
         )
         res.json({ listaMezzi: auto });

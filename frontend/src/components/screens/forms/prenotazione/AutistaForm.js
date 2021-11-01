@@ -31,7 +31,7 @@ export default function AutistaForm() {
 
         localStorage.setItem("numeroCartaCliente", decryptString(JSON.parse(localStorage.getItem("datiCarta")).numeroCartaCredito, key));
 
-        //window.location.replace("/");
+        window.location.replace("/schermataprenotazioneautista/selezioneautista");
     }
 
     return (

@@ -35,27 +35,11 @@ export default function SchermataPrenotazione() {
             });
     }
 
-    async function elencoVeicoliAutistaDisponibili(event) {
-        event.preventDefault();
+    async function prenotazioneAutista() {
 
-        var config = {
-            method: 'post',
-            url: '/api/fetch/veicoliautistadisponibili',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-                localStorage.setItem("listaVeicoli", JSON.stringify(response.data));
-                localStorage.setItem("dataRitiroUTC", new Date());
-                window.location.replace("/schermataprenotazioneautista")
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        localStorage.setItem("dataRitiroUTC", new Date());
+        window.location.replace("/schermataprenotazioneautista")
+        
     }
 
     let authToken = localStorage.getItem('authToken');
@@ -92,7 +76,7 @@ export default function SchermataPrenotazione() {
                                             </Card.Body>
                                             <div className="d-flex justify-content-center">
 
-                                                <Button className="btn-lg" to="schermataprenotazioneautista" variant="outline-primary" onClick={elencoVeicoliAutistaDisponibili}>Prenota con autista</Button>
+                                                <Button className="btn-lg" variant="outline-primary" onClick={prenotazioneAutista}>Prenota con autista</Button>
                                             </div>
                                         </Card>
                                     </div>
@@ -145,7 +129,7 @@ export default function SchermataPrenotazione() {
                                                 </Card.Body>
                                                 <div className="d-flex justify-content-center">
                                                     <Button className="btn-lg" to="schermataprenotazioneauto" variant="outline-primary" onClick={elencoStalliAuto}>Prenota</Button>
-                                                    <Button className="btn-lg" to="schermataprenotazioneautista" variant="outline-primary" onClick={elencoVeicoliAutistaDisponibili}>Prenota con autista</Button>
+                                                    <Button className="btn-lg" variant="outline-primary" onClick={prenotazioneAutista}>Prenota con autista</Button>
                                                 </div>
                                             </Card>
                                         </div>
@@ -212,7 +196,7 @@ export default function SchermataPrenotazione() {
                                                 </Card.Body>
                                                 <div className="d-flex justify-content-center">
 
-                                                    <Button className="btn-lg" to="schermataprenotazioneautista" variant="outline-primary" onClick={elencoVeicoliAutistaDisponibili}>Prenota con autista</Button>
+                                                    <Button className="btn-lg" variant="outline-primary" onClick={prenotazioneAutista}>Prenota con autista</Button>
                                                 </div>
                                             </Card>
                                         </div>
