@@ -11,7 +11,7 @@ export default function SchermataPrenotazione() {
         event.preventDefault();
 
         var data = JSON.stringify({
-            "tipoMezzi": "Auto"
+            tipoMezzi: "Auto"
         });
 
         var config = {
@@ -42,6 +42,35 @@ export default function SchermataPrenotazione() {
         
     }
 
+    async function elencoStalliMoto(event) {
+        event.preventDefault();
+
+        var data = JSON.stringify({
+            tipoMezzi: "Moto"
+        });
+
+        var config = {
+            method: 'post',
+            url: '/api/fetch/listastalli',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                localStorage.setItem("listaStalli", JSON.stringify(response.data));
+                localStorage.setItem("dataRitiroUTC", new Date());
+                window.location.replace("/schermataprenotazionemoto");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+
     let authToken = localStorage.getItem('authToken');
     let patente = JSON.parse(localStorage.getItem("datiPatente"));
 
@@ -54,7 +83,7 @@ export default function SchermataPrenotazione() {
             window.location.replace("/");
         } else {
             if (!patente) {
-                //Può prenotare solo bici e monopattini
+                //Può prenotare solo bici, monopattini e auto con autista
                 return (<>
                     <Container fluid className="mb-5 d-flex flex-column justify-content-center align-items-center">
                         <div className="d-flex flex-column align-items-center mt-5 my-5">
@@ -128,7 +157,7 @@ export default function SchermataPrenotazione() {
                                                     </div>
                                                 </Card.Body>
                                                 <div className="d-flex justify-content-center">
-                                                    <Button className="btn-lg" to="schermataprenotazioneauto" variant="outline-primary" onClick={elencoStalliAuto}>Prenota</Button>
+                                                    <Button className="btn-lg" variant="outline-primary" onClick={elencoStalliAuto}>Prenota</Button>
                                                     <Button className="btn-lg" variant="outline-primary" onClick={prenotazioneAutista}>Prenota con autista</Button>
                                                 </div>
                                             </Card>
@@ -146,7 +175,7 @@ export default function SchermataPrenotazione() {
                                                     </div>
                                                 </Card.Body>
                                                 <div className="d-flex justify-content-center">
-                                                    <Button className="btn-lg" to="/schermataprenotazionemoto" variant="outline-primary">Prenota</Button>
+                                                    <Button className="btn-lg" onClick={elencoStalliMoto} variant="outline-primary">Prenota</Button>
                                                 </div>
                                             </Card>
                                         </div>
@@ -212,7 +241,7 @@ export default function SchermataPrenotazione() {
                                                     </div>
                                                 </Card.Body>
                                                 <div className="d-flex justify-content-center">
-                                                    <Button className="btn-lg" to="/schermataprenotazionemoto" variant="outline-primary">Prenota</Button>
+                                                    <Button className="btn-lg" onClick={elencoStalliMoto} variant="outline-primary">Prenota</Button>
                                                 </div>
                                             </Card>
                                         </div>

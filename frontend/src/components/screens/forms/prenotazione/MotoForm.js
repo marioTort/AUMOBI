@@ -45,6 +45,14 @@ export default function MotoForm() {
 
         localStorage.setItem("numeroCartaCliente", decryptString(JSON.parse(localStorage.getItem("datiCarta")).numeroCartaCredito, key));
 
+
+        if (JSON.parse(localStorage.getItem("datiPatente")).categoria === "AM") {
+            localStorage.setItem("TIPOVEICOLO", "49");
+        } else {
+            localStorage.setItem("TIPOVEICOLO", "125");
+        }
+
+
     }
 
     return (

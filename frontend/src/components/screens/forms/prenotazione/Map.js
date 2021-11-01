@@ -9,9 +9,8 @@ import { Row, Col, Card, Form } from 'react-bootstrap'
 function MarkerMap(props) {
 
     function getIcon(_iconSize) {
-        
             return L.icon({
-                iconUrl: "/marker.png",
+                iconUrl: "/markerAuto.png",
                 iconSize: [_iconSize]
             })
         
@@ -28,7 +27,7 @@ function MarkerMap(props) {
     }
     
     return (
-        <Marker position={props.position} icon={getIcon(25)}>
+        <Marker position={[38.1202, 13.3572]} icon={getIcon(25)}>
             <Popup>
                 <div className="row gy-3 d-flex flex-column">
                     <h3 className="t-light">{props.nome}</h3>
@@ -52,7 +51,6 @@ export default function Mappa() {
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; Aumobi" />
-                
             {/*history.location.state.payload.depositi.map((key) => {
                 return (<MarkerMap 
                     id={key._id}

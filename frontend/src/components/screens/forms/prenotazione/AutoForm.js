@@ -104,6 +104,7 @@ export default function AutoForm() {
                                                         show={DataConsegnaShow}
                                                         onHide={() => setDataConsegnaShow(false)}
                                                     />
+                                                    
                                                     <Form.Group >
                                                         <Form.Label>Categoria veicolo</Form.Label>
                                                         <Form.Control as="select" classe="form-select" onChange={(event) => { setTipoVeicolo(event.target.value) }} required >
@@ -112,8 +113,8 @@ export default function AutoForm() {
                                                             <option value="Monovolume">MONOVOLUME</option>
                                                             <option value="Utilitaria">UTILITARIA</option>
                                                         </Form.Control>
-
                                                     </Form.Group>
+
                                                 </Row>
                                             </Form>
 
