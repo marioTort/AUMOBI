@@ -8,7 +8,8 @@ const {
     elencoPatenti,
     listaStalli,
     listaVeicoliAutistaDisponibili,
-    listaVeicoliDisponibiliStallo
+    listaVeicoliDisponibiliStallo,
+    listaImpiegati
 } = require("../controllers/fetch");
 
 // RICHIESTE
@@ -28,6 +29,8 @@ router.route("/fetchPatente").post(patenteUtente);
 router.route("/elencopatenti").post(elencoPatenti);
 
 router.route("/listastalli").post(listaStalli);
+
+router.route("/listaimpiegati").post(listaImpiegati);
 
 //ESPORTAZIONI
 module.exports = router;

@@ -9,6 +9,22 @@ const Patente = require('../models/Patenti');
 
 //Utente
 
+exports.listaImpiegati = async (req, res)  => {
+
+    try {
+        const impiegati = await Utente.find(
+            { $or: [{ tipoUtente: "Autista" }, { tipoUtente: "Parcheggiatore" }] }
+        )
+        res.json({ listaImpiegati: impiegati });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+
+}
+
 //Prenotazione
 
 exports.storicoPrenotazioni = async (req, res, next) => {
