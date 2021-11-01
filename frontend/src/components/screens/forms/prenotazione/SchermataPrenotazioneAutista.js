@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Col, Row, Container } from 'react-bootstrap'
 
-import Map from './Map';
 import AutistaForm from './AutistaForm';
+import MappaAuto from './MappaAuto';
 
 export default function SchermataPrenotazioneAutista() {
 
@@ -26,7 +26,7 @@ export default function SchermataPrenotazioneAutista() {
                             </div>
                         </Col>
                         <Col xs={{ span: 10 }} lg={{ span: 6 }} className="h-100 d-flex">
-                            <Map />
+                            <MappaAuto />
                         </Col>
                     </Row>
                 </Container>

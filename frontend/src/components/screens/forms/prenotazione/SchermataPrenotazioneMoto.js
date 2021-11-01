@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { Col, Row, Container } from 'react-bootstrap'
+import MappaMoto from './MappaMoto';
 
-import Map from './Map';
 import MotoForm from './MotoForm';
 
 export default function SchermataPrenotazioneMoto() {
@@ -26,7 +26,7 @@ export default function SchermataPrenotazioneMoto() {
                             </div>
                         </Col>
                         <Col xs={{ span: 10 }} lg={{ span: 6 }} className="h-100 d-flex">
-                            <Map />
+                            <MappaMoto />
                         </Col>
                     </Row>
                 </Container>
