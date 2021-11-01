@@ -8,8 +8,8 @@ import { Container, Table } from 'react-bootstrap';
 import Button from '../utils/Button';
 import Ritarga from './forms/admin/Ritarga';
 import Sposta from './forms/admin/Sposta';
+import Riprezza from './forms/admin/Riprezza';
 
-import ModificaPrezzoModal from './forms/admin/ModificaPrezzoModal';
 import ModificaPrezzoPerTipoModal from './forms/admin/ModificaPrezzoPerTipoModal';
 import AggiungiVeicoloModal from './forms/admin/AggiungiVeicoloModal';
 import RicercaVeicolo from './forms/admin/RicercaVeicolo';
@@ -34,6 +34,39 @@ export default function GestioneVeicoli() {
 
         localStorage.setItem('targaVeicoloDaSpostare', targa);
         setSpostaShow(true)
+
+    }
+
+    function riprezza(targa) {
+
+        localStorage.setItem('targaVeicoloDaRiprezzare', targa);
+        setRiprezzaShow(true)
+
+    }
+
+    async function elimina(targa) {
+
+        var data = JSON.stringify({
+            targa: targa
+        });
+
+        var config = {
+            method: 'delete',
+            url: '/api/mezzo/eliminamezzo',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        await axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                window.location.replace("/schermataadmin");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
     }
 
@@ -76,8 +109,11 @@ export default function GestioneVeicoli() {
                 <React.Fragment>
                     <Container fluid className="mt-4">
                         <h2 className="t-bold pb-3 mt-5"><center>Gestione veicoli</center></h2>
-
-                        <Table className="mb-5 mt-3" responsive striped bordered hover>
+                        <div className="d-flex justify-content">
+                            <Button variant="outline-primary">Inserisci nuovo veicolo</Button>
+                            <Button variant="outline-success">Riprezza per tipo</Button>
+                        </div>
+                        <Table className="mb-5 mt-3" responsive striped bordered hover >
                             <thead>
                                 <tr>
                                     <th><p className=" h5 t-bold card-text">#</p></th>
@@ -120,8 +156,8 @@ export default function GestioneVeicoli() {
                                         <div className="d-flex justify-content">
                                             <Button variant="outline-success" onClick={() => ritarga(row.targa)}>Ritarga</Button>
                                             <Button variant="outline-success" onClick={() => sposta(row.targa)}>Sposta</Button>
-                                            <Button variant="outline-success">Riprezza</Button>
-                                            <Button variant="outline-danger">Elimina</Button>
+                                            <Button variant="outline-success" onClick={() => riprezza(row.targa)}>Riprezza</Button>
+                                            <Button variant="outline-danger"onClick={() => elimina(row.targa)}>Elimina</Button>
                                         </div>
                                         <Ritarga
                                             show={RitargaShow}
@@ -131,11 +167,11 @@ export default function GestioneVeicoli() {
                                             show={SpostaShow}
                                             onHide={() => setSpostaShow(false)}
                                         />
-                                        {/*<Riprezza
+                                        <Riprezza
                                             show={RiprezzaShow}
                                             onHide={() => setRiprezzaShow(false)}
                                         />
-                                        */}
+                                        
                                     </td>
                                 </tr>
                                 ))}
