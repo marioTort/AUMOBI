@@ -54,12 +54,11 @@ export default function SelezioneAuto() {
             window.location.replace("/");
         } else {
 
-            async function programmaPrenotazione(event) {
-                event.preventDefault();
+            async function programmaPrenotazione(targa) {
 
                 var data = JSON.stringify({
                     emailCliente: JSON.parse(localStorage.getItem("datiPersonali")).email,
-                    targaVeicolo: localStorage.getItem("targaVeicoloPrenotato"),
+                    targaVeicolo: targa,
                     luogoConsegna: localStorage.getItem("luogoConsegna"),
                     dataRitiro: localStorage.getItem("dataRitiro"),
                     oraRitiro: localStorage.getItem("oraRitiro"),
@@ -135,35 +134,39 @@ export default function SelezioneAuto() {
                     <Container className="mt-2 mb-5">
                         <Row className="mb-100">
 
-                            <Col xs={{ span: 10, offset: 1 }} xl={{ span: 4, offset: 0 }}>
-                                <Row className="gy-4 mb-5">
+                            
+                                
                                     <div>
+                                    <Row className="gy-4 mb-5">
                                         {auto.map((macchina) => (
+                                            <Col xs={{ span: 10, offset: 1 }} xl={{ span: 4, offset: 0 }}>
                                             <Card className="h-100 border-5 shadow">
                                                 <Card.Header className="border-3 shadow"><center><h2 className="card-title">{nomeVeicolo}</h2></center></Card.Header>
                                                 <Card.Img variant="top" src={immagine} />
                                                 <Card.Body className="d-flex flex-column justify-content-evenly">
                                                     <div className=" py-1 justify-content-center">
-                                                        <p className=" h4 card-text py-4 t-bold">Categoria:<center>{macchina.categoriaMezzo}</center></p>
-                                                        <p className=" h4 t-light card-text py-4">Numero posti: {numeroPosti}</p>
 
-                                                        <p className=" h4 t-light card-text py-4">Alimentazione: {alimentazione}</p>
+                                                        <p className=" h4 card-text py-4 t-bold">Categoria: <a className="t-light"><font color = "black"> {macchina.categoriaMezzo}</font></a></p>
+                                                        <p className=" h4 t-bold card-text py-4">Numero posti: <a className="t-light"><font color = "black">  {numeroPosti} </font></a></p>
 
-                                                        <p className=" h4 t-bold card-text py-4">Targa: <center className=" h4 t-light card-text">{macchina.targa}</center></p>
+                                                        <p className=" h4 t-bold card-text py-4">Alimentazione: <a className="t-light"><font color = "black">  {alimentazione} </font></a></p>
 
-                                                        <p className=" h4 t-light card-text py-4">Prezzo orario: {macchina.prezzoOrario} €</p>
+                                                        <p className=" h4 t-bold card-text py-4">Targa: <a className="t-light"><font color = "black">   {macchina.targa} </font></a></p>
+
+                                                        <p className=" h4 t-bold card-text py-4">Prezzo orario: <a className="t-light"><font color = "black">  {macchina.prezzoOrario} € </font></a></p>
                                                         
                                                     </div>
 
                                                     <div className="d-flex justify-content-end">
-                                                        <Button className="button-menu" variant="outline-secondary" onClick={programmaPrenotazione}>Seleziona Auto</Button>
+                                                        <Button className="button-menu" variant="outline-secondary" onClick = {() => programmaPrenotazione(macchina.targa)}>Seleziona Auto</Button>
                                                     </div>
                                                 </Card.Body>
                                             </Card>
+                                            </Col>
                                         ))}
-                                    </div>
+                                    
                                 </Row>
-                            </Col>
+                                </div>
 
                         </Row>
                     </Container>
