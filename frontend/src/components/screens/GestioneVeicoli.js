@@ -7,9 +7,8 @@ import { Container, Table } from 'react-bootstrap';
 // Custom Components
 import Button from '../utils/Button';
 import Ritarga from './forms/admin/Ritarga';
+import Sposta from './forms/admin/Sposta';
 
-import ModificaTargaModal from './forms/admin/ModificaTargaModal';
-import ModificaPosizioneModal from './forms/admin/ModificaPosizioneModal';
 import ModificaPrezzoModal from './forms/admin/ModificaPrezzoModal';
 import ModificaPrezzoPerTipoModal from './forms/admin/ModificaPrezzoPerTipoModal';
 import AggiungiVeicoloModal from './forms/admin/AggiungiVeicoloModal';
@@ -23,10 +22,19 @@ export default function GestioneVeicoli() {
     const [veicoli, setVeicoli] = useState([]);
 
     const [RitargaShow, setRitargaShow] = useState(false);
+    const [SpostaShow, setSpostaShow] = useState(false);
+    const [RiprezzaShow, setRiprezzaShow] = useState(false);
 
     function ritarga(targa) {
         localStorage.setItem('targaVeicoloDaRitargare', targa);
         setRitargaShow(true)
+    }
+
+    function sposta(targa) {
+
+        localStorage.setItem('targaVeicoloDaSpostare', targa);
+        setSpostaShow(true)
+
     }
 
     useEffect(() => {
@@ -88,29 +96,30 @@ export default function GestioneVeicoli() {
                                 <tr>
                                     <td><p className=" h5 t-light card-text">{row._id}</p>
                                     </td>
+
                                     <td><p className=" h5 t-light card-text">{row.targa}</p>
                                     </td>
 
                                     <td><p className=" h5 t-light card-text">{row.posizione}</p>
                                     </td>
-                                    <td ><p className=" h5 t-light card-text">{row.tipoMezzo}</p>
 
+                                    <td><p className=" h5 t-light card-text">{row.tipoMezzo}</p>
                                     </td>
-                                    <td ><p className=" h5 t-light card-text">{row.categoriaMezzo}</p>
+                                    <td><p className=" h5 t-light card-text">{row.categoriaMezzo}</p>
+                                    </td>
 
+                                    <td><p className=" h5 t-light card-text">{row.emailAutista}</p>
                                     </td>
-                                    <td ><p className=" h5 t-light card-text">{row.emailAutista}</p>
 
+                                    <td><p className=" h5 t-light card-text">{row.prezzoOrario}</p>
                                     </td>
-                                    <td ><p className=" h5 t-light card-text">{row.prezzoOrario}</p>
 
-                                    </td>
-                                        <td ><p className=" h5 t-light card-text">{row.stato}</p></td>
+                                    <td><p className=" h5 t-light card-text">{row.stato}</p></td>
                                     <td>
 
                                         <div className="d-flex justify-content">
                                             <Button variant="outline-success" onClick={() => ritarga(row.targa)}>Ritarga</Button>
-                                            <Button variant="outline-success">Sposta</Button>
+                                            <Button variant="outline-success" onClick={() => sposta(row.targa)}>Sposta</Button>
                                             <Button variant="outline-success">Riprezza</Button>
                                             <Button variant="outline-danger">Elimina</Button>
                                         </div>
@@ -118,6 +127,15 @@ export default function GestioneVeicoli() {
                                             show={RitargaShow}
                                             onHide={() => setRitargaShow(false)}
                                         />
+                                        <Sposta
+                                            show={SpostaShow}
+                                            onHide={() => setSpostaShow(false)}
+                                        />
+                                        {/*<Riprezza
+                                            show={RiprezzaShow}
+                                            onHide={() => setRiprezzaShow(false)}
+                                        />
+                                        */}
                                     </td>
                                 </tr>
                                 ))}
