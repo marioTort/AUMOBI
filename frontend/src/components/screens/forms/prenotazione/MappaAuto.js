@@ -30,6 +30,20 @@ function Stalli() {
                 </div>
             </Popup>
         </Marker>
+        <Marker position={[38.118488235878175, 13.362955184639112]} icon={getIcon(50)}>
+            <Popup>
+                <div className="row gy-3 d-flex flex-column">
+                    <h3 className="t-light">Via Roma</h3>
+                </div>
+            </Popup>
+        </Marker>
+        <Marker position={[38.135283800085546, 13.34895219813255]} icon={getIcon(50)}>
+            <Popup>
+                <div className="row gy-3 d-flex flex-column">
+                    <h3 className="t-light">Via della Libertà</h3>
+                </div>
+            </Popup>
+        </Marker>
     </div>
     );
 }
@@ -39,7 +53,7 @@ export default function MappaAuto() {
     return (
         <React.Fragment>
         <Col xs={{ span: 11, offset: 0 }} >
-        <MapContainer center={[38.1202, 13.3572]} zoom={15} className="h-100 ms-auto">
+        <MapContainer center={[38.1202, 13.3572]} zoom={14} className="h-100 ms-auto">
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; Aumobi" />
