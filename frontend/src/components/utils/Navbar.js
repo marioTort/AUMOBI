@@ -46,7 +46,6 @@ export default function Navbar() {
                             <div className="buttonsGroup d-none d-lg-flex">
                                 <Button className="button-menu" to={"/gestioneveicoli"} variant="outline-light">Gestione Veicoli</Button>                       
                                 <Button className="button-menu" to={"/gestioneimpiegati"} variant="outline-light">Gestione Impiegati</Button>
-                                <Button className="button-menu" to={"/gestionestalli"} variant="outline-light">Gestione Stalli</Button>
                                 <Button className="button-menu" to={"/visualizzaprenotazioniadmin"} variant="outline-light">Visualizza Prenotazioni</Button>
                                 <Button className="button-menu" to={"/registrazioneimpiegato"} variant="outline-light">Registra Impiegato</Button>
                                 <Button className="button-menu" to={"/gestioneaccountadmin"} variant="outline-light">Mio Account</Button>
@@ -57,7 +56,6 @@ export default function Navbar() {
                     <Sidebar>
                         <Button className="button-menu" to={"/gestioneveicoli"} variant="outline-light">Gestione Veicoli</Button>                       
                         <Button className="button-menu" to={"/gestioneimpiegati"} variant="outline-light">Gestione Impiegati</Button>
-                        <Button className="button-menu" to={"/gestionestalli"} variant="outline-light">Gestione Stalli</Button>
                         <Button className="button-menu" to={"/visualizzaprenotazioniadmin"} variant="outline-light">Visualizza Prenotazioni</Button>
                         <Button className="button-menu" to={"/registrazioneimpiegato"} variant="outline-light">Registra Impiegato</Button>
                         <Button className="button-menu" to={"/gestioneaccountadmin"} variant="outline-light">Mio Account</Button>

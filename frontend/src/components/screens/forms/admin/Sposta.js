@@ -61,10 +61,7 @@ export default function Sposta(props) {
                                         <Form.Label className="me-2">Nuovo Stallo</Form.Label>
                                         <Form.Control className="form-select" as="select" onChange={(event) => { setNuovaPosizione(event.target.value) }} required>
                                             <option value="" disabled selected>Seleziona</option>
-                                            <option value="Basile">Via E. Basile</option>
-                                            <option value="Scienze">Viale delle scienze</option>
-                                            <option value="Roma">Via Roma</option>
-                                            <option value="Liberta">Via della Libertà</option>
+                                            
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
