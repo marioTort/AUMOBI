@@ -36,46 +36,54 @@ export default function SchermataCliente() {
     if(!authToken) {
         window.location.replace("/login");
     } else {
-        let nome = JSON.parse(localStorage.getItem("datiPersonali")).nome;
-        return (<>
-            <div style={{
-                backgroundImage: `url(${process.env.PUBLIC_URL + '/cliente1.jpg'})`,
 
-                height: '1500px'
-            }}>
-                <div >
-                    <Container fluid className="d-flex justify-content-center align-items-center my-5">
+        let tipoUtente = localStorage.getItem('tipoUtente');
 
-                        <div className="d-flex flex-column align-items-start">
-                            <h1 className="t-bold">Ciao, {nome}</h1>
-                        </div>
-                    </Container >
+        if (tipoUtente !== "Cliente") {
+            window.location.replace("/");
+        } else {
+            let nome = JSON.parse(localStorage.getItem("datiPersonali")).nome;
+            return (<>
+                <div style={{
+                    backgroundImage: `url(${process.env.PUBLIC_URL + '/cliente1.jpg'})`,
+
+                    height: '1500px'
+                }}>
+                    <div >
+                        <Container fluid className="d-flex justify-content-center align-items-center my-5">
+
+                            <div className="d-flex flex-column align-items-start">
+                                <h1 className="t-bold">Ciao, {nome}</h1>
+                            </div>
+                        </Container >
+                    </div>
+                    <Container className="d-flex justify-content-center mt-5">
+                        <CardGroup >
+                            <Row className="gy-5 align-items-center justify-content-center">
+                                <LinkCard
+                                    title={"Gestione Account"}
+                                    text={"Da qui puoi visualizzare le informazioni sul tuo account, e se vuoi, modificarle."}
+                                    to={"/gestioneaccount"}
+                                    buttonLabel={"Il tuo account"} />
+                                <LinkCard
+                                    title={"Prenotazione"}
+                                    text={"Aumobi a tua dispozione, prenota il veicolo più adatto alle tue necessità!"}
+                                    to={"/schermataprenotazione"}
+                                    buttonLabel={"Prenota ora!"} />
+                                <LinkCard
+                                    title={"Archivio Prenotazioni"}
+                                    text={"Grazie per aver usufruito di Aumobi! Da qui puoi visualizzare e gestire le tue prenotazioni."}
+                                    to={"/archivioprenotazioni"}
+                                    buttonLabel={"Le tue prenotazioni"} />
+                            </Row>
+                        </CardGroup>
+                    </Container>
+
                 </div>
-                <Container className="d-flex justify-content-center mt-5">
-                    <CardGroup >
-                        <Row className="gy-5 align-items-center justify-content-center">
-                            <LinkCard
-                                title={"Gestione Account"}
-                                text={"Da qui puoi visualizzare le informazioni sul tuo account, e se vuoi, modificarle."}
-                                to={"/gestioneaccount"}
-                                buttonLabel={"Il tuo account"} />
-                            <LinkCard
-                                title={"Prenotazione"}
-                                text={"Aumobi a tua dispozione, prenota il veicolo più adatto alle tue necessità!"}
-                                to={"/schermataprenotazione"}
-                                buttonLabel={"Prenota ora!"} />
-                            <LinkCard
-                                title={"Archivio Prenotazioni"}
-                                text={"Grazie per aver usufruito di Aumobi! Da qui puoi visualizzare e gestire le tue prenotazioni."}
-                                to={"/archivioprenotazioni"}
-                                buttonLabel={"Le tue prenotazioni"} />
-                        </Row>
-                    </CardGroup>
-                </Container>
-
-            </div>
-            <Footer></Footer>
-        </>
-        );
+                <Footer></Footer>
+            </>
+            );
+        }
     }
+
 }

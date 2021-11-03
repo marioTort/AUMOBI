@@ -6,13 +6,13 @@ import { Container, Table } from 'react-bootstrap';
 
 // Custom Components
 import Button from '../utils/Button';
+
 import Ritarga from './forms/admin/Ritarga';
 import Sposta from './forms/admin/Sposta';
 import Riprezza from './forms/admin/Riprezza';
+import RiprezzaPerTipo from './forms/admin/RiprezzaPerTipo';
+import Inserisci from './forms/admin/Inserisci';
 
-import ModificaPrezzoPerTipoModal from './forms/admin/ModificaPrezzoPerTipoModal';
-import AggiungiVeicoloModal from './forms/admin/AggiungiVeicoloModal';
-import RicercaVeicolo from './forms/admin/RicercaVeicolo';
 
 // Schermata profilo
 export default function GestioneVeicoli() {
@@ -24,6 +24,8 @@ export default function GestioneVeicoli() {
     const [RitargaShow, setRitargaShow] = useState(false);
     const [SpostaShow, setSpostaShow] = useState(false);
     const [RiprezzaShow, setRiprezzaShow] = useState(false);
+    const [InserisciShow, setInserisciShow] = useState(false);
+    const [RiprezzaPerTipoShow, setRiprezzaPerTipoShow] = useState(false);
 
     function ritarga(targa) {
         localStorage.setItem('targaVeicoloDaRitargare', targa);
@@ -110,9 +112,22 @@ export default function GestioneVeicoli() {
                     <Container fluid className="mt-4">
                         <h2 className="t-bold pb-3 mt-5"><center>Gestione veicoli</center></h2>
                         <div className="d-flex justify-content">
-                            <Button variant="outline-primary">Inserisci nuovo veicolo</Button>
-                            <Button variant="outline-success">Riprezza per tipo</Button>
+                            <Button variant="outline-primary" onClick={() => setInserisciShow(true)}>Inserisci nuovo veicolo</Button>
+                            <Button variant="outline-success" onClick={() => setRiprezzaPerTipoShow(true)}>Riprezza per tipo</Button>
                         </div>
+
+                        
+                        <Inserisci
+                            show={InserisciShow}
+                            onHide={() => setInserisciShow(false)}
+                        />
+
+                        <RiprezzaPerTipo
+                            show={RiprezzaPerTipoShow}
+                            onHide={() => setRiprezzaPerTipoShow(false)}
+                        />
+                        
+
                         <Table className="mb-5 mt-3" responsive striped bordered hover >
                             <thead>
                                 <tr>

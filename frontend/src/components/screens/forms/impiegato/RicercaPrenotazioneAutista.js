@@ -39,10 +39,10 @@ export default function RicercaPrenotazioneAutista() {
                         <Form.Label>Stato</Form.Label>
                         <Form.Control className="form-select" as="select">
                             <option value="" disabled selected>Seleziona...</option>
-                            <option value="P">PROGRAMMATA</option>
-                            <option value="I">INIZIATA</option>
-                            <option value="T">TERMINATA</option>
-                            <option value="A">ANNULLATA</option>
+                            <option value="PROGRAMMATA">PROGRAMMATA</option>
+                            <option value="INIZIATA">INIZIATA</option>
+                            <option value="TERMINATA">TERMINATA</option>
+                            <option value="ANNULLATA">ANNULLATA</option>
                         </Form.Control>
                     </Form.Group>
                 </Col>

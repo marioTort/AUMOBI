@@ -254,7 +254,7 @@ exports.inviaEmailAutista = async function (
 
 exports.inviaEmailInizioPrenotazione = async function (email, idPrenotazione, dataConsegna, oraConsegna, luogoConsegna) {
 
-    const modificaPercorsoUrl = `http://localhost:3000/modificaluogoconsegna`;
+    const modificaPercorsoUrl = `http://localhost:3000/archivioprenotazioni`;
 
     const message = `
             <h1>Prenotazione iniziata!</h1>
@@ -319,8 +319,8 @@ exports.inviaEmailAutistaInizioPrenotazione = async function (email, dataConsegn
 
 exports.inviaEmailRitardoConsegna = async function (email, idPrenotazione) {
     //in input passa l'email del cliente il cui timer è scaduto
-    const ritardoUrl = `http://localhost:3000/modificadataconsegna`;
-    const guastoUrl = `http://localhost:3000/segnalaguasto`;
+    const ritardoUrl = `http://localhost:3000/archivioprenotazioni`;
+    const guastoUrl = `http://localhost:3000/archivioprenotazioni`;
 
     const message = `
             <h1>Sei in ritardo con la tua consegna!</h1>

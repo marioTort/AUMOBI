@@ -10,7 +10,10 @@ const {
     listaVeicoliAutistaDisponibili,
     listaVeicoliDisponibiliStallo,
     listaImpiegati,
-    listaVeicoli
+    listaVeicoli,
+    listaStalliAdmin,
+    listaAuto,
+    listaImp
 } = require("../controllers/fetch");
 
 // RICHIESTE
@@ -26,6 +29,10 @@ router.route("/veicolidisponibilistallo").post(listaVeicoliDisponibiliStallo);
 
 router.route("/listaveicoli").post(listaVeicoli);
 
+router.route("/listaauto").post(listaAuto);
+
+router.route("/listaimp").post(listaImp);
+
 
 //PATENTE
 router.route("/fetchPatente").post(patenteUtente);
@@ -33,6 +40,8 @@ router.route("/fetchPatente").post(patenteUtente);
 router.route("/elencopatenti").post(elencoPatenti);
 
 router.route("/listastalli").post(listaStalli);
+
+router.route("/listastalliadmin").post(listaStalliAdmin);
 
 router.route("/listaimpiegati").post(listaImpiegati);
 

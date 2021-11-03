@@ -11,21 +11,35 @@ import Button from "../utils/Button";
 
 // Util Card
 function LinkCard(props) {
-    return (
-        <Col xs={{ span: 10 }} lg={{ span: 4 }} >
-            <div>
-                <Card className="border-5 shadow">
-                <Card.Header className="border-3 shadow"><h2 className="card-title">{props.title}</h2></Card.Header>
-                    <Card.Body>
-                        <div className=" py-3">
-                            <p className=" h4 t-light card-text py-4">{props.text}</p>
-                        </div>
-                        <Button  to={props.to} variant="outline-primary">{props.buttonLabel}</Button>
-                    </Card.Body>
-                </Card>
-            </div>
-        </Col>
-    );
+
+    let authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+        window.location.replace("/login");
+    } else {
+
+        let tipoUtente = localStorage.getItem('tipoUtente');
+
+        if (tipoUtente !== "Admin") {
+            window.location.replace("/");
+        } else {
+            return (
+                <Col xs={{ span: 10 }} lg={{ span: 4 }} >
+                    <div>
+                        <Card className="border-5 shadow">
+                            <Card.Header className="border-3 shadow"><h2 className="card-title">{props.title}</h2></Card.Header>
+                            <Card.Body>
+                                <div className=" py-3">
+                                    <p className=" h4 t-light card-text py-4">{props.text}</p>
+                                </div>
+                                <Button to={props.to} variant="outline-primary">{props.buttonLabel}</Button>
+                            </Card.Body>
+                        </Card>
+                    </div>
+                </Col>
+            );
+        }
+    }
+    
 }
 
 // Schermata personale utente

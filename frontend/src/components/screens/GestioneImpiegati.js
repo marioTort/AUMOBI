@@ -17,6 +17,9 @@ export default function GestioneImpiegati() {
 
     const [impiegati, setImpiegati] = useState([]);
 
+    const [AssegnaAutistaShow, setAssegnaAutistaShow] = useState(false);
+    const [AssegnaParcheggiatoreShow, setAssegnaParcheggiatoreShow] = useState(false);
+
     useEffect(() => {
 
         async function loadImpiegati() {
@@ -82,6 +85,20 @@ export default function GestioneImpiegati() {
                 <React.Fragment>
                     <Container fluid className="mt-4">
                         <h2 className="t-bold pb-3 mt-5"><center>Gestione impiegati</center></h2>
+                        
+                        <div className="d-flex justify-content">
+                            <Button variant="outline-primary" onClick={() => setAssegnaAutistaShow(true)}>Assegna Autista</Button>
+                            <Button variant="outline-success" onClick={() => setAssegnaParcheggiatoreShow(true)}>Assegna Parcheggiatore</Button>
+                        </div>
+                        <AssegnaAutistaModal
+                            show={AssegnaAutistaShow}
+                            onHide={() => setAssegnaAutistaShow(false)}
+                        />
+                        <AssegnaParcheggiatoreModal
+                            show={AssegnaParcheggiatoreShow}
+                            onHide={() => setAssegnaParcheggiatoreShow(false)}
+                        />
+                        
                         <Table className="mb-5 mt-3" responsive striped bordered hover>
                             <thead>
                                 <tr>

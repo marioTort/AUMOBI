@@ -6,7 +6,6 @@ import { Row, Col, Modal, Form, Button } from 'react-bootstrap'
 
 export default function ModificaDataRitiro(props) {
 
-    const [idPrenotazione, setIdPrenotazione] = useState("");
     const [oraRitiro, setOraRitiro] = useState("");
     const [dataRitiro, setDataRitiro] = useState("");
 
@@ -15,7 +14,7 @@ export default function ModificaDataRitiro(props) {
         var dataR = new Date(dataRitiro);
 
         var data = JSON.stringify({
-            idPrenotazione: idPrenotazione,
+            idPrenotazione: localStorage.getItem('idModificaDataRitiro'),
             nuovaDataRitiro: (dataR.getDate() + "/" + (dataR.getMonth() + 1) + "/" + dataR.getFullYear()),
             nuovaOraRitiro: oraRitiro
         });
@@ -58,13 +57,6 @@ export default function ModificaDataRitiro(props) {
                         <br></br>
                         <Form>
                             <Row className="gy-8">
-
-                                <Col xs={{ span: 12 }}>
-                                    <Form.Group>
-                                        <Form.Label>#Prenotazione</Form.Label>
-                                        <Form.Control type="text" placeholder="Inserisci id prenotazione" onChange={(event) => { setIdPrenotazione(event.target.value) }} required />
-                                    </Form.Group>
-                                </Col>
 
                                 <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                     <Form.Group onChange={(event) => { setDataRitiro(event.target.value) }}>

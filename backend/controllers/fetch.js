@@ -121,9 +121,61 @@ exports.listaVeicoli = async (req, res) => {
     }
 }
 
+exports.listaAuto = async (req, res) => {
+    
+    const {
+        tipoMezzo
+    } = req.body;
+    
+    try {
+        const auto = await Mezzo.find(
+            { tipoMezzo: tipoMezzo }
+        )
+        res.json({ listaMezzi: auto });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+}
+
+exports.listaImp = async (req, res) => {
+
+    const {
+        tipoUtente
+    } = req.body;
+
+    try {
+        const imp = await Utente.find(
+            { tipoUtente: tipoUtente }
+        )
+        res.json({ listaImp: imp });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+}
+
 //Wallet
 
 //Stallo
+
+exports.listaStalliAdmin = async (req, res, next) => {
+
+    try {
+        const stallo = await Stallo.find();
+        res.json({ listaStalli: stallo });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+};
+
 exports.listaStalli = async (req, res, next) => {
 
     const {

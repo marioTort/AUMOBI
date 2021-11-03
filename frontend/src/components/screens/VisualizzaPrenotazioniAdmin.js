@@ -4,9 +4,6 @@ import axios from 'axios';
 // Bootstrap Components
 import { Container, Table } from 'react-bootstrap';
 
-// Custom Components
-import RicercaPrenotazioneAdmin from './forms/admin/RicercaPrenotazioneAdmin';
-
 // Schermata profilo
 export default function VisualizzaPrenotazioniAdmin() {
 

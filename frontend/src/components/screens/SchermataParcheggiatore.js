@@ -11,6 +11,7 @@ import Button from "../utils/Button";
 
 // Util Card
 function LinkCard(props) {
+
     return (
         <Col xs={{ span: 10 }} lg={{ span: 4 }} >
             <div>
@@ -42,7 +43,7 @@ export default function SchermataParcheggiatore() {
                     <Container fluid className="d-flex justify-content-center align-items-center my-5 ">
 
                         <div className="d-flex flex-column align-items-start">
-                            <h1 className="t-bold">Benvenuto, {nome}!</h1>
+                            <h1 className="t-bold">Bentornato, {nome}!</h1>
                         </div>
                     </Container >
                 </div>
@@ -57,7 +58,7 @@ export default function SchermataParcheggiatore() {
                             <LinkCard
                                 title={"Conferma Prenotazione"}
                                 text={"Conferma l'inizio o la fine delle prenotazioni dei clienti."}
-                                to={"/"}
+                                to={"/confermaprenotazione"}
                                 buttonLabel={"Prosegui"} />
                         </Row>
                     </CardGroup>

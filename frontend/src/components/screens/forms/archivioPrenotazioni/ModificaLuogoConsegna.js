@@ -6,12 +6,31 @@ import { Row, Col, Modal, Form, Button } from 'react-bootstrap'
 
 export default function ModificaLuogoConsegna(props) {
 
-    const [idPrenotazione, setIdPrenotazione] = useState("");
     const [luogoConsegna, setLuogoConsegna] = useState("");
 
     const [renderParcheggio, setRenderParcheggio] = useState(true);
     const [optionsParcheggio, setOptionsParcheggio] = useState([]);
 
+    async function elencoStalli() {
+
+        var config = {
+            method: 'post',
+            url: '/api/fetch/listastalliadmin',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                localStorage.setItem("listaStalli", JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    elencoStalli();
     useEffect(() => {
         if (renderParcheggio) {
             for (let index = 0; index < JSON.parse(localStorage.getItem('listaStalli')).listaStalli.length; index++) {
@@ -27,7 +46,7 @@ export default function ModificaLuogoConsegna(props) {
     async function modificaLuogoConsegna(event) {
         event.preventDefault();
         var data = JSON.stringify({
-            idPrenotazione: idPrenotazione,
+            idPrenotazione: localStorage.getItem('idModificaLuogoConsegna'),
             nuovoLuogoConsegna: luogoConsegna
         });
 
@@ -68,13 +87,6 @@ export default function ModificaLuogoConsegna(props) {
                         <br></br>
                         <Form>
                             <Row className="gy-8">
-
-                                <Col xs={{ span: 12 }}>
-                                    <Form.Group>
-                                        <Form.Label>#Prenotazione</Form.Label>
-                                        <Form.Control type="text" placeholder="Inserisci id prenotazione" onChange={(event) => { setIdPrenotazione(event.target.value) }} required />
-                                    </Form.Group>
-                                </Col>
 
                                 <Form.Group>
                                     <Form.Label className="me-2">Luogo di consegna</Form.Label>

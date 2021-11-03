@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
+import axios from 'axios'
 
 // Bootstrap Components
 import { Row, Col, Modal, Form } from 'react-bootstrap'
@@ -10,7 +11,7 @@ import WarningMessage from '../../../utils/WarningMessage';
 import QRCode from '../../../utils/QRCode';
 
 export default function IniziaPrenotazioneModal(props) {
-    
+    const [ID, setID] = useState("");
     const history = useHistory()
     const [state, setState] = useState({
         error: {
@@ -22,8 +23,31 @@ export default function IniziaPrenotazioneModal(props) {
         submit: false
     })
 
-    function onClick(e) {
-        
+    async function iniziaPrenotazione(event) {
+        event.preventDefault();
+
+        var data = JSON.stringify({
+            idPrenotazione: ID
+        });
+
+        var config = {
+            method: 'put',
+            url: '/api/prenotazione/iniziaprenotazione',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        await axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                window.location.replace("/");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
     }
     return (
         <Modal
@@ -52,14 +76,14 @@ export default function IniziaPrenotazioneModal(props) {
                         </Col>
                         <QRCode/>
                         <Col xs={{ span: 12 }} lg={{ span: 10, offset: 1 }}>
-                                <Form.Group controlId="cambiaCellulare">
+                                <Form.Group>
                                     <Form.Label>Numero prenotazione</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il numero della prenotazione" />
+                                <Form.Control type="text" placeholder="Inserisci il numero della prenotazione" onChange={(event) => { setID(event.target.value) }} required/>
                                 </Form.Group>
                             </Col>
                         <div className="buttonsGroup mx-auto">
                             <Button variant="outline-secondary" onClick={props.onHide}>Annulla</Button>
-                            <Button spinner={state.submit} variant="outline-primary" onClick={onClick}>Prosegui</Button>
+                            <Button variant="outline-primary" onClick={iniziaPrenotazione}>Prosegui</Button>
                         </div>
                     </Row>
                 }

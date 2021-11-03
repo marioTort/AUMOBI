@@ -4,20 +4,22 @@ import axios from 'axios';
 // Bootstrap Components
 import { Row, Col, Modal, Form, Button } from 'react-bootstrap'
 
-export default function AnnullaPrenotazione(props) {
+export default function Inserisci(props) {
 
-    const [idPrenotazione, setIdPrenotazione] = useState("");
+    const [tipoMezzo, setTipoMezzo] = useState("");
+    const [prezzoOrario, setPrezzoOrario] = useState("");
 
-
-    async function annullaPrenotazione(event) {
+    async function riprezzaPerTipo(event) {
         event.preventDefault();
+
         var data = JSON.stringify({
-            idPrenotazione: idPrenotazione
+            tipoMezzo: tipoMezzo,
+            nuovoPrezzo: prezzoOrario
         });
 
         var config = {
             method: 'put',
-            url: '/api/prenotazione/annullaprenotazione',
+            url: '/api/mezzo/riprezzapertipo',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -27,7 +29,7 @@ export default function AnnullaPrenotazione(props) {
         axios(config)
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
-                //window.location.replace("/archivioprenotazioni");
+                window.location.replace("/schermataadmin");
             })
             .catch(function (error) {
                 console.log(error);
@@ -44,7 +46,7 @@ export default function AnnullaPrenotazione(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Annulla prenotazione
+                    Riprezza per tipo
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -55,9 +57,20 @@ export default function AnnullaPrenotazione(props) {
                             <Row className="gy-8">
 
                                 <Col xs={{ span: 12 }}>
-                                    <Form.Group>
-                                        <Form.Label>#Prenotazione</Form.Label>
-                                        <Form.Control type="text" placeholder="Inserisci id prenotazione" onChange={(event) => { setIdPrenotazione(event.target.value) }} required />
+                                    <Form.Group controlId="tipoVeicolo">
+                                        <Form.Label>Tipo veicolo</Form.Label>
+                                        <Form.Control className="form-select" as="select" onChange={(event) => { setTipoMezzo(event.target.value) }} required>
+                                            <option value="" disabled selected>Seleziona</option>
+                                            <option value="Bici">Bici</option>
+                                            <option value="Monopattino">Monopattino</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+
+                                <Col xs={{ span: 12 }}>
+                                    <Form.Group controlId="prezzo">
+                                        <Form.Label>Prezzo Orario</Form.Label>
+                                        <Form.Control type="text" placeholder="Inserisci il prezzo orario del nuovo veicolo" onChange={(event) => { setPrezzoOrario(event.target.value) }} required />
                                     </Form.Group>
                                 </Col>
 
@@ -69,7 +82,7 @@ export default function AnnullaPrenotazione(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
-                <Button onClick={annullaPrenotazione}>Annulla Prenotazione</Button>
+                <Button onClick={riprezzaPerTipo}>Riprezza</Button>
             </Modal.Footer>
         </Modal>
     );

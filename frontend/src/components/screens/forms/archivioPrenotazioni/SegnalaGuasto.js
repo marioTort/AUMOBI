@@ -6,13 +6,12 @@ import { Row, Col, Modal, Form, Button } from 'react-bootstrap'
 
 export default function SegnalaGuasto(props) {
 
-    const [idPrenotazione, setIdPrenotazione] = useState("");
     const [luogoGuasto, setLuogoGuasto] = useState("");
 
     async function segnalaGuasto(event) {
         event.preventDefault();
         var data = JSON.stringify({
-            idPrenotazione: idPrenotazione,
+            idPrenotazione: localStorage.setItem('idSegnalaGuasto'),
             luogoGuasto: luogoGuasto
         });
 
@@ -54,13 +53,6 @@ export default function SegnalaGuasto(props) {
                         <br></br>
                         <Form>
                             <Row className="gy-8">
-
-                                <Col xs={{ span: 12 }}>
-                                    <Form.Group>
-                                        <Form.Label>#Prenotazione</Form.Label>
-                                        <Form.Control type="text" placeholder="Inserisci id prenotazione" onChange={(event) => { setIdPrenotazione(event.target.value) }} required />
-                                    </Form.Group>
-                                </Col>
 
                                 <Col xs={{ span: 12 }}>
                                     <Form.Group>

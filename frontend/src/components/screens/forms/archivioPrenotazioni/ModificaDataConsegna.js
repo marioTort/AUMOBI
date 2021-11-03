@@ -6,7 +6,6 @@ import { Row, Col, Modal, Form, Button } from 'react-bootstrap'
 
 export default function ModificaDataConsegna(props) {
 
-    const [idPrenotazione, setIdPrenotazione] = useState("");
     const [oraConsegna, setOraConsegna] = useState("");
     const [dataConsegna, setDataConsegna] = useState("");
 
@@ -16,7 +15,7 @@ export default function ModificaDataConsegna(props) {
         var dataC = new Date(dataConsegna);
 
         var data = JSON.stringify({
-            idPrenotazione: idPrenotazione,
+            idPrenotazione: localStorage.getItem('idModificaDataConsegna'),
             nuovaDataConsegna: (dataC.getDate() + "/" + (dataC.getMonth() + 1) + "/" + dataC.getFullYear()),
             nuovaOraConsegna: oraConsegna
         });
@@ -59,13 +58,6 @@ export default function ModificaDataConsegna(props) {
                         <br></br>
                         <Form>
                             <Row className="gy-8">
-
-                                <Col xs={{ span: 12 }}>
-                                    <Form.Group>
-                                        <Form.Label>#Prenotazione</Form.Label>
-                                        <Form.Control type="text" placeholder="Inserisci id prenotazione" onChange={(event) => { setIdPrenotazione(event.target.value) }} required />
-                                    </Form.Group>
-                                </Col>
 
                                 <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                     <Form.Group onChange={(event) => { setDataConsegna(event.target.value) }}>

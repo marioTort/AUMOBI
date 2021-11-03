@@ -31,37 +31,52 @@ function LinkCard(props) {
 // Schermata personale utente
 export default function SchermataAutista() {
 
-    return (
-        <div>
+    let authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+        window.location.replace("/login");
+    } else {
+
+        let tipoUtente = localStorage.getItem('tipoUtente');
+
+        if (tipoUtente !== "Autista") {
+            window.location.replace("/");
+        } else {
+            let nome = JSON.parse(localStorage.getItem("datiPersonali")).nome;
+            return (
                 <div>
-                    <Container fluid className="d-flex justify-content-center align-items-center my-5 ">
-                        
-                        <div className="d-flex flex-column align-items-start">
-                            <h1 className="t-bold">Benvenuto Autista!</h1>
-                        </div>
-                    </Container >
+                    <div>
+                        <Container fluid className="d-flex justify-content-center align-items-center my-5 ">
+
+                            <div className="d-flex flex-column align-items-start">
+                                <h1 className="t-bold">Bentornato, {nome}!</h1>
+                            </div>
+                        </Container >
+                    </div>
+                    <Container className="d-flex justify-content-center mt-5 pb-5">
+                        <CardGroup >
+                            <Row className="gy-5 align-items-center justify-content-center">
+                                <LinkCard
+                                    title={"Gestione Account"}
+                                    text={"Visualizza e modifica i dati del tuo account. "}
+                                    to={"/gestioneaccountimpiegato"}
+                                    buttonLabel={"Prosegui"} />
+                                <LinkCard
+                                    title={"Conferma Prenotazione"}
+                                    text={"Conferma l'inizio o la fine delle prenotazioni dei clienti."}
+                                    to={"/confermaprenotazione"}
+                                    buttonLabel={"Prosegui"} />
+                                <LinkCard
+                                    title={"Visualizza Prenotazioni"}
+                                    text={"Visualizza le prenotazioni effettuate dagli utenti."}
+                                    to={"/visualizzaprenotazioniautista"}
+                                    buttonLabel={"Prosegui"} />
+                            </Row>
+                        </CardGroup>
+                    </Container>
                 </div>
-                <Container className="d-flex justify-content-center mt-5 pb-5">
-                    <CardGroup >
-                        <Row className="gy-5 align-items-center justify-content-center">   
-                                    <LinkCard
-                                        title={"Gestione Account"}
-                                        text={"Visualizza e modifica i dati del tuo account. "}
-                                        to={"/"}
-                                        buttonLabel={"Prosegui"}/>
-                                    <LinkCard
-                                        title={"Conferma Prenotazione"}
-                                        text={"Conferma l'inizio o la fine delle prenotazioni dei clienti."}
-                                        to={"/"}
-                                        buttonLabel={"Prosegui"}/>
-                                    <LinkCard
-                                        title={"Visualizza Prenotazioni"}
-                                        text={"Visualizza le prenotazioni effettuate dagli utenti."}
-                                        to={"/"}
-                                        buttonLabel={"Prosegui"}/>
-                        </Row>
-                    </CardGroup>
-                </Container>               
-       </div>
-    );
+            );
+        }
+    }
+
+    
 }
