@@ -115,7 +115,8 @@ exports.recuperaPassword = async (req, res, next) => {
         //Devo essere adesso in grado di salvare questo utente con il token di resete della password generato...
         await utente.save();
 
-        const resetUrl = `http://localhost:3000/resetpassword/${resetToken}`;
+        const resetUrl = `http://localhost:3000/resetpassword/${resetToken}
+`;
 
         const message = `
             <h1>Recupero password</h1>
@@ -137,7 +138,8 @@ exports.recuperaPassword = async (req, res, next) => {
 
             res.status(200).json({
                 success: true,
-                data: "Email inviata con successo!"
+                data: "Email inviata con successo!",
+                resetToken: resetToken
             });
 
         } catch (error) {

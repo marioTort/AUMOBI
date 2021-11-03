@@ -94,7 +94,7 @@ const App = () => {
           <Route exact path ="/login" component = { Autenticazione } />
           <Route exact path="/recuperapassword" component = { RecuperaPassword } />
           <Route exact path="/recuperapasswordcompletato" component = {RecuperaPasswordCompletato} />
-          <Route exact path="/resetpassword" component = {ResetPassword} />
+          <Route exact path="/resetpassword/:resetToken" component = {ResetPassword} />
           <Route exact path="/resetpasswordcompletato" component = {ResetPasswordCompletato} />
 
           <Route exact path="/schermatacliente" component = {SchermataCliente} />

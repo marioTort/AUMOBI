@@ -8,10 +8,16 @@ import Footer from '../utils/Footer';
 
 // Schermata Login
 export default function Autenticazione() {
+    let authToken = localStorage.getItem('authToken');
 
-    return (
-        <div>      
-            <AutenticazioneForm />                         
-        </div>
-    );
+    if (!authToken) {
+        return (
+            <div>
+                <AutenticazioneForm />
+            </div>
+        );
+    } else {
+        window.location.replace("/");
+    }
+    
 }
