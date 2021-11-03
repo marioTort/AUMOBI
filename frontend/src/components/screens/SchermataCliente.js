@@ -1,5 +1,5 @@
 import React from 'react'
-
+import axios from 'axios';
 // Bootstrap Components
 import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
 
@@ -13,6 +13,28 @@ import Footer from '../utils/Footer';
 
 // Util Card
 function LinkCard(props) {
+
+    async function elencoStalli() {
+
+        var config = {
+            method: 'post',
+            url: '/api/fetch/listastalliadmin',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        await axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                localStorage.setItem("listaStalli", JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    elencoStalli();
+
     return (
         <Col md={{ span: 10 }} lg={{ span: 5 }} xl={{ span: 4 }}  >
             <div>

@@ -11,26 +11,6 @@ export default function ModificaLuogoConsegna(props) {
     const [renderParcheggio, setRenderParcheggio] = useState(true);
     const [optionsParcheggio, setOptionsParcheggio] = useState([]);
 
-    async function elencoStalli() {
-
-        var config = {
-            method: 'post',
-            url: '/api/fetch/listastalliadmin',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-                localStorage.setItem("listaStalli", JSON.stringify(response.data));
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-    elencoStalli();
     useEffect(() => {
         if (renderParcheggio) {
             for (let index = 0; index < JSON.parse(localStorage.getItem('listaStalli')).listaStalli.length; index++) {
