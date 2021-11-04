@@ -162,7 +162,7 @@ exports.programmaPrenotazione = async (req, res, next) => {
     
                                             var autoPrenotabile = (patentePresente.categoria === "B" && mezzoPresente.tipoMezzo === "Auto");
     
-                                            var motoPrenotabile = ((patentePresente.categoria === "A1" || patentePresente.categoria === "A1") && mezzoPresente.tipoMezzo === "Moto"); 
+                                            var motoPrenotabile = ((patentePresente.categoria === "B" || patentePresente.categoria === "A1") && mezzoPresente.tipoMezzo === "Moto"); 
     
                                             var scooterPrenotabile = (patentePresente.categoria === "AM" && mezzoPresente.categoriaMezzo < 50); 
 
