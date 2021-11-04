@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // Bootstrap Components
 import { Row, Col, Modal, Form, Button } from 'react-bootstrap'
 
-export default function ModificaCellulare(props) {
+export default function DataConsegna(props) {
     const [oraConsegna, setOraConsegna] = useState("");
     const [dataConsegna, setDataConsegna] = useState("");
 

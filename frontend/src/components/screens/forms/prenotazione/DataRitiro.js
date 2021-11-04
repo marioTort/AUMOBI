@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // Bootstrap Components
 import { Row, Col, Modal, Form, Button } from 'react-bootstrap'
 
-export default function ModificaCellulare(props) {
+export default function DataRitiro(props) {
     const [oraRitiro, setOraRitiro] = useState("");
     const [dataRitiro, setDataRitiro] = useState("");
 

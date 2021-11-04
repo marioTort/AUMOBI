@@ -1,5 +1,5 @@
 import React from 'react';
-import {Carousel, Container, Row, Image, Card, Button} from "react-bootstrap";
+import {Carousel, Container, Row, Image, Card} from "react-bootstrap";
 // Framer Motion Componets
 
 import Footer from '../utils/Footer';
@@ -104,7 +104,7 @@ export default function Home() {
                                         <Card.Text>
                                         Il classico evergreen italiano. Perfetta per chi ha necessità di andare in montagna.
                                         </Card.Text>
-                                        <Button className="btn-red-outline" variant="primary">Go somewhere</Button>
+                                        
                                     </Card.Body>
                                 </Card>
                                 <Card className="card-item">
@@ -114,7 +114,7 @@ export default function Home() {
                                         <Card.Text>
                                         L'utilitaria per eccellenza. Elegante, maneggevole e adatta per ogni occasione.
                                         </Card.Text>
-                                        <Button className="btn-red-outline" variant="primary">Go somewhere</Button>
+                                        
                                     </Card.Body>
                                 </Card>
                                 <Card className="card-item">
@@ -124,7 +124,7 @@ export default function Home() {
                                         <Card.Text>
                                         La monovolume più richiesta. Comoda, spaziosa e adatta a tutte le famiglie.
                                         </Card.Text>
-                                        <Button className="btn-red-outline" variant="primary">Go somewhere</Button>
+                                        
                                     </Card.Body>
                                 </Card>
                             </div>
