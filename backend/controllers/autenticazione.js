@@ -79,14 +79,17 @@ exports.login = async (req, res, next) => {
                 success: false,
                 error: "Password errata. Riprovare."
             });
-        }
-        if (!datiCarta) {
-            sendTokenImpiegato(utente, 200, res);
         } else {
-            /* Se invece password ed email sono corrispondenti genero il token di autenticazione che sostanzialmente permette 
-            di accedere alla propria area riservata */
-            sendToken(utente, 200, res);
-            
+
+            if (!datiCarta) {
+                sendTokenImpiegato(utente, 200, res);
+            } else {
+                /* Se invece password ed email sono corrispondenti genero il token di autenticazione che sostanzialmente permette 
+                di accedere alla propria area riservata */
+                sendToken(utente, 200, res);
+                
+            }
+        
         }
 
     } catch (error) {
