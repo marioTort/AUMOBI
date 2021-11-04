@@ -15,18 +15,18 @@ function StalliB() {
     }
     
     return (<div>
-        <Marker position={[33.1202, 13.3572]} icon={getIcon(50)}>
+        <Marker position={[38.11114376186537, 13.35157839813205]} icon={getIcon(50)}>
             <Popup>
                 <div className="row gy-3 d-flex flex-column">
-                    <h3 className="t-light">VIA DI STO CAZZZOOOOOO</h3>
+                    <h3 className="t-light">Piazza Indipendenza</h3>
                     
                 </div>
             </Popup>
         </Marker>
-        <Marker position={[38.1102, 13.3672]} icon={getIcon(50)}>
+        <Marker position={[38.13321785643879, 13.351880826929056]} icon={getIcon(50)}>
             <Popup>
                 <div className="row gy-3 d-flex flex-column">
-                    <h3 className="t-light">VIA DI STO CAZZZOOOOOO</h3>
+                    <h3 className="t-light">Giardino Inglese</h3>
                 </div>
             </Popup>
         </Marker>
@@ -48,15 +48,14 @@ function StalliM() {
         <Marker position={[38.12036963131095, 13.357198011625277]} icon={getIcon(50)}>
             <Popup>
                 <div className="row gy-3 d-flex flex-column">
-                    <h3 className="t-light">Teatro Massimo</h3>
-                    
+                    <h3 className="t-light">Teatro Massimo</h3>   
                 </div>
             </Popup>
         </Marker>
-        <Marker position={[38.112, 13.362]} icon={getIcon(50)}>
+        <Marker position={[38.1249026289687, 13.355919950763699]} icon={getIcon(50)}>
             <Popup>
                 <div className="row gy-3 d-flex flex-column">
-                    <h3 className="t-light">VIA DI STO CAZZZOOOOOO</h3>
+                    <h3 className="t-light">Piazza Politeama</h3>
                 </div>
             </Popup>
         </Marker>

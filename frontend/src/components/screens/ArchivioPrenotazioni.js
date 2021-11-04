@@ -126,7 +126,7 @@ export default function ArchivioPrenotazioni() {
         loadPrenotazioni();
 
     }, []);
-
+    console.log(prenotazioni)
     let authToken = localStorage.getItem('authToken');
 
     if (!authToken) {
@@ -138,8 +138,10 @@ export default function ArchivioPrenotazioni() {
             window.location.replace("/");
         } else {
 
-            if (!prenotazioni) {
-                <h1>NESSUNA PRENOTAZIONE IN ELENCO</h1>
+            if (prenotazioni===null) {
+                return(
+                <h1 className="py-5"><center>NESSUNA PRENOTAZIONE IN ELENCO</center></h1>
+                );
             } else {
                 return (
                     <React.Fragment>

@@ -54,7 +54,7 @@ exports.prenotazioniUtente = async (req, res, next) => {
     
     //const prenotazioni = await Prenotazione.find(emailCliente);
     if(prenotazioni.length === 0) {
-        res.json({result: "Nessuna prenotazione presente!"});
+        res.json(null);
     } else {
         res.json(prenotazioni);
     }

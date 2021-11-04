@@ -14,17 +14,31 @@ function Stalli() {
     }
     
     return (<div>
-        <Marker position={[38.1202, 13.3572]} icon={getIcon(50)}>
+        <Marker position={[38.115901647567064, 13.361464198132142]} icon={getIcon(50)}>
             <Popup>
                 <div className="row gy-3 d-flex flex-column">
-                    <h3 className="t-light">VIA DI STO CAZZZOOOOOO</h3>
+                    <h3 className="t-light">Via Maqueda</h3>
                 </div>
             </Popup>
         </Marker>
-        <Marker position={[38.1102, 13.3672]} icon={getIcon(50)}>
+        <Marker position={[38.11446503373733, 13.374054088126664]} icon={getIcon(50)}>
             <Popup>
                 <div className="row gy-3 d-flex flex-column">
-                    <h3 className="t-light">VIA DI STO CAZZZOOOOOO</h3>
+                    <h3 className="t-light">Via Lincoln</h3>
+                </div>
+            </Popup>
+        </Marker>
+        <Marker position={[38.142180244662505, 13.337424984639613]} icon={getIcon(50)}>
+            <Popup>
+                <div className="row gy-3 d-flex flex-column">
+                    <h3 className="t-light">Viale Lazio</h3>
+                </div>
+            </Popup>
+        </Marker>
+        <Marker position={[38.103090413754316, 13.329738769331993]} icon={getIcon(50)}>
+            <Popup>
+                <div className="row gy-3 d-flex flex-column">
+                    <h3 className="t-light">Corso Calatafimi</h3>
                 </div>
             </Popup>
         </Marker>
