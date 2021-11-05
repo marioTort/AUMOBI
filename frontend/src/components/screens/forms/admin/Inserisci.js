@@ -88,7 +88,7 @@ export default function Inserisci(props) {
                                             <option value="" disabled selected>Seleziona</option>
                                             <option value="Utilitaria">Utilitaria</option>
                                             <option value="Monovolume">Monovolume</option>
-                                            <option value="Sportiva">Sportiva</option>
+                                            <option value="Fuoristrada">Fuoristrada</option>
                                             <option value="49">49</option>
                                             <option value="125">125</option>
                                         </Form.Control>
