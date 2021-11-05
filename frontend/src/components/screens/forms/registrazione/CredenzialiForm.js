@@ -71,9 +71,7 @@ export default function CredenzialiForm() {
                 });
         }
     }
-    if (!authToken) {
-        window.location.replace("/registrazionecliente");
-    } else {
+    
         let isRegistrato = localStorage.getItem('isRegistrato');
 
         if (isRegistrato) {
@@ -128,6 +126,6 @@ export default function CredenzialiForm() {
 
             );
         }
-    }
+    
     
 }
