@@ -104,6 +104,9 @@ export default function Inserisci(props) {
                                             <option value="Viale delle scienze">Viale delle scienze</option>
                                             <option value="Via Roma">Via Roma</option>
                                             <option value="Via della Libertà">Via della Libertà </option>
+                                            <option value="Viale Lazio">Viale Lazio </option>
+                                            <option value="Giardino Inglese">Giardino Inglese </option>
+                                            <option value="Piazza Politeama">Piazza Politeama </option>
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
