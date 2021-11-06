@@ -739,6 +739,28 @@ exports.annullaPrenotazione = async (req, res, next) => {
                         if (prenotazionePresente.servizioAutista === true) {
                             //invio email all'autista per informarlo dell'annullamento della prenotazione...
                             notifica.inviaEmailAnnullaPrenotazioneAutista(mezzoPresente.emailAutista);
+                        } else {
+                            const stalloConsegna = await Stallo.findOne({ indirizzoStallo: prenotazionePresente.luogoConsegna });
+                            try {
+                                let postiDisp = stalloConsegna.postiDisponibili + 1;
+                                try {
+                                    //aumento il numero di posti disponibili nello stallo di consegna
+                                    await stalloConsegna.updateOne({
+                                        postiDisponibili: postiDisp
+                                    });
+
+                                } catch (error) {
+                                    res.status(500).json({
+                                        success: false,
+                                        error: error.message
+                                    });
+                                }
+                            } catch (error) {
+                                res.status(500).json({
+                                    success: false,
+                                    error: error.message
+                                });
+                            }
                         }
 
                         try {
@@ -747,20 +769,8 @@ exports.annullaPrenotazione = async (req, res, next) => {
                             await mezzoPresente.updateOne({ stato: "Libero" });
 
                             //**************************************************** */
-                            const stalloConsegna = await Stallo.findOne({ indirizzoStallo: prenotazionePresente.luogoConsegna });
-                            let postiDisp = stalloConsegna.postiDisponibili + 1;
-                            try {
-                                //aumento il numero di posti disponibili nello stallo di consegna
-                                await stalloConsegna.updateOne({
-                                    postiDisponibili: postiDisp
-                                });
-
-                            } catch (error) {
-                                res.status(500).json({
-                                    success: false,
-                                    error: error.message
-                                });
-                            }
+                            
+                            
 
                             //**************************************************** */
                             try {
