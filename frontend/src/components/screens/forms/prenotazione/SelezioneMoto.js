@@ -31,7 +31,7 @@ export default function SelezioneMoto() {
             axios(config)
                 .then(function (response) {
                     console.log(JSON.stringify(response.data));
-                    localStorage.setItem("targaVeicoloPrenotato", (JSON.parse(JSON.stringify(response.data.listaMezzi))[0].targa));
+                    //localStorage.setItem("targaVeicoloPrenotato", (JSON.parse(JSON.stringify(response.data.listaMezzi))[0].targa));
                     setMoto(response.data.listaMezzi);
                 })
                 .catch(function (error) {
