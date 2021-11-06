@@ -30,7 +30,6 @@ export default function SelezioneAuto() {
             axios(config)
                 .then(function (response) {
                     console.log(JSON.stringify(response.data));
-                    //localStorage.setItem("targaVeicoloPrenotato", (JSON.parse(JSON.stringify(response.data.listaMezzi))[0].targa));
                     setAuto(response.data.listaMezzi);
                 })
                 .catch(function (error) {
@@ -86,6 +85,7 @@ export default function SelezioneAuto() {
                     })
                     .catch(function (error) {
                         console.log(error);
+                        alert("Qualcosa è andato storto con la prenotazione. Riprova...");
                     });
 
             }

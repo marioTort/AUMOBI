@@ -31,7 +31,6 @@ export default function SelezioneMoto() {
             axios(config)
                 .then(function (response) {
                     console.log(JSON.stringify(response.data));
-                    //localStorage.setItem("targaVeicoloPrenotato", (JSON.parse(JSON.stringify(response.data.listaMezzi))[0].targa));
                     setMoto(response.data.listaMezzi);
                 })
                 .catch(function (error) {
@@ -103,6 +102,7 @@ export default function SelezioneMoto() {
                     })
                     .catch(function (error) {
                         console.log(error);
+                        alert("Qualcosa è andato storto con la prenotazione. Riprova...");
                     });
             }
             return (
@@ -124,13 +124,13 @@ export default function SelezioneMoto() {
                                                 <Card.Body className="d-flex flex-column justify-content-evenly">
                                                     <div className=" py-1 justify-content-center">
 
-                                                        <p className=" h4 card-text py-4 t-bold">Categoria: <a className="t-light"><font color = "black"> {scooter.categoriaMezzo}</font></a></p>
+                                                        <p className=" h4 card-text py-1 t-bold">Categoria: <a className="t-light"><font color = "black"> {scooter.categoriaMezzo}</font></a></p>
 
-                                                        <p className=" h4 t-bold card-text py-4">Alimentazione: <a className="t-light"><font color = "black">  Benzina </font></a></p>
+                                                        <p className=" h4 t-bold card-text py-1">Alimentazione: <a className="t-light"><font color = "black">  Benzina </font></a></p>
 
-                                                        <p className=" h4 t-bold card-text py-4">Targa: <a className="t-light"><font color = "black">   {scooter.targa} </font></a></p>
+                                                        <p className=" h4 t-bold card-text py-1">Targa: <a className="t-light"><font color = "black">   {scooter.targa} </font></a></p>
 
-                                                        <p className=" h4 t-bold card-text py-4">Prezzo orario: <a className="t-light"><font color = "black">  {scooter.prezzoOrario} € </font></a></p>
+                                                        <p className=" h4 t-bold card-text py-1">Prezzo orario: <a className="t-light"><font color = "black">  {scooter.prezzoOrario} € </font></a></p>
 
                                                     </div>
 

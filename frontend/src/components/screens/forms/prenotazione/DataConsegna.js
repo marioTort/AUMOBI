@@ -12,10 +12,11 @@ export default function DataConsegna(props) {
     let dataRitiroTrucc = new Date(Date(localStorage.getItem("dataRitiroUTC")));
     dataRitiroTrucc.setDate(dataRit.getDate() + 1)
 
-    function settaLuogoRitiro() {
+    function settaDataConsegna() {
         var dataC = new Date(dataConsegna);
         localStorage.setItem("dataConsegna", (dataC.getDate() + "/" + (dataC.getMonth() + 1) + "/" + dataC.getFullYear()));
         localStorage.setItem("oraConsegna", oraConsegna);
+        alert("Data di consegna impostata! Clicca su Close per proseguire...");
     }
 
     return (
@@ -101,7 +102,7 @@ export default function DataConsegna(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
-                <Button onClick={settaLuogoRitiro}>Inserisci</Button>
+                <Button onClick={settaDataConsegna}>Inserisci</Button>
             </Modal.Footer>
         </Modal>
     );

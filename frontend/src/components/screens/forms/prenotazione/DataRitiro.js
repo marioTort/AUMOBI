@@ -7,11 +7,12 @@ export default function DataRitiro(props) {
     const [oraRitiro, setOraRitiro] = useState("");
     const [dataRitiro, setDataRitiro] = useState("");
 
-    function settaLuogoRitiro() {
+    function settaDataRitiro() {
         var dataR = new Date(dataRitiro);
         localStorage.setItem("dataRitiro", (dataR.getDate() + "/" + (dataR.getMonth() + 1) + "/" + dataR.getFullYear()));
         localStorage.setItem("oraRitiro", oraRitiro);
         localStorage.setItem("dataRitiroUTC", dataR);
+        alert("Data di ritiro impostata! Clicca su Close per proseguire...");
     }
 
     return (
@@ -97,7 +98,7 @@ export default function DataRitiro(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
-                <Button onClick={settaLuogoRitiro}>Inserisci</Button>
+                <Button onClick={settaDataRitiro}>Inserisci</Button>
             </Modal.Footer>
         </Modal>
     );
