@@ -167,7 +167,7 @@ export default function DatiBancariForm() {
                                         <Form.Group >
                                             <Form.Label>Numero carta</Form.Label>
                                                     <Form.Control type="number" id="cardNumber" placeholder="Numero carta" onBlur={() => setValidaDati({ ...validaDati, numeroCartaCredito: true })} onChange={(event) => { setNumeroCartaCredito(event.target.value) }} required />
-                                                <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Formato patente non valido!</Form.Text>
+                                                <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Formato carta non valido!</Form.Text>
                                         </Form.Group>
                                     </Col>
     
@@ -180,9 +180,9 @@ export default function DatiBancariForm() {
     
                                     <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                         <Form.Group>
-                                            <Form.Label>Data di scadenza</Form.Label>
+                                            <Form.Label>Data di scadenza (mm/aa)</Form.Label>
                                                     <Form.Control type="text" id="cardExpiration" placeholder="Data di scadenza" onBlur={() => setValidaDati({ ...validaDati, dataScadenzaCarta: true })} onChange={(event) => { setDataScadenzaCarta(event.target.value) }} required />
-                                                <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato carta non valido!</Form.Text>
+                                                <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato data non valido!</Form.Text>
                                         </Form.Group>
                                     </Col>
     
