@@ -64,6 +64,7 @@ export default function AutenticazioneForm() {
             })
             .catch(function (error) {
                 console.log(error);
+                alert("Email o password non corrispondenti!");
             });
 
     }
