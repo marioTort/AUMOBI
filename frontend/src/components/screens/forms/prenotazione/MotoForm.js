@@ -51,7 +51,12 @@ export default function MotoForm() {
 
         localStorage.setItem("numeroCartaCliente", decryptString(JSON.parse(localStorage.getItem("datiCarta")).numeroCartaCredito, key));
 
-        window.location.replace("/schermataprenotazionemoto/selezionemoto")
+        if (localStorage.getItem("dataRitiro") === null || localStorage.getItem("oraRitiro") === null || localStorage.getItem("dataConsegna") === null || localStorage.getItem("oraConsegna") === null) {
+            alert("Inserisci la data di ritiro e consegna per continuare!");
+        } else {
+            window.location.replace("/schermataprenotazionemoto/selezionemoto")
+        }
+
 
     }
 

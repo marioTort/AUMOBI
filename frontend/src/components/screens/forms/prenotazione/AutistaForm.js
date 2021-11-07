@@ -31,7 +31,13 @@ export default function AutistaForm() {
 
         localStorage.setItem("numeroCartaCliente", decryptString(JSON.parse(localStorage.getItem("datiCarta")).numeroCartaCredito, key));
 
-        window.location.replace("/schermataprenotazioneautista/selezioneautista");
+        if (localStorage.getItem("dataRitiro") === null || localStorage.getItem("oraRitiro") === null || localStorage.getItem("dataConsegna") === null || localStorage.getItem("oraConsegna") === null) {
+            alert("Inserisci la data di ritiro e consegna per continuare!");
+        } else {
+            window.location.replace("/schermataprenotazioneautista/selezioneautista");
+        }
+
+
     }
 
     return (
