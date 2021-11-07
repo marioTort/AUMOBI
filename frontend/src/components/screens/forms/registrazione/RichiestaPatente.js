@@ -35,11 +35,12 @@ export default function RichiestaPatente() {
                                             Se lo desideri, puoi inserire la tua patente di guida adesso.<br></br>
                                             Ti ricordiamo che potrai farlo in qualsiasi altro momento.
                                         </h1>
-
+                                        <div className="d-flex justify-content-end">
                                         <Col className="d-flex justify-content-center">
                                             <Button variant="outline-secondary" onClick={inserisciCarta}>Lo farò dopo</Button>
                                             <Button variant="outline-success" onClick={inserisciPatente}>Inserisci Patente</Button>
                                         </Col>
+                                        </div>
                                     </Row>
                                 </div>
                             </Container>

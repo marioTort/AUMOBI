@@ -65,6 +65,12 @@ export default function SchermataCliente() {
             window.location.replace("/");
         } else {
             let nome = JSON.parse(localStorage.getItem("datiPersonali")).nome;
+
+            localStorage.removeItem("oraConsegna");
+            localStorage.removeItem("oraRitiro");
+            localStorage.removeItem("dataRitiro");
+            localStorage.removeItem("dataConsegna");
+
             return (<>
                 <div style={{
                     backgroundImage: `url(${process.env.PUBLIC_URL + '/cliente1.jpg'})`,

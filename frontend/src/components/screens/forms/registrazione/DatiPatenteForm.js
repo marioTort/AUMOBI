@@ -52,7 +52,7 @@ export default function DatiPatenteForm() {
         }
         if (validaDati.dataScadenza) {
 
-            const regex = new RegExp(/^(0?[1-9]|1[012])[\/\-]\d{4}$/);
+            const regex = new RegExp(/^(0?[1-9]|1[012])[/-]\d{4}$/);
             const error = document.querySelector("#formatoDataNonValido");
             const match = regex.test(dataScad.value);
 
@@ -71,31 +71,39 @@ export default function DatiPatenteForm() {
     
     async function registraPatente(event) {
         event.preventDefault();
+        
+        const regex = new RegExp(/^(0?[1-9]|1[012])[/-]\d{4}$/);
+        const match = regex.test(dataScadenza);
 
-        var data = JSON.stringify({
-            email: localStorage.getItem('email'),
-            numeroPatente: numeroPatente,
-            dataScadenza: dataScadenza,
-            categoria: categoria
-        });
-
-        var config = {
-            method: 'post',
-            url: '/api/patente/aggiungipatente',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: data
-        };
-
-        await axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-                history.push("/datibancari");
-            })
-            .catch(function (error) {
-                console.log(error);
+        if (!match) {
+            alert("Inserisci una data di scadenza nel formato mm/aaaa");
+        } else {
+            var data = JSON.stringify({
+                email: localStorage.getItem('email'),
+                numeroPatente: numeroPatente,
+                dataScadenza: dataScadenza,
+                categoria: categoria
             });
+    
+            var config = {
+                method: 'post',
+                url: '/api/patente/aggiungipatente',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
+    
+            await axios(config)
+                .then(function (response) {
+                    console.log(JSON.stringify(response.data));
+                    history.push("/datibancari");
+                })
+                .catch(function (error) {
+                    alert("Rispetta i formati richiesti!");
+                    console.log(error);
+                });
+        }
 
     }
 

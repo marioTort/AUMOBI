@@ -83,7 +83,7 @@ export default function DatiBancariForm() {
         if (validaDati.CVV) {
 
             const regex = new RegExp(/^[0-9]{3,4}$/);
-            const error = document.querySelector("#formatoDataNonValido");
+            const error = document.querySelector("#formatoCVVNonValido");
             const match = regex.test(cvv.value);
 
             if (!match) {
@@ -166,30 +166,31 @@ export default function DatiBancariForm() {
                                 <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                         <Form.Group >
                                             <Form.Label>Numero carta</Form.Label>
-                                                    <Form.Control type="number" id="cardNumber" placeholder="Numero carta" onBlur={() => setValidaDati({ ...validaDati, numeroCartaCredito: true })} onChange={(event) => { setNumeroCartaCredito(event.target.value) }} required />
-                                                <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Formato carta non valido!</Form.Text>
+                                            <Form.Control type="text" id="cardNumber" placeholder="Numero carta" minLength="16" maxLength="16" onBlur={() => setValidaDati({ ...validaDati, numeroCartaCredito: true })} onChange={(event) => { setNumeroCartaCredito(event.target.value) }} required />
+                                            <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Formato carta non valido!</Form.Text>
                                         </Form.Group>
                                     </Col>
     
                                     <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                         <Form.Group >
                                             <Form.Label>Intestatario</Form.Label>
-                                                    <Form.Control type="text" id="cardName" placeholder="Intestatario" onBlur={() => setValidaDati({ ...validaDati, intestatario: true })} onChange={(event) => { setIntestatario(event.target.value) }} required />
+                                            <Form.Control type="text" id="cardName" placeholder="Intestatario" onBlur={() => setValidaDati({ ...validaDati, intestatario: true })} onChange={(event) => { setIntestatario(event.target.value) }} required />
                                         </Form.Group>
                                     </Col>
     
                                     <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                         <Form.Group>
-                                            <Form.Label>Data di scadenza (mm/aa)</Form.Label>
-                                                    <Form.Control type="text" id="cardExpiration" placeholder="Data di scadenza" onBlur={() => setValidaDati({ ...validaDati, dataScadenzaCarta: true })} onChange={(event) => { setDataScadenzaCarta(event.target.value) }} required />
-                                                <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato data non valido!</Form.Text>
+                                            <Form.Label>Data di scadenza (mm/aa)</Form.Label> 
+                                            <Form.Control type="text" id="cardExpiration" placeholder="Data di scadenza"  minLength="5" maxLength="5" onBlur={() => setValidaDati({ ...validaDati, dataScadenzaCarta: true })} onChange={(event) => { setDataScadenzaCarta(event.target.value) }} required />
+                                            <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato data non valido!</Form.Text>
                                         </Form.Group>
                                     </Col>
     
                                     <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                                         <Form.Group >
                                             <Form.Label>CVV</Form.Label>
-                                                    <Form.Control type="number" id="cardSecurityCode" placeholder="CVV" onBlur={() => setValidaDati({ ...validaDati, CVV: true })} onChange={(event) => { setCVV(event.target.value) }} required/>
+                                            <Form.Control type="text" id="cardSecurityCode" placeholder="CVV" maxLength="4" onBlur={() => setValidaDati({ ...validaDati, CVV: true })} onChange={(event) => { setCVV(event.target.value) }} required/>
+                                            <Form.Text id="formatoCVVNonValido" className="text-danger d-none">Formato CVV non valido!</Form.Text>
                                         </Form.Group> 
                                     </Col>
                                     

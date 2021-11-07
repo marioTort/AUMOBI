@@ -35,6 +35,7 @@ export default function ModificaPassword(props) {
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
                 localStorage.clear();
+                alert("Password modificata con successo!");
                 window.location.replace("/login");
 
             })

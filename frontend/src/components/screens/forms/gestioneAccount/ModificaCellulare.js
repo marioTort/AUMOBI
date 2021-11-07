@@ -42,6 +42,7 @@ export default function ModificaCellulare(props) {
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
                 localStorage.clear();
+                alert("Telefono modificato con successo!");
                 window.location.replace("/login");
             })
             .catch(function (error) {
@@ -59,7 +60,7 @@ export default function ModificaCellulare(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Aggiungi Patente
+                    Modifica Telefono
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

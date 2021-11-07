@@ -33,6 +33,9 @@ export default function RegistrazioneClienteForm() {
         let nomeInserito = document.querySelector("#nome");
         let cognomeInserito = document.querySelector("#cognome");
         let sessoInserito = document.querySelector("#sesso");
+
+        const error = document.querySelector("#formatoCFNonValido");
+
         // Controllo campo Nome
         if (validaDati.nome) {
             nomeInserito.classList.remove("border-danger", "border-success");
@@ -73,10 +76,12 @@ export default function RegistrazioneClienteForm() {
             if (cf !== inputCF.value.toUpperCase()) {
                 inputCF.classList.add("border-danger");
                 inputCF.classList.remove("border-success");
+                error.classList.remove("d-none");
                 setValidaDati({ ...validaDati, CF: { check: false, valid: false } });
             } else {
                 inputCF.classList.add("border-success");
                 inputCF.classList.remove("border-danger");
+                error.classList.add("d-none");
                 setValidaDati({ ...validaDati, CF: { check: false, valid: true } });
             }
 
@@ -86,11 +91,18 @@ export default function RegistrazioneClienteForm() {
     //PASSO I DATI ANAGRAFICI ALLA PAGINA CREDENZIALI TRAMITE I LOCAL STORAGE...
     function inviaDatiAnagrafici() {
 
-        localStorage.setItem("nome", nome);
-        localStorage.setItem("cognome", cognome);
-        localStorage.setItem("sesso", sesso);
-        localStorage.setItem("CF", CF);
-        history.push("/credenziali")
+        const regex = new RegExp(/^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/);
+        const match = regex.test(CF);
+
+        if (!match) {
+            alert("Codice fiscale non corretto!");
+        } else {
+            localStorage.setItem("nome", nome);
+            localStorage.setItem("cognome", cognome);
+            localStorage.setItem("sesso", sesso);
+            localStorage.setItem("CF", CF);
+            history.push("/credenziali");
+        }
 
     }
 
@@ -133,6 +145,7 @@ export default function RegistrazioneClienteForm() {
                                 <Form.Group controlId="CF">
                                     <Form.Label className="me-2">Codice fiscale</Form.Label>
                                     <Form.Control type="text" placeholder="Inserisci il tuo codice fiscale" onBlur={() => setValidaDati({ ...validaDati, CF: { ...validaDati.CF, check: true } })} onChange={(event) => { setCF(event.target.value) }} required />
+                                    <Form.Text id="formatoCFNonValido" className="text-danger d-none">Formato codice fiscale non valido!</Form.Text>
                                 </Form.Group>
                             </Col>
 

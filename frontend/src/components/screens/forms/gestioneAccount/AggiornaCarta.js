@@ -114,6 +114,7 @@ export default function AggiornaCarta(props) {
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
                 localStorage.setItem("datiCarta", JSON.stringify(response.data.datiCarta));
+                alert("Carta aggiornata con successo!");
                 window.location.replace("/gestioneaccount");
             })
             .catch(function (error) {
@@ -155,7 +156,7 @@ export default function AggiornaCarta(props) {
                                             <Form.Group >
                                                 <Form.Label>Numero carta</Form.Label>
                                                 <Form.Control type="number" id="cardNumber" placeholder="Numero carta" onBlur={() => setValidaDati({ ...validaDati, numeroCartaCredito: true })} onChange={(event) => { setNumeroCartaCredito(event.target.value) }} required />
-                                                <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Formato patente non valido!</Form.Text>
+                                                <Form.Text id="formatoCartaNonValido" className="text-danger d-none">Numero carta non valido!</Form.Text>
                                             </Form.Group>
                                         </Col>
 
@@ -170,7 +171,7 @@ export default function AggiornaCarta(props) {
                                             <Form.Group>
                                                 <Form.Label>Data di scadenza</Form.Label>
                                                 <Form.Control type="text" id="cardExpiration" placeholder="Data di scadenza" onBlur={() => setValidaDati({ ...validaDati, dataScadenzaCarta: true })} onChange={(event) => { setDataScadenzaCarta(event.target.value) }} required />
-                                                <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato carta non valido!</Form.Text>
+                                                <Form.Text id="formatoDataNonValido" className="text-danger d-none">Formato data non valido!</Form.Text>
                                             </Form.Group>
                                         </Col>
 

@@ -46,11 +46,12 @@ export default function GestioneAccount() {
             data: data
         };
 
-        axios(config)
+        await axios(config)
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
                 localStorage.removeItem("datiPatente");
                 window.location.replace("/gestioneaccount");
+                alert("Patente eliminata con successo!");
             })
             .catch(function (error) {
                 console.log(error);

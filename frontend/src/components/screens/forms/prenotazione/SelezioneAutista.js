@@ -21,7 +21,7 @@ export default function SelezioneAutista() {
                 }
             };
 
-            axios(config)
+            await axios(config)
                 .then(function (response) {
                     console.log(JSON.stringify(response.data));
                     setAuto(response.data.listaVeicoli);
@@ -70,7 +70,7 @@ export default function SelezioneAutista() {
                     data: data
                 };
 
-                axios(config)
+                await axios(config)
                     .then(function (response) {
                         console.log(JSON.stringify(response.data));
 

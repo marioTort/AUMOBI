@@ -68,6 +68,7 @@ export default function CredenzialiForm() {
                 })
                 .catch(function (error) {
                     console.log(error);
+                    alert("Rispetta i formati richiesti!");
                 });
         }
     }

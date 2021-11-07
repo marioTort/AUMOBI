@@ -30,6 +30,7 @@ export default function VisualizzaDati() {
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
                 localStorage.clear();
+                alert("Account eliminato correttamente!");
                 window.location.replace("/");
             })
             .catch(function (error) {

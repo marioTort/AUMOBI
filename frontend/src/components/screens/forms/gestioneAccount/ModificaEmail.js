@@ -52,6 +52,7 @@ export default function ModificaEmail(props) {
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
                 localStorage.clear();
+                alert("Email modificata con successo!");
                 window.location.replace("/login");
             })
             .catch(function (error) {
@@ -69,7 +70,7 @@ export default function ModificaEmail(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Aggiungi Patente
+                    Modifica Email
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
