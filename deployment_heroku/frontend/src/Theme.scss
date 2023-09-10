@@ -1,0 +1,278 @@
+// BOOTSTRAP THEME
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+// CUSTOM PALETTE
+$primary: #2498ff;
+$primary-dark: #04222c;
+$secondary: #35393d;
+$success: #008744;
+$danger: #d62d20;
+$warning: #ffa31a;
+$info: #1bca9e;
+$light: #ffffff;
+$dark: #0a0a0a;
+
+$red: #0057e7;
+$border-form: #f7f7f7;
+
+// CUSTOM THEME TO BOOTSTRAP COMPONENTS
+.btn {
+    border-radius: 1px !important;
+    font-weight: 500 !important;
+}
+
+.btn-success, .btn-danger, .btn-outline-danger:hover {
+    color: white !important;
+}
+
+.progress-bar{
+    border-radius: 25px !important; 
+}
+
+.card{
+    border-radius: 20px !important;
+    padding: 20px;
+}
+
+.card-header{
+    border-radius: 20px 20px 0px 0px !important
+}
+
+.bg-primary-dark{
+    background-color: $primary-dark !important;
+}
+
+.text-primary-dark{
+    color: $primary-dark;
+}
+
+.badge{
+    border-radius: 50px !important
+}
+
+
+
+
+// CAROUSEL
+.carousel-caption {    
+    .text-wrapper
+    {
+        background: rgba(0,0,0,0.5);
+        padding: 40px 20px;
+        text-align: left;
+    }
+}
+
+nav
+{
+    .logo-site
+    {
+        max-width: 200px;
+    }
+
+    .menu-page-item
+    {
+        position: relative;
+        text-decoration: none;
+        font-size: 1em;
+        &::after
+        {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            left: 0;
+            bottom: -2px;
+            background: $red;
+            transition: all 0.25s ease-in-out;
+        }
+        &:hover
+        {
+            &::after
+            {
+                width: 100%;
+            }
+        }
+    }
+
+    .button-menu
+    {
+        border-radius: 5px !important;
+        font-size: 0.825em;
+    }
+}
+
+// SEZIONE INFO HOME
+.info-section-container
+{
+    padding: 60px 0;
+    &.red-mode
+    {
+        background: $red;  
+        
+        .info-section-wrapper
+        {
+            .info-content
+            {
+                &::after
+                {
+                    background-color: $light;
+                }
+            }
+        }
+    }
+
+    .info-section-wrapper
+    {
+        max-width: 960px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 40px 0;
+        text-align: center;
+
+        .info-content
+        {
+            position: relative;
+            padding-bottom: 40px;
+            &::after
+            {
+                content: '';
+                width: 170px;
+                height: 2px;
+                background-color: $red;
+                position: absolute;
+                left: 50%;
+                bottom: 0px;
+                transform: translateX(-50%);
+            }
+        }
+
+        .cards-wrapper
+        {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 40px;
+
+            @media screen and (max-width: 768px) {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card-info
+            {
+                width: 33.33%;
+                @media screen and (max-width: 768px) {
+                    width: 100%;
+                }
+            }   
+
+            .card-item
+            {
+                width: calc(33.33% - 15px) !important;
+                @media screen and (max-width: 768px) {
+                    width: 90% !important;
+                    margin-bottom: 40px;
+                }
+            }
+        }
+
+    }
+}
+
+.card-info
+{
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+
+    .icon-image
+    {
+        width: 120px;
+        height: 120px;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        &.red
+        {
+            background-color: $red;
+        }
+
+        .icon
+        {
+            max-width: 80px;
+        }
+    }
+    .content-card
+    {
+        margin-top: 25px;
+        width: 100%;
+    }
+}  
+
+.card-item
+{
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+    .btn-red-outline
+    {
+        background-color: $light;
+        border-radius: 10px !important;
+        border-color: $red;
+        color: $red;
+        transition: all 0.25s ease-in-out;
+
+        &:hover
+        {
+            background-color: $red;
+            color: $light; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            transform: scale(1.1);
+        }
+    }
+}
+
+footer
+{
+   position: relative; 
+   padding: 60px 0;
+
+   .logo-site
+   {
+       max-width: 120px;
+   }
+}
+
+//FORM
+.form
+{
+    align-items: center;
+    justify-content: center; 
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+    @media screen and (min-width: 768px) {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .btn-outline-secondary
+    {
+        border-radius: 5px !important;
+    }
+    .btn-outline-success
+    {
+        border-radius: 5px !important;
+    }
+}
+
